@@ -7,7 +7,7 @@ export default function Header() {
     return (
         <Navbar bg='dark' variant='dark'>
             <Container>
-                <Navbar.Brand>Biblioteca Admision</Navbar.Brand>
+                <Navbar.Brand>Biblioteca Admision /prueba</Navbar.Brand>
             </Container>
         </Navbar>
     )

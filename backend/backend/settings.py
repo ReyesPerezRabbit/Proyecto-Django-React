@@ -80,7 +80,7 @@ DATABASES = {
 		'ENGINE': 'django.db.backends.postgresql_psycopg2',
 		'NAME' : 'db_biblioteca',
 		'USER' : 'postgres',
-		'PASSWORD' : 'admin',
+		'PASSWORD' : 'zellendust123',
 		'HOST' : 'localhost' ,  # la base esta descargado de la rama master 
 		'PORT' : '' 
     }

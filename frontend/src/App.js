@@ -8,6 +8,7 @@ import Blogs from "./components/Blogs";
 
 
 function App() {
+  //<h1>Hola</h1>
  
   const [blogs, setBlogs] = useState([]);
   
