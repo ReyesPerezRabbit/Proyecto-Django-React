@@ -29,7 +29,9 @@ function App() {
      <Blogs blogs={blogs} setBlogs={setBlogs}/>
      
     </div>
-    
+    <div>
+      <h1>hola</h1>
+    </div>
     </>
   );
   
