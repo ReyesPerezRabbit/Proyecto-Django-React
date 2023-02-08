@@ -78,9 +78,9 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 DATABASES = {
     'default': {
 		'ENGINE': 'django.db.backends.postgresql_psycopg2',
-		'NAME' : 'db_biblioteca',
+		'NAME' : 'db_bibli',
 		'USER' : 'postgres',
-		'PASSWORD' : 'zellendust123',
+		'PASSWORD' : 'admin',
 		'HOST' : 'localhost' ,  # la base esta descargado de la rama master 
 		'PORT' : '' 
     }
