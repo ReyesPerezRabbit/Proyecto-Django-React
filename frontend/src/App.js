@@ -2,8 +2,10 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route, NavLink } from "react-router-dom";
 import Inicio from "./components/inicio";
 import LoginAdmin from "./components/admin/login_Admin";
-import LoginUssers from "./components/ussers/login_Ussers";
-import SolicitudLibros from "./components/ussers/solicitudLibros";
+import LoginUssers from "./components/usuario/login_Ussers";
+import SolicitudLibros from "./components/usuario/solicitudLibros";
+import AgregarUssers from "./components/admin/agregarUsuarios";
+import AgregarLibro from "./components/admin/agregar_Libro";
 //import axios from 'axios';
 
 // // Components
@@ -17,16 +19,22 @@ function App() {
     <Router>
       <div className="container">
         <div className="btn-group">
-          <NavLink to="/" className="btn btn-dark">
+          <NavLink to="/" exact className="btn btn-dark">
             inicio
           </NavLink>
-          <NavLink to="/admin" className="btn btn-dark">
+          <NavLink to="/admin" exact className="btn btn-dark">
             admin
           </NavLink>
-          <NavLink to="/ussers" className="btn btn-dark">
+          <NavLink to="/agregar_Usuarios" exact className="btn btn-dark">
+            agregar usuarios
+          </NavLink>
+          <NavLink to="/agregar_Libro" exact className="btn btn-dark">
+            agregar libro
+          </NavLink>
+          <NavLink to="/ussers" exact className="btn btn-dark">
             usuarios
           </NavLink>
-          <NavLink to="/solicitud" className="btn btn-dark">
+          <NavLink to="/solicitud" exact className="btn btn-dark">
             solicitud
           </NavLink>
         </div>
@@ -43,6 +51,12 @@ function App() {
           </Route>
           <Route path="/solicitud" exact>
             <SolicitudLibros />
+          </Route>
+          <Route path="/agregar_Usuarios" exact>
+            <AgregarUssers />
+          </Route>
+          <Route path="/agregar_Libro" exact>
+            <AgregarLibro />
           </Route>
         </Switch>
       </div>
