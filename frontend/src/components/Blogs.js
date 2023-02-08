@@ -12,6 +12,7 @@ import axios from 'axios';
 export default function Blogs({ blogs = [], setBlogs}){
 
     const [show, setShow] = useState(false);
+    
     const [record, setRecord] = useState(null);
 
     const handleUpdate = async (id, value) => {
