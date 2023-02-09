@@ -1,3 +1,4 @@
+
 from rest_framework.response import Response 
 from rest_framework.serializers import Serializer
 from rest_framework.decorators import api_view
@@ -35,3 +36,42 @@ def deleteBlog(request, pk):
     blog = Blog.objects.get(id=pk)
     blog.delete()
     return Response('Blog Eliminado')
+
+
+#parte del login
+from django.contrib.auth import authenticate, login
+from django.http import JsonResponse
+
+def user_login(request):
+    username = request.POST.get('username')
+    password = request.POST.get('password')
+    user = authenticate(request, username=username, password=password)
+    if user is not None:
+        login(request, user)
+        return JsonResponse({'status': 'success'})
+    else:
+        return JsonResponse({'status': 'error'})
+
+#para dar de alta
+import json
+from django.contrib.auth.models import User
+from django.http import JsonResponse
+@api_view(['POST'])
+def register_user(request):
+    if request.method == 'POST':
+        data = json.loads(request.body.decode('utf-8'))
+        username = data['username']
+        email = data['email']
+        password = data['password']
+
+        user = User.objects.create_user(
+            username=username,
+            email=email,
+            password=password
+        )
+        user.save()
+
+        return JsonResponse({'message': 'Usuario creado con éxito'})
+    else:
+        return JsonResponse({'message': 'Método no permitido'})
+
