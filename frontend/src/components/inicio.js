@@ -20,11 +20,11 @@ const inicio = () => {
       </div>
       <div id="contenedor" class="row">
         <div id="naranja" class="col-4 my-auto mx-auto">
-        <span><Link className="btn bg-success nav-link" to="/admin">Admin</Link></span>
+        <span><Link className="btn btn-success nav-link" to="/admin">Admin</Link></span>
         </div>
 
         <div id="verde" class="col-4 my-auto mx-auto">
-        <span><Link className="btn bg-success nav-link" to="/ussers">Estudiantes</Link></span>
+        <span><Link className="btn btn-primary nav-link" to="/ussers">Estudiantes</Link></span>
         </div>
       </div>
 

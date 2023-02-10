@@ -19,12 +19,12 @@ const login_Ussers = () => {
                     {/* Formulario */}
                     <form>
                         <div className="form-group mb-4">
-                            <label for="exampleInputEmail1">Correo electronico</label>
+                            <label for="exampleInputEmail1">Usuario:</label>
                             <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                                placeholder="Correo institucional" />
+                                placeholder="Uuario Exaples RM27" />
                         </div>
                         <div className="form-group">
-                            <label for="exampleInputPassword1">Contraseña</label>
+                            <label for="exampleInputPassword1">Contraseña:</label>
                             <input type="password" class="form-control" id="exampleInputPassword1" />
                         </div>
                         <br/>

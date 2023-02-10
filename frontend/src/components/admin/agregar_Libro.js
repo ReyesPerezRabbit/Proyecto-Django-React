@@ -40,7 +40,7 @@ class agregar_Libro extends Component {
         <br />
         <br />
         <label>
-          Descripción:
+          Sinopsis:
           <input type="text" value={this.state.description} onChange={this.handleDescriptionChange} />
         </label>
         <br />
