@@ -75,3 +75,16 @@ def register_user(request):
     else:
         return JsonResponse({'message': 'Método no permitido'})
 
+#para guardar datos en añador usuarios
+
+# from django.shortcuts import render, redirect
+# from .models import FormData
+
+# def save_form_data(request):
+#     if request.method == 'POST':
+#         name = request.POST['name']
+#         email = request.POST['email']
+#         message = request.POST['message']
+#         FormData.objects.create(name=name, email=email, message=message)
+#         return redirect('success_page')
+#     return render(request, 'form.html')
