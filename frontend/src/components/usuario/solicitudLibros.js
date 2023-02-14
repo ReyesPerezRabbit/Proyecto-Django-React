@@ -5,7 +5,7 @@ import React from 'react'
 // import SignaturPad from 'react-signature-canvas'
 // import logo from '../assets/img/logo_Integrador.jpeg'
 
-const solicitudLibros = () => {
+const SolicitudLibros = () => {
     return(
     <h1>solicitud</h1>
 
@@ -95,4 +95,4 @@ const solicitudLibros = () => {
   )
 }
 
-export default solicitudLibros
+export default SolicitudLibros

@@ -83,7 +83,7 @@
 //           <label htmlFor="carrera">Carrera:</label>
 //           <input
 //             type="text"
-//             id="carrera"
+//             id="carrera"                                                                                                             
 //             value={carrera}
 //             onChange={(event) => setCarrera(event.target.value)}
 //           />
@@ -105,7 +105,7 @@
 //nuevo formulario para guardar los datos en añador usuarios 
 import React, { useState } from 'react';
 
-const Form = () => {
+const AgregarUsuarios = () => {
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -154,4 +154,4 @@ const Form = () => {
     );
 };
 
-export default Form;
+export default AgregarUsuarios;

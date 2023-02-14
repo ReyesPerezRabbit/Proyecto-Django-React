@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
-
+import logo from '../img/login.jpg'
 const LoginForm = () => {
   return (
 
@@ -10,7 +10,7 @@ const LoginForm = () => {
         </div>
         <div className="col bg-white p-5 rounded-end">
           <div className="text-end">
-            {/* <img src={logo} alt="" width="14% px" /> */}
+          <img src={logo} alt="" width="14% px" />
           </div>
           <h2 className="fw-bold text-center py-5">Admin putoooo </h2>
 
