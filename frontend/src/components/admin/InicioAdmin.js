@@ -1,11 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const inicio = () => {
+
+const InicioAdmin = () => {
   return (
     <container>
       <div className="container w-75 mt-5 rounded shadow text-center">
-        <h1>Hola Bienvenidos</h1>
+        <h1>Hola Bienvenidos al inicio de admin</h1>
       </div>
       <div className="container w-75 mt-5 rounded shadow text-center">
         <p> Queridos usuarios, esta es la plataforma digital para poder hacer
@@ -15,23 +16,18 @@ const inicio = () => {
           no valla a ver problemas mas adelante son su peticion </p>
       </div>
       <div className="col-4 mx-auto">
-        
-        
       </div>
       <div id="contenedor" class="row">
         <div id="naranja" class="col-4 my-auto mx-auto">
-        <span><Link className="btn btn-success nav-link" to="/admin">Admin</Link></span>
+          <span><Link className="btn btn-success nav-link" to="/agregar_Usuarios">Agregar usuarios</Link></span>
         </div>
 
         <div id="verde" class="col-4 my-auto mx-auto">
-        <span><Link className="btn btn-primary nav-link" to="/usuario">Estudiantes</Link></span>
+          <span><Link className="btn btn-primary nav-link" to="/agregar_Libro">Subir libros</Link></span>
         </div>
       </div>
-
-
     </container>
   )
 }
 
-
-export default inicio
+export default InicioAdmin

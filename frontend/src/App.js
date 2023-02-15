@@ -1,11 +1,16 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route, NavLink } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Inicio from "./components/inicio";
 import LoginAdmin from "./components/admin/login_Admin";
 import LoginUssers from "./components/usuario/login_Ussers";
-import SolicitudLibros from "./components/usuario/solicitudLibros";
+import SolicitudLibros from "./components/usuario/SolicitudLibros";
 import AgregarUssers from "./components/admin/agregarUsuarios";
 import AgregarLibro from "./components/admin/agregar_Libro";
+import PaletaPrestamos from "./components/admin/Paleta_Prestamos";
+import NavbarAdmin from "./components/navbar/NavbarAdmin";
+import NavbarUsuarios from "./components/navbar/NavbarUsuarios";
+import InicioAdmin from "./components/admin/InicioAdmin";
+import InicioUsuario from "./components/usuario/InicioUsuario";
 //import axios from 'axios';
 
 // // Components
@@ -18,6 +23,8 @@ function App() {
   return (
     <Router>
       <div className="container">
+        {/* <NavbarAdmin /> */}
+        {/* <br />
         <div className="btn-group">
           <NavLink to="/" exact className="btn btn-dark">
             inicio
@@ -31,14 +38,14 @@ function App() {
           <NavLink to="/agregar_Libro" exact className="btn btn-dark">
             agregar libro
           </NavLink>
-          <NavLink to="/ussers" exact className="btn btn-dark">
+          <NavLink to="/usuario" exact className="btn btn-dark">
             usuarios
           </NavLink>
           <NavLink to="/solicitud" exact className="btn btn-dark">
             solicitud
           </NavLink>
         </div>
-        <hr />
+        <hr /> */}
         <Switch>
           <Route path="/" exact>
             <Inicio />
@@ -46,17 +53,31 @@ function App() {
           <Route path="/admin" exact>
             <LoginAdmin />
           </Route>
-          <Route path="/ussers" exact>
+          <Route path="/usuario" exact>
             <LoginUssers />
           </Route>
           <Route path="/solicitud" exact>
+            <NavbarUsuarios />
             <SolicitudLibros />
           </Route>
           <Route path="/agregar_Usuarios" exact>
+            <NavbarAdmin />
             <AgregarUssers />
           </Route>
           <Route path="/agregar_Libro" exact>
+            <NavbarAdmin />
             <AgregarLibro />
+          </Route>
+          <Route path="/prestamos" exact>
+            <PaletaPrestamos />
+          </Route>
+          <Route path="/inicio_Admin">
+            <NavbarAdmin />
+            <InicioAdmin />
+          </Route>
+          <Route path="/inicio_Usuario">
+            <NavbarUsuarios />
+            <InicioUsuario />
           </Route>
         </Switch>
       </div>
@@ -79,7 +100,6 @@ function App() {
     //   <div className="container p-4">
     //    <BlogForm blogs={blogs} setBlogs={setBlogs}/>
     //    <Blogs blogs={blogs} setBlogs={setBlogs}/>
-    //    {/* <h1>Hola mundo :O</h1> */}
 
     //   </div>
 
