@@ -36,7 +36,7 @@ def deleteBlog(request, pk):
     blog = Blog.objects.get(id=pk)
     blog.delete()
     return Response('Blog Eliminado')
-
+###############################################################################
 
 #parte del login
 from django.contrib.auth import authenticate, login
