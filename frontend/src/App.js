@@ -11,6 +11,9 @@ import NavbarAdmin from "./components/navbar/NavbarAdmin";
 import NavbarUsuarios from "./components/navbar/NavbarUsuarios";
 import InicioAdmin from "./components/admin/InicioAdmin";
 import InicioUsuario from "./components/usuario/InicioUsuario";
+import LibrosDisponibles from "./components/usuario/LibrosDisponibles";
+import BlogForm from "./components/admin/BlogForm"
+import "./components/css/navbar.css";
 //import axios from 'axios';
 
 // // Components
@@ -49,35 +52,46 @@ function App() {
         <Switch>
           <Route path="/" exact>
             <Inicio />
+            {/* Admin */}
           </Route>
           <Route path="/admin" exact>
             <LoginAdmin />
           </Route>
-          <Route path="/usuario" exact>
-            <LoginUssers />
-          </Route>
-          <Route path="/solicitud" exact>
-            <NavbarUsuarios />
-            <SolicitudLibros />
-          </Route>
-          <Route path="/agregar_Usuarios" exact>
-            <NavbarAdmin />
-            <AgregarUssers />
-          </Route>
-          <Route path="/agregar_Libro" exact>
-            <NavbarAdmin />
-            <AgregarLibro />
-          </Route>
-          <Route path="/prestamos" exact>
-            <PaletaPrestamos />
-          </Route>
-          <Route path="/inicio_Admin">
+          <Route path="/admin/inicio" exact>
             <NavbarAdmin />
             <InicioAdmin />
           </Route>
-          <Route path="/inicio_Usuario">
+          <Route path="/admin/agregarUsuarios" exact>
+            <NavbarAdmin />
+            <AgregarUssers />
+          </Route>
+          <Route path="/admin/agregarLibro" exact>
+            <NavbarAdmin />
+            <AgregarLibro />
+          </Route>
+          <Route path="/admin/prestamos" exact>
+            <NavbarAdmin />
+            <PaletaPrestamos />
+          </Route>
+          <Route path="/admin/blogForm" exact>
+           <NavbarAdmin/>
+           <BlogForm/> 
+          </Route>
+          {/* Usuario */}
+          <Route path="/usuario" exact>
+            <LoginUssers />
+          </Route>
+          <Route path="/usuario/inicio">
             <NavbarUsuarios />
             <InicioUsuario />
+          </Route>
+          <Route path="/usuario/libros_Disponibles">
+            <NavbarUsuarios />
+            <LibrosDisponibles />
+          </Route>
+          <Route path="/usuario/solicitud" exact>
+            <NavbarUsuarios />
+            <SolicitudLibros />
           </Route>
         </Switch>
       </div>

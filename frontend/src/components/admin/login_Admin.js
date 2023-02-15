@@ -27,7 +27,7 @@ const LoginForm = () => {
             </div>
             <br />
             <div className="d-grid">
-              <span><Link className="btn bg-success nav-link col-4 my-auto mx-auto" to="/inicio_Admin">Iniciar sesión</Link></span>
+              <span><Link className="btn bg-success nav-link col-4 my-auto mx-auto" to="/admin/inicio">Iniciar sesión</Link></span>
             </div>
             <br />
             <div className="d-grid">

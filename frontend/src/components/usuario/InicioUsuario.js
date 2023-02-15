@@ -18,10 +18,10 @@ const InicioUsuario = () => {
             </div>
             <div id="contenedor" class="row">
                 <div id="naranja" class="col-4 my-auto mx-auto">
-                    <span><Link className="btn btn-success nav-link" to="/inicio_Usuario">Agregar usuarios</Link></span>
+                    <span><Link className="btn btn-success nav-link" to="/usuario/inicio">Libros disponibles</Link></span>
                 </div>
                 <div id="verde" class="col-4 my-auto mx-auto">
-                    <span><Link className="btn btn-primary nav-link" to="/agregar_Libro">Subir libros</Link></span>
+                    <span><Link className="btn btn-primary nav-link" to="/usuario/agregar_Libro">Subir libros</Link></span>
                 </div>
             </div>
         </container>

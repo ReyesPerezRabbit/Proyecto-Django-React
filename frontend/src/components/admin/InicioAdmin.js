@@ -19,11 +19,11 @@ const InicioAdmin = () => {
       </div>
       <div id="contenedor" class="row">
         <div id="naranja" class="col-4 my-auto mx-auto">
-          <span><Link className="btn btn-success nav-link" to="/agregar_Usuarios">Agregar usuarios</Link></span>
+          <span><Link className="btn btn-success nav-link" to="/admin/agregarUsuarios">Agregar usuarios</Link></span>
         </div>
 
         <div id="verde" class="col-4 my-auto mx-auto">
-          <span><Link className="btn btn-primary nav-link" to="/agregar_Libro">Subir libros</Link></span>
+          <span><Link className="btn btn-primary nav-link" to="/admin/agregarLibro">Subir libros</Link></span>
         </div>
       </div>
     </container>
