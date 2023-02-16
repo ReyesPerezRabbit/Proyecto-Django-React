@@ -5,6 +5,8 @@ import '../css/navbar.css'
 
 const NavbarAdmin = () => {
     return (
+        <div className="mb-4">
+            <br/>
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
             <div className="container-fluid">
                 <img src={logoPrincipal} className="Logo" alt="" width="85" />
@@ -27,6 +29,8 @@ const NavbarAdmin = () => {
                 </div>
             </div>
         </nav>
+        
+        </div>
     )
 }
 
