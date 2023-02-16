@@ -6,8 +6,14 @@ import LoginUssers from "./components/usuario/login_Ussers";
 import SolicitudLibros from "./components/usuario/SolicitudLibros";
 import AgregarUssers from "./components/admin/agregarUsuarios";
 import AgregarLibro from "./components/admin/agregar_Libro";
-//import PaletaPrestamos from "./components/admin/Paleta_Prestamos";
-import Navbar from "./components/navbar/Navbar";
+import PaletaPrestamos from "./components/admin/Paleta_Prestamos";
+import NavbarAdmin from "./components/navbar/NavbarAdmin";
+import NavbarUsuarios from "./components/navbar/NavbarUsuarios";
+import InicioAdmin from "./components/admin/InicioAdmin";
+import InicioUsuario from "./components/usuario/InicioUsuario";
+import LibrosDisponibles from "./components/usuario/LibrosDisponibles";
+import BlogForm from "./components/admin/BlogForm"
+import "./components/css/navbar.css";
 //import axios from 'axios';
 
 // // Components
@@ -20,7 +26,7 @@ function App() {
   return (
     <Router>
       <div className="container">
-        <Navbar />
+        {/* <NavbarAdmin /> */}
         {/* <br />
         <div className="btn-group">
           <NavLink to="/" exact className="btn btn-dark">
@@ -46,25 +52,47 @@ function App() {
         <Switch>
           <Route path="/" exact>
             <Inicio />
+            {/* Admin */}
           </Route>
           <Route path="/admin" exact>
             <LoginAdmin />
           </Route>
+          <Route path="/admin/inicio" exact>
+            <NavbarAdmin />
+            <InicioAdmin />
+          </Route>
+          <Route path="/admin/agregarUsuarios" exact>
+            <NavbarAdmin />
+            <AgregarUssers />
+          </Route>
+          <Route path="/admin/agregarLibro" exact>
+            <NavbarAdmin />
+            <AgregarLibro />
+          </Route>
+          <Route path="/admin/prestamos" exact>
+            <NavbarAdmin />
+            <PaletaPrestamos />
+          </Route>
+          <Route path="/admin/blogForm" exact>
+           <NavbarAdmin/>
+           <BlogForm/> 
+          </Route>
+          {/* Usuario */}
           <Route path="/usuario" exact>
             <LoginUssers />
           </Route>
-          <Route path="/solicitud" exact>
+          <Route path="/usuario/inicio">
+            <NavbarUsuarios />
+            <InicioUsuario />
+          </Route>
+          <Route path="/usuario/libros_Disponibles">
+            <NavbarUsuarios />
+            <LibrosDisponibles />
+          </Route>
+          <Route path="/usuario/solicitud" exact>
+            <NavbarUsuarios />
             <SolicitudLibros />
           </Route>
-          <Route path="/agregar_Usuarios" exact>
-            <AgregarUssers />
-          </Route>
-          <Route path="/agregar_Libro" exact>
-            <AgregarLibro />
-          </Route>
-          {/* <Route path="/prestamos" exact>
-            <PaletaPrestamos />
-          </Route> */}
         </Switch>
       </div>
     </Router>

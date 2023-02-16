@@ -1,0 +1,11 @@
+.signatureCanvas{
+    border: 1px solid black;
+    width: 100%;
+    min-height: 500px;
+}
+.firma{
+    display: block;
+    margin: 0 auto;
+    border: 1 px solid black;
+    width: 150px;
+}
