@@ -171,14 +171,20 @@ import { useState } from 'react';
 import { TextField, Button, Box, Select, MenuItem, InputLabel } from '@material-ui/core';
 
 function Registro() {
+  const [matricula, setMatricula] = useState('');
   const [name, setName] = useState('');
   const [paternalLastName, setPaternalLastName] = useState('');
   const [maternalLastName, setMaternalLastName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
+  const [edad, setEdad] = useState('');
   const [career, setCareer] = useState('');
   const [gender, setGender] = useState('');
 
+
+  const handleMatriculaChange = (event) => {
+    setMatricula(event.target.value);
+  }
   const handleNameChange = (event) => {
     setName(event.target.value);
   }
@@ -199,6 +205,10 @@ function Registro() {
     setPhone(event.target.value);
   }
 
+  const handleEdadChange = (event) => {
+    setEdad(event.target.value);
+  }
+
   const handleCareerChange = (event) => {
     setCareer(event.target.value);
   }
@@ -213,8 +223,16 @@ function Registro() {
   }
 
   return (
+    <div className="container col-3 mt-5 rounded shadow">
     <form onSubmit={handleSubmit}>
       <Box display="flex" flexDirection="column" alignItems="center" marginBottom={2}>
+       
+      <TextField
+          label="Matricula"
+          value={matricula}
+          onChange={handleMatriculaChange}
+          margin="normal"
+        />
         <TextField
           label="Nombre"
           value={name}
@@ -247,13 +265,20 @@ function Registro() {
           onChange={handlePhoneChange}
           margin="normal"
         />
+        <TextField
+          label="Edad"
+          type="tel"
+          value={edad}
+          onChange={handleEdadChange}
+          margin="normal"
+        />
          <Box display="flex" flexDirection="column" alignItems="center" marginBottom={2}>
           <InputLabel id="career-label">Carrera</InputLabel>
           <Select
             labelId="career-label"
             value={career}
             onChange={handleCareerChange}
-            margin="normal"
+            margin="center"
           >
             <MenuItem value="Software">Ingeniería de Software</MenuItem>
             <MenuItem value="Ingenieria">Maestría en Ingeniería</MenuItem>
@@ -283,6 +308,7 @@ function Registro() {
             <MenuItem value="Prefiero no decirlo">Prefiero no decirlo</MenuItem>
           </Select>
         </Box>
+        <br/>
           <Box mt={2}>
           <Button variant="contained" color="primary" type="submit">
             Registrarse
@@ -292,6 +318,7 @@ function Registro() {
       
      
     </form>
+    </div>
   );
 }
 

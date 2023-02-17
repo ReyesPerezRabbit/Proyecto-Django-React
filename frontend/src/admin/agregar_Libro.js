@@ -98,6 +98,7 @@ function RegistroForm() {
   };
 
   return (
+    <div className="container col-5 mt-5 rounded shadow">
     <Form onSubmit={handleSubmit}>
       <Form.Group controlId="titulo">
         <Form.Label>Título:</Form.Label>
@@ -118,6 +119,7 @@ function RegistroForm() {
         Guardar
       </Button>
     </Form>
+    </div>
   );
 }
 export default RegistroForm;
