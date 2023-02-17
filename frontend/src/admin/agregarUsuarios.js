@@ -258,15 +258,15 @@ function Registro() {
             <MenuItem value="Software">Ingeniería de Software</MenuItem>
             <MenuItem value="Ingenieria">Maestría en Ingeniería</MenuItem>
             <MenuItem value="Mecatronica">Ingeniería Mecatrónica</MenuItem>
-            <MenuItem value="Informática">Ingeniería Financiera</MenuItem>
-            <MenuItem value="Informática">Ingeniería en Tecnología Ambiental</MenuItem>
-            <MenuItem value="Informática">Ingeniería en Sistemas Automotrices</MenuItem>
-            <MenuItem value="Informática">Ingeniería en Nanotecnología</MenuItem>
-            <MenuItem value="Informática">Ingeniería en Logística y Transporte</MenuItem>
-            <MenuItem value="Electrónica">Ingeniería en Energía</MenuItem>
-            <MenuItem value="Derecho">Ingeniería en Animación y Efectos Visuales</MenuItem>
-            <MenuItem value="Administración">Ingeniería Agroindustrial</MenuItem>
-            <MenuItem value="Psicología">Centro de Estudios de Lenguas Extranjeras</MenuItem>
+            <MenuItem value="Financiera">Ingeniería Financiera</MenuItem>
+            <MenuItem value="Ambiental">Ingeniería en Tecnología Ambiental</MenuItem>
+            <MenuItem value="Automotrices">Ingeniería en Sistemas Automotrices</MenuItem>
+            <MenuItem value="Nanotecnología">Ingeniería en Nanotecnología</MenuItem>
+            <MenuItem value="Transporte">Ingeniería en Logística y Transporte</MenuItem>
+            <MenuItem value="Energía">Ingeniería en Energía</MenuItem>
+            <MenuItem value="Animacion">Ingeniería en Animación y Efectos Visuales</MenuItem>
+            <MenuItem value="Agroindustrial">Ingeniería Agroindustrial</MenuItem>
+            <MenuItem value="LenguasExtranjeras">Centro de Estudios de Lenguas Extranjeras</MenuItem>
           </Select>
         </Box>
         <Box display="flex" flexDirection="column" alignItems="center" marginBottom={2}>
