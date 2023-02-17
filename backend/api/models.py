@@ -10,7 +10,7 @@ class Blog(models.Model):
 
 
 class registrousuario(models.Model):
-    matricñula = models.AutoField(primary_key=True)
+    matricula = models.AutoField(primary_key=True)
     nombrealumno = models.CharField(max_length=100)
     edad = models.IntegerField(max_length=50, blank=True)
     carrera = models.TextField(max_length=100)
