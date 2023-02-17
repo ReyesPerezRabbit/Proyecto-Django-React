@@ -12,9 +12,10 @@ class Blog(models.Model):
 class registrousuario(models.Model):
     matricula = models.AutoField(primary_key=True)
     nombrealumno = models.CharField(max_length=100)
-    edad = models.CharField(max_length=50)
+    edad = models.IntegerField(max_length=50, blank=True)
     carrera = models.TextField(max_length=100)
     correo = models.EmailField()
+
 
 
 # Datos del libro

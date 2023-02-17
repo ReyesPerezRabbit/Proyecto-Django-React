@@ -1,0 +1,15 @@
+.navbar {
+  padding: 20px 0px;
+}
+
+img {
+  border-radius: 50%;
+}
+
+
+a {
+  text-decoration: none;
+  font-size: 30px;
+  padding: 12px 20px;
+  display: block;
+}

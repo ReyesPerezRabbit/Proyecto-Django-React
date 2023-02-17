@@ -7,6 +7,7 @@ import axios from 'axios';
 //import Blogs from './Blogs';
 
 export default function BlogForm ({blogs, setBlogs}) {
+    
 
     const [body, setBody] = useState('');
 
