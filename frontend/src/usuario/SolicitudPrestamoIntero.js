@@ -7,7 +7,7 @@ import 'reactjs-popup/dist/index.css';
 import SignaturPad from 'react-signature-canvas'
 import '../css/sigCanvas.css'
 import '../css/libros.css'
-import logo from '../components/img/logo_Integrador.jpeg'
+import logo from '../img/logo_Integrador.jpeg'
 
 const SolicitudPrestamoIntero = () => {
     // Fechas
