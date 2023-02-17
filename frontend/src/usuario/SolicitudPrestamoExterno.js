@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react'
 import { DatePicker } from '@material-ui/pickers'
 import { Link } from 'react-router-dom'
+import { Box } from '@material-ui/core';
 import Popup from 'reactjs-popup'
 import 'reactjs-popup/dist/index.css';
 import SignaturPad from 'react-signature-canvas'
@@ -93,12 +94,12 @@ const SolicitudPrestamoExterno = () => {
               <label for="colFormLabel" className="col-sm-2 col-form-label ">TURNO:</label>
             </div>
             <div className="form-check col-sm-2 col-form-label">
-              <input className="form-check-input" type="radio" />
+              <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"/>
               <label className="form-check-label" for="flexRadioDefault1">MATUTINO</label>
             </div>
             <div className="form-check col-sm-3 col-form-label">
-              <input className="form-check-input" type="radio" />
-              <label className="form-check-label" for="flexRadioDefault1">VESPERTINO</label>
+              <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2"/>
+              <label className="form-check-label" for="flexRadioDefault2">VESPERTINO</label>
             </div>
           </div>
           <div>
@@ -231,12 +232,16 @@ const SolicitudPrestamoExterno = () => {
             {FirmaDevolucion ? (<img src={FirmaDevolucion} alt="Firma" className="firma" />) : null}
           </div>
           <hr className="firmas" />
-          <div className="d-grid mb-4">
-            <span type="submit"><Link className="btn btn-success nav-link" to="#">Guardar</Link></span>
-          </div>
-          <div className="d-grid mb-4">
-            <span type="reset"><Link className="btn btn-danger nav-link" to="/usuario">Cancelar</Link></span>
-          </div>
+          <Box mb={4}>
+              <br />
+              <div className="d-grid">
+                <span><Link className="reset btn btn-success nav-link col-2 my-auto mx-auto" to="/usuario/inicio">Guardar</Link></span>
+              </div>
+              <br />
+              <div className="d-grid">
+                <span><Link className="btn btn-danger nav-link col-2 my-auto mx-auto" to="/">Regresar</Link></span>
+              </div>
+            </Box>
         </form>
       </div>
     </div>

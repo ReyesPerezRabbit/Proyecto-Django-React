@@ -10,7 +10,7 @@ const NavbarUsuarios = () => {
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
                 <div className="container-fluid">
                     <img src={logoPrincipal} className="Logo" alt="" width="85" />
-                    <Link className="navbar-brand" to="/usuario/inicio">Universidad Politecnica de Tapachula usuarios</Link>
+                    <Link className="navbar-brand" to="/usuario/inicio">UPTAP</Link>
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav mx-auto mb-lg-0">
                             <li className="nav-item">
@@ -20,7 +20,7 @@ const NavbarUsuarios = () => {
                                 <Link className="nav-link" to="/usuario/prestamo_Externo">prestamos externos</Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link" to="/usuario/prestamo_Interno">prestamos interno</Link>
+                                <Link className="nav-link" to="/usuario/prestamo_Interno">prestamos internos</Link>
                             </li>
                             <li className="nav-item">
                                 <Link className="nav-link" to="/">Cerrar sesión</Link>

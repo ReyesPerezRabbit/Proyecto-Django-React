@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react'
 import { DatePicker } from '@material-ui/pickers'
 import { Link } from 'react-router-dom'
+import { Box } from '@material-ui/core';
 import Popup from 'reactjs-popup'
 import 'reactjs-popup/dist/index.css';
 import SignaturPad from 'react-signature-canvas'
@@ -30,9 +31,9 @@ const SolicitudPrestamoIntero = () => {
         // {/*Prestamo interno*
         <div className="container w-75 bg-light mt-5 rounded shadow">
             <div className="col bg-white p-1 rounded-end">
-            <div className="text-end">
-          <img src={logo} alt="" width="10% px" />
-        </div>
+                <div className="text-end">
+                    <img src={logo} alt="" width="10% px" />
+                </div>
                 <form>
                     <div className="mb-4">
                         <h4 className="datosLibro fw-bold text-center py-1 mb-4">PRESTAMO INTERNO</h4>
@@ -117,12 +118,16 @@ const SolicitudPrestamoIntero = () => {
                         {FirmaEntregado ? (<img src={FirmaEntregado} alt="Firma" className="firma" />) : null}
                     </div>
                     <hr className="firmas" />
-                    <div className="d-grid mb-4">
-                        <span type="submit"><Link className="btn btn-success nav-link" to="#">Guardar</Link></span>
-                    </div>
-                    <div className="d-grid mb-4">
-                        <span type="reset"><Link className="btn btn-danger nav-link" to="/usuario">Cancelar</Link></span>
-                    </div>
+                    <Box mb={4}>
+                        <br />
+                        <div className="d-grid">
+                            <span><Link className="btn btn-success nav-link col-4 my-auto mx-auto" to="/usuario/inicio">Guardar</Link></span>
+                        </div>
+                        <br />
+                        <div className="d-grid">
+                            <span><Link className="btn btn-danger nav-link col-4 my-auto mx-auto" to="/">Regresar</Link></span>
+                        </div>
+                    </Box>
                 </form>
             </div>
         </div>
