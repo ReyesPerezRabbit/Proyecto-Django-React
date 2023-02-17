@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import logoPrincipal from '../img/logo_Politecnica.png'
+import logoPrincipal from '../components/img/logo_Politecnica.png'
 import '../css/navbar.css'
 
 const NavbarUsuarios = () => {
@@ -12,12 +12,15 @@ const NavbarUsuarios = () => {
                     <img src={logoPrincipal} className="Logo" alt="" width="85" />
                     <Link className="navbar-brand" to="/usuario/inicio">Universidad Politecnica de Tapachula usuarios</Link>
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul className="navbar-nav mx-auto mb-2 mb-lg-0">
+                        <ul className="navbar-nav mx-auto mb-lg-0">
                             <li className="nav-item">
                                 <Link className="nav-link" to="/usuario/libros_Disponibles">Libros disponibles</Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link" to="/usuario/solicitud">Pedir prestamo</Link>
+                                <Link className="nav-link" to="/usuario/prestamo_Externo">prestamos externos</Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/usuario/prestamo_Interno">prestamos interno</Link>
                             </li>
                             <li className="nav-item">
                                 <Link className="nav-link" to="/">Cerrar sesión</Link>

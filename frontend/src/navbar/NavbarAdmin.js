@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import logoPrincipal from '../img/logo_Politecnica.png'
+import logoPrincipal from '../components/img/logo_Politecnica.png'
 import '../css/navbar.css'
 
 const NavbarAdmin = () => {

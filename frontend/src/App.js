@@ -1,19 +1,21 @@
 import React from "react";
+import "./css/App.css"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Inicio from "./components/inicio";
-import LoginAdmin from "./components/admin/login_Admin";
-import LoginUssers from "./components/usuario/login_Ussers";
-import SolicitudLibros from "./components/usuario/SolicitudLibros";
-import AgregarUssers from "./components/admin/agregarUsuarios";
-import AgregarLibro from "./components/admin/agregar_Libro";
-import PaletaPrestamos from "./components/admin/Paleta_Prestamos";
-import NavbarAdmin from "./components/navbar/NavbarAdmin";
-import NavbarUsuarios from "./components/navbar/NavbarUsuarios";
-import InicioAdmin from "./components/admin/InicioAdmin";
-import InicioUsuario from "./components/usuario/InicioUsuario";
-import LibrosDisponibles from "./components/usuario/LibrosDisponibles";
-import BlogForm from "./components/admin/BlogForm"
-import "./components/css/navbar.css";
+import Inicio from "./inicio";
+import LoginAdmin from "./admin/login_Admin";
+import LoginUssers from "./usuario/login_Ussers";
+import SolicitudPrestamoExterno from "./usuario/SolicitudPrestamoExterno";
+import SolicitudPrestamoIntero from "./usuario/SolicitudPrestamoIntero";
+import AgregarUssers from "./admin/agregarUsuarios";
+import AgregarLibro from "./admin/agregar_Libro";
+import PaletaPrestamos from "./admin/Paleta_Prestamos";
+import NavbarAdmin from "./navbar/NavbarAdmin";
+import NavbarUsuarios from "./navbar/NavbarUsuarios";
+import InicioAdmin from "./admin/InicioAdmin";
+import InicioUsuario from "./usuario/InicioUsuario";
+import LibrosDisponibles from "./usuario/LibrosDisponibles";
+import BlogForm from "./admin/BlogForm"
+// import "./components/css/navbar.css";
 //import axios from 'axios';
 
 // // Components
@@ -81,17 +83,21 @@ function App() {
           <Route path="/usuario" exact>
             <LoginUssers />
           </Route>
-          <Route path="/usuario/inicio">
+          <Route path="/usuario/inicio" exact>
             <NavbarUsuarios />
             <InicioUsuario />
           </Route>
-          <Route path="/usuario/libros_Disponibles">
+          <Route path="/usuario/libros_Disponibles" exact>
             <NavbarUsuarios />
             <LibrosDisponibles />
           </Route>
-          <Route path="/usuario/solicitud" exact>
+          <Route path="/usuario/prestamo_Externo" exact>
             <NavbarUsuarios />
-            <SolicitudLibros />
+            <SolicitudPrestamoExterno />
+          </Route>
+          <Route path="/usuario/prestamo_Interno" exact>
+            <NavbarUsuarios/>
+            <SolicitudPrestamoIntero/>
           </Route>
         </Switch>
       </div>

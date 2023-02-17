@@ -1,14 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import logo from '../img/login.jpg'
+import logo from '../components/img/login.jpg'
 
 const login_Ussers = () => {
 
   return (
     <div className="container w-75 bg-primary mt-5 rounded shadow">
       <div className="row align-items-stretch">
-        <div className="col bg d-none col-md-5 col-lg-5 col-xl-6 rounded">
-        </div>
         <div className="col bg-white p-5 rounded-end">
           <div className="text-end">
             <img src={logo} alt="" width="14% px" />
