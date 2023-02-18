@@ -5,6 +5,9 @@ const LibrosDisponibles = () => {
   return (
     <div>
       <h1>Libros disponibles</h1>
+    {/* titulo
+         imagen
+         descripcion */}
     </div>
   )
 }
