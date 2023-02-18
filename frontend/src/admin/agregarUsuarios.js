@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { TextField, Button, Box, Select, MenuItem, InputLabel } from '@material-ui/core';
 
-function Registro() {
+function AgregarUsuarios() {
   const [matricula, setMatricula] = useState('');
   const [name, setName] = useState('');
   const [paternalLastName, setPaternalLastName] = useState('');
@@ -153,4 +153,4 @@ function Registro() {
   );
 }
 
-export default Registro;
+export default AgregarUsuarios;
