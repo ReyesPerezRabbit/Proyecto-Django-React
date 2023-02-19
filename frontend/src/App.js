@@ -15,6 +15,8 @@ import InicioAdmin from "./admin/InicioAdmin";
 import InicioUsuario from "./usuario/InicioUsuario";
 import LibrosDisponibles from "./usuario/LibrosDisponibles";
 import BlogForm from "./admin/BlogForm"
+import "./css/BackgroundAnimation.css";
+
 // import "./components/css/navbar.css";
 //import axios from 'axios';
 
@@ -26,8 +28,9 @@ import BlogForm from "./admin/BlogForm"
 
 function App() {
   return (
-    <Router>
-      <div className="container">
+    
+    <Router>    
+      <div className="container ">
         {/* <NavbarAdmin /> */}
         {/* <br />
         <div className="btn-group">
@@ -52,6 +55,7 @@ function App() {
         </div>
         <hr /> */}
         <Switch>
+          
           <Route path="/" exact>
             <Inicio />
             {/* Admin */}
@@ -94,6 +98,7 @@ function App() {
           <Route path="/usuario/prestamo_Externo" exact>
             <NavbarUsuarios />
             <SolicitudPrestamoExterno />
+            
           </Route>
           <Route path="/usuario/prestamo_Interno" exact>
             <NavbarUsuarios/>
@@ -124,7 +129,9 @@ function App() {
     //   </div>
 
     //   </>
+  
   )
 }
+
 
 export default App;

@@ -4,9 +4,9 @@ import { Typography, Box, Button } from '@material-ui/core';
 
 const inicio = () => {
   return (
-    <div className="container w-75 mt-5 rounded shadow text-center">
+    <div className="container w-75 text-center">
       <div className="row align-items-stretch">
-        <div className="col bg-white p-5 rounded-end">
+        <div className="col bg-white p-5 rounded-end mt-5">
           <Typography variant="h3" gutterBottom>Sistema de Documentos de biblioteca</Typography>
           <Typography variant="h5" gutterBottom>Queridos usuarios, esta es la plataforma digital para poder hacer
             su solicutud de libros de la Escuela Politecnica de Tapachula la cual va a consistir
