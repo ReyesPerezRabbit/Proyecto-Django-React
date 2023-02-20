@@ -1,5 +1,8 @@
 import { useState } from 'react';
 import { TextField, Button, Box, Select, MenuItem, InputLabel } from '@material-ui/core';
+import logo from '../img/logo_Integrador.jpeg'
+// import Table from 'react-bootstrap/Table';
+// import Form from 'react-bootstrap/Form';
 
 function AgregarUsuarios() {
   const [matricula, setMatricula] = useState('');
@@ -54,7 +57,11 @@ function AgregarUsuarios() {
   }
 
   return (
-    <div className="container col-3 mt-5 rounded shadow">
+    <div className="container w-75 bg-light mt-5 rounded shadow">
+            <div className="col bg-white p-1 rounded-end">
+      <div className="text-end">
+                    <img src={logo} alt="" width="20% px" />
+                </div>
     <form onSubmit={handleSubmit}>
       <Box display="flex" flexDirection="column" alignItems="center" marginBottom={2}>
        
@@ -149,7 +156,40 @@ function AgregarUsuarios() {
       
      
     </form>
+    {/* <br/>
+    <div>
+    <Form className="d-flex">
+                  <Form.Control
+                    type="search"
+                    placeholder="Search"
+                    className="me-2"
+                    aria-label="Search"
+                  />
+                  <Button variant="outline-success">Search</Button>
+                </Form>
+    <Table striped bordered hover>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Username</th>
+          <th>Username</th>
+          <th>Username</th>
+          <th>Username</th>
+          <th>Username</th>
+          <th>Username</th>
+          <th>Username</th>
+        </tr>
+      </thead>
+     
+    </Table>
+    </div> */}
     </div>
+    
+      
+    </div>
+    
   );
 }
 

@@ -31,7 +31,7 @@
 //   render() {
 //     return (
 //       <div className="container w-75 mt-5 rounded shadow">
-      
+
 //       <form onSubmit={this.handleSubmit}>
 //         <label>
 //           Título:
@@ -67,6 +67,7 @@
 
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
+import logo from '../img/logo_Integrador.jpeg'
 
 function RegistroForm() {
   const [titulo, setTitulo] = useState('');
@@ -98,27 +99,35 @@ function RegistroForm() {
   };
 
   return (
-    <div className="container col-5 mt-5 rounded shadow">
-    <Form onSubmit={handleSubmit}>
-      <Form.Group controlId="titulo">
-        <Form.Label>Título:</Form.Label>
-        <Form.Control type="text" placeholder="Ingrese el título" value={titulo} onChange={handleTituloChange} />
-      </Form.Group>
+    <div className="container w-75 bg-light mt-5 rounded shadow">
+      <div className="col bg-white p-1 rounded-end">
+        <div className="text-end">
+          <img src={logo} alt="" width="20% px" />
+        </div>
+        <Form onSubmit={handleSubmit}>
+          <Form.Group controlId="titulo">
+            <Form.Label>Título:</Form.Label>
+            <Form.Control type="text" placeholder="Ingrese el título" value={titulo} onChange={handleTituloChange} />
+          </Form.Group>
 
-      <Form.Group controlId="descripcion">
-        <Form.Label>Descripción:</Form.Label>
-        <Form.Control as="textarea" rows={3} placeholder="Ingrese la descripción" value={descripcion} onChange={handleDescripcionChange} />
-      </Form.Group>
+          <Form.Group controlId="descripcion">
+            <Form.Label>Descripción:</Form.Label>
+            <Form.Control as="textarea" rows={3} placeholder="Ingrese la descripción" value={descripcion} onChange={handleDescripcionChange} />
+          </Form.Group>
 
-      <Form.Group controlId="imagen">
-        <Form.Label>Imagen:</Form.Label>
-        <Form.Control type="file" accept="image/*" onChange={handleImagenChange} />
-      </Form.Group>
+          <Form.Group controlId="imagen">
+            <Form.Label>Imagen:</Form.Label>
+            <Form.Control type="file" accept="image/*" onChange={handleImagenChange} />
+          </Form.Group>
+          <br />
+          <div className="container text-lg-center">
+            <Button className="btn btn-primary text-center" type="submit">
+              Guardar
+            </Button>
 
-      <Button variant="primary" type="submit">
-        Guardar
-      </Button>
-    </Form>
+          </div>
+        </Form>
+      </div>
     </div>
   );
 }

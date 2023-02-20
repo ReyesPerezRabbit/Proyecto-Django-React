@@ -1,9 +1,11 @@
 import React from "react";
+import "./css/App.css"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Inicio from "./components/inicio";
 import LoginAdmin from "./admin/login_Admin";
 import LoginUssers from "./usuario/login_Ussers";
-import SolicitudLibros from "./usuario/SolicitudLibros";
+import SolicitudPrestamoExterno from "./usuario/SolicitudPrestamoExterno";
+import SolicitudPrestamoIntero from "./usuario/SolicitudPrestamoInterno";
 import AgregarUssers from "./admin/agregarUsuarios";
 import AgregarLibro from "./admin/agregar_Libro";
 import PaletaPrestamos from "./admin/Paleta_Prestamos";
@@ -13,7 +15,9 @@ import InicioAdmin from "./admin/InicioAdmin";
 import InicioUsuario from "./usuario/InicioUsuario";
 import LibrosDisponibles from "./usuario/LibrosDisponibles";
 import BlogForm from "./admin/BlogForm"
-import "./css/navbar.css";
+//import "./css/BackgroundAnimation.css";
+
+// import "./components/css/navbar.css";
 //import axios from 'axios';
 
 // // Components
@@ -24,8 +28,9 @@ import "./css/navbar.css";
 
 function App() {
   return (
-    <Router>
-      <div className="container">
+    
+    <Router>    
+      <div className="container ">
         {/* <NavbarAdmin /> */}
         {/* <br />
         <div className="btn-group">
@@ -50,6 +55,7 @@ function App() {
         </div>
         <hr /> */}
         <Switch>
+          
           <Route path="/" exact>
             <Inicio />
             {/* Admin */}
@@ -81,17 +87,22 @@ function App() {
           <Route path="/usuario" exact>
             <LoginUssers />
           </Route>
-          <Route path="/usuario/inicio">
+          <Route path="/usuario/inicio" exact>
             <NavbarUsuarios />
             <InicioUsuario />
           </Route>
-          <Route path="/usuario/libros_Disponibles">
+          <Route path="/usuario/libros_Disponibles" exact>
             <NavbarUsuarios />
             <LibrosDisponibles />
           </Route>
-          <Route path="/usuario/solicitud" exact>
+          <Route path="/usuario/prestamo_Externo" exact>
             <NavbarUsuarios />
-            <SolicitudLibros />
+            <SolicitudPrestamoExterno />
+            
+          </Route>
+          <Route path="/usuario/prestamo_Interno" exact>
+            <NavbarUsuarios/>
+            <SolicitudPrestamoIntero/>
           </Route>
         </Switch>
       </div>
@@ -118,7 +129,9 @@ function App() {
     //   </div>
 
     //   </>
+  
   )
 }
+
 
 export default App;

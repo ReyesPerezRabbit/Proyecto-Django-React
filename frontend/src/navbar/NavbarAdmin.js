@@ -19,9 +19,9 @@ const NavbarAdmin = () => {
                         <li className="nav-item">
                             <Link className="nav-link" to="/admin/agregarLibro">Subir libros</Link>
                         </li>
-                        <li className="nav-item">
+                        {/* <li className="nav-item">
                             <Link className="nav-link" to="/admin/prestamos">prestamos solicitados</Link>
-                        </li>
+                        </li> */}
                         <li className="nav-item">
                             <Link className="nav-link" to="/">Cerrar sesión</Link>
                         </li>
