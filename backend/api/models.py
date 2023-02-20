@@ -8,7 +8,10 @@ class Blog(models.Model):
 
 # base de datos para añadir usuarios
 
-
+class incioseccion(models.Model):
+    idinicio = models.AutoField(primary_key=True)
+    usuario = models.CharField( max_length=50)
+    password = models.CharField( max_length=50)
 class registrousuario(models.Model):
     matricula = models.AutoField(primary_key=True)
     nombrealumno = models.CharField(max_length=100)
