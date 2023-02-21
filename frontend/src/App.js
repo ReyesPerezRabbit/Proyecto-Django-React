@@ -15,7 +15,7 @@ import InicioAdmin from "./admin/InicioAdmin";
 import InicioUsuario from "./usuario/InicioUsuario";
 import LibrosDisponibles from "./usuario/LibrosDisponibles";
 import BlogForm from "./admin/BlogForm"
-//import "./css/BackgroundAnimation.css";
+import "./css/BackgroundAnimation.css";
 
 // import "./components/css/navbar.css";
 //import axios from 'axios';
@@ -30,7 +30,10 @@ function App() {
   return (
     
     <Router>    
-      <div className="container ">
+     <div class="collage-container">
+  <div class="collage collage-1"></div>
+  <div class="collage collage-2"></div>
+  <div class="collage collage-3"></div>
         {/* <NavbarAdmin /> */}
         {/* <br />
         <div className="btn-group">

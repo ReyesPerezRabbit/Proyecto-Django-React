@@ -10,7 +10,7 @@ const inicio = () => {
   return (
     <div className="container w-75 text-center ">
       
-      <div className="row align-items-stretch rounded shadow w-80 mt-5">
+      <div className="row align-items-stretch rounded w-80 ">
         <div className="col bg-white p-5 rounded-end mt-5">
           <Typography variant="h3" gutterBottom>
             Gestion de Sistema de Biblioteca
@@ -61,6 +61,7 @@ const inicio = () => {
           </Accordion.Item>
         </Accordion>
       </div>
+      <br></br>
       {/* Figura */}
       <Figure>
       <Figure.Image
