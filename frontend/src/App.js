@@ -30,10 +30,7 @@ function App() {
   return (
     
     <Router>    
-     <div class="collage-container">
-  <div class="collage collage-1"></div>
-  <div class="collage collage-2"></div>
-  <div class="collage collage-3"></div>
+     <div class="container">
         {/* <NavbarAdmin /> */}
         {/* <br />
         <div className="btn-group">

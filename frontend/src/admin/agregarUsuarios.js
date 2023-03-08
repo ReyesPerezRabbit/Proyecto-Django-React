@@ -149,7 +149,7 @@ function AgregarUsuarios() {
         <br/>
           <Box mt={2}>
           <Button variant="contained" color="primary" type="submit">
-            Registrarse
+            Dar de alta
           </Button>
         </Box>
       </Box>
