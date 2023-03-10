@@ -12,29 +12,33 @@ class incioseccion(models.Model):
     idinicio = models.AutoField(primary_key=True)
     usuario = models.CharField( max_length=50)
     password = models.CharField( max_length=50)
+
+
 class registrousuario(models.Model):
-    matricula = models.AutoField(primary_key=True)
-    nombrealumno = models.CharField(max_length=100)
-    apellidoP = models.CharField(max_length=50)
-    apellidoM = models.CharField(max_length=50)
-    correo = models.EmailField()
-    telefono = models.IntegerField()
+    # matricula = models.AutoField(primary_key=True)
+    nombrealumno = models.CharField(max_length=100,blank=False)
+    apellidoP = models.CharField(max_length=50,blank=False)
+    apellidoM = models.CharField(max_length=50,blank=False)
+    correo = models.EmailField(blank=False)
+    telefono = models.CharField(max_length=20, blank=False, null=False)
     edad = models.IntegerField( blank=True)
-    carrera = models.TextField(max_length=100)
+    carrera = models.CharField(max_length=100,blank=False)
+    genero = models.CharField(max_length=100,blank=False)
+    usuario = models.CharField(max_length=50,blank=False)
+    password = models.CharField(max_length=50,blank=False)
     
-
-
-
 
 # Datos del libro
 
 
 class libro(models.Model):
-    id_libro = models.AutoField(primary_key=True)
-    nombrelibro = models.CharField(max_length=150)
-    actor = models.CharField(max_length=100)
-    descripcion = models.TextField()
-    imagen = models.ImageField()
+    # id_libro = models.AutoField(primary_key=True)
+    codigo = models.CharField(max_length = 150,blank=False)
+    cantidad = models.IntegerField(blank=False)
+    nombrelibro = models.CharField(max_length=150,blank=False)
+    actor = models.CharField(max_length=100,blank=False)
+    descripcion = models.TextField(blank=False)
+    # imagen = models.ImageField()
 
 
 ## Inventario
