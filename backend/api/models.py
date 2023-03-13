@@ -15,7 +15,7 @@ class incioseccion(models.Model):
 
 
 class registrousuario(models.Model):
-    # matricula = models.AutoField(primary_key=True)
+    matricula = models.AutoField(primary_key=True)
     nombrealumno = models.CharField(max_length=100,blank=False)
     apellidoP = models.CharField(max_length=50,blank=False)
     apellidoM = models.CharField(max_length=50,blank=False)
@@ -32,7 +32,7 @@ class registrousuario(models.Model):
 
 
 class libro(models.Model):
-    # id_libro = models.AutoField(primary_key=True)
+    id_libro = models.AutoField(primary_key=True)
     codigo = models.CharField(max_length = 150,blank=False)
     cantidad = models.IntegerField(blank=False)
     nombrelibro = models.CharField(max_length=150,blank=False)
