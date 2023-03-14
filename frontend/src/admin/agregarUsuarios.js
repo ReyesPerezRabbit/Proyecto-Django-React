@@ -5,50 +5,54 @@ import logo from '../img/logo_Integrador.jpeg'
 // import Form from 'react-bootstrap/Form';
 
 function AgregarUsuarios() {
-  const [matricula, setMatricula] = useState('');
-  const [name, setName] = useState('');
-  const [paternalLastName, setPaternalLastName] = useState('');
-  const [maternalLastName, setMaternalLastName] = useState('');
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
+  const [nombrealumno, setNombrealumno] = useState('');
+  const [apellidoP, setApellidoP] = useState('');
+  const [apellidoM, setApellidoM] = useState('');
+  const [correo, setCorreo] = useState('');
+  const [telefono, setTelefono] = useState('');
   const [edad, setEdad] = useState('');
-  const [career, setCareer] = useState('');
-  const [gender, setGender] = useState('');
+  const [carrera, setCarrera] = useState('');
+  const [genero, setGenero] = useState('');
+  const [usuario, setUsuario] = useState('');
+  const [password, setPassword] = useState('');
 
 
-  const handleMatriculaChange = (event) => {
-    setMatricula(event.target.value);
+  const handleNombrealumnoChange = (event) => {
+    setNombrealumno(event.target.value);
   }
-  const handleNameChange = (event) => {
-    setName(event.target.value);
-  }
-
-  const handlePaternalLastNameChange = (event) => {
-    setPaternalLastName(event.target.value);
+  const handleApellidoPChange = (event) => {
+    setApellidoP(event.target.value);
   }
 
-  const handleMaternalLastNameChange = (event) => {
-    setMaternalLastName(event.target.value);
+  const handleApellidoMChange = (event) => {
+    setApellidoM(event.target.value);
   }
 
-  const handleEmailChange = (event) => {
-    setEmail(event.target.value);
+  const handleCorreoChange = (event) => {
+    setCorreo(event.target.value);
   }
 
-  const handlePhoneChange = (event) => {
-    setPhone(event.target.value);
+  const handleTelefonoChange = (event) => {
+    setTelefono(event.target.value);
   }
 
   const handleEdadChange = (event) => {
     setEdad(event.target.value);
   }
 
-  const handleCareerChange = (event) => {
-    setCareer(event.target.value);
+  const handleCarreraChange = (event) => {
+    setCarrera(event.target.value);
   }
 
-  const handleGenderChange = (event) => {
-    setGender(event.target.value);
+  const handleGeneroChange = (event) => {
+    setGenero(event.target.value);
+  }
+
+  const handleUsuarioChange = (event) => {
+    setUsuario(event.target.value);
+  }
+  const handlePasswordChange = (event) => {
+    setPassword(event.target.value);
   }
 
   const handleSubmit = (event) => {
@@ -66,56 +70,60 @@ function AgregarUsuarios() {
       <Box display="flex" flexDirection="column" alignItems="center" marginBottom={2}>
        
       <TextField
-          label="Matricula"
-          value={matricula}
-          onChange={handleMatriculaChange}
+          label="Nombre del Alumno"
+          value={nombrealumno}
+          onChange={handleNombrealumnoChange}
+          margin="normal"
+        />
+         <TextField
+          label="Apellido Paterno"
+          value={apellidoP}
+          onChange={handleApellidoPChange}
           margin="normal"
         />
         <TextField
-          label="Nombre"
-          value={name}
-          onChange={handleNameChange}
+          label="Apellido Materno"
+          value={apellidoM}
+          onChange={handleApellidoMChange}
           margin="normal"
         />
         <TextField
-          label="Apellido paterno"
-          value={paternalLastName}
-          onChange={handlePaternalLastNameChange}
+          label="Correo Electronico"
+          value={correo}
+          onChange={handleCorreoChange}
           margin="normal"
         />
         <TextField
-          label="Apellido materno"
-          value={maternalLastName}
-          onChange={handleMaternalLastNameChange}
-          margin="normal"
-        />
-        <TextField
-          label="Correo electrónico"
-          type="email"
-          value={email}
-          onChange={handleEmailChange}
-          margin="normal"
-        />
-        <TextField
-          label="Teléfono"
-          type="tel"
-          value={phone}
-          onChange={handlePhoneChange}
+          label="Telefono"
+          value={telefono}
+          type= "tel"
+          onChange={handleTelefonoChange}
           margin="normal"
         />
         <TextField
           label="Edad"
-          type="tel"
           value={edad}
           onChange={handleEdadChange}
           margin="normal"
         />
+        <TextField
+          label="Usuario"
+          value={usuario}
+          onChange={handleUsuarioChange}
+          margin="normal"
+        />
+        <TextField
+          label="Contraseña"
+          value={password}
+          onChange={handlePasswordChange}
+          margin="normal"
+        />
          <Box display="flex" flexDirection="column" alignItems="center" marginBottom={2}>
-          <InputLabel id="career-label">Carrera</InputLabel>
+          <InputLabel id="carrera">Carreras</InputLabel>
           <Select
             labelId="career-label"
-            value={career}
-            onChange={handleCareerChange}
+            value={carrera}
+            onChange={handleCarreraChange}
             margin="center"
           >
             <MenuItem value="Software">Ingeniería de Software</MenuItem>
@@ -132,12 +140,13 @@ function AgregarUsuarios() {
             <MenuItem value="LenguasExtranjeras">Centro de Estudios de Lenguas Extranjeras</MenuItem>
           </Select>
         </Box>
+
         <Box display="flex" flexDirection="column" alignItems="center" marginBottom={2}>
-          <InputLabel id="gender-label">Género</InputLabel>
+          <InputLabel id="genero">Género</InputLabel>
           <Select
             labelId="gender-label"
-            value={gender}
-            onChange={handleGenderChange}
+            value={genero}
+            onChange={handleGeneroChange}
             margin="normal"
           >
             <MenuItem value="Masculino">Masculino</MenuItem>

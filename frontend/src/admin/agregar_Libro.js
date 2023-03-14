@@ -70,12 +70,27 @@ import { Form, Button } from 'react-bootstrap';
 import logo from '../img/logo_Integrador.jpeg'
 
 function RegistroForm() {
-  const [titulo, setTitulo] = useState('');
+  const [codigo, setCodigo] = useState('');
+  const [cantidad, setCantidad] = useState('');
+  const [nombrelibro, setNombrelibro] = useState('');
+  const [actor, setActor] = useState('');
   const [descripcion, setDescripcion] = useState('');
   const [imagen, setImagen] = useState(null);
 
-  const handleTituloChange = (e) => {
-    setTitulo(e.target.value);
+  const handleCodigoChange = (e) => {
+    setCodigo(e.target.value);
+  };
+
+  const handleCantidadChange = (e) => {
+    setCantidad(e.target.value);
+  };
+
+  const handleNombrelibroChange = (e) => {
+    setNombrelibro(e.target.value);
+  };
+
+  const handleActorChange = (e) => {
+    setActor(e.target.value);
   };
 
   const handleDescripcionChange = (e) => {
@@ -90,7 +105,10 @@ function RegistroForm() {
     e.preventDefault();
     // Crear un objeto FormData para enviar los datos al servidor
     const formData = new FormData();
-    formData.append('titulo', titulo);
+    formData.append('codigo', codigo);
+    formData.append('cantidad', cantidad);
+    formData.append('nombrelibro', nombrelibro);
+    formData.append('actor', actor);
     formData.append('descripcion', descripcion);
     formData.append('imagen', imagen);
 
@@ -104,15 +122,42 @@ function RegistroForm() {
         <div className="text-end">
           <img src={logo} alt="" width="20% px" />
         </div>
+
         <Form onSubmit={handleSubmit}>
-          <Form.Group controlId="titulo">
-            <Form.Label>Título:</Form.Label>
-            <Form.Control type="text" placeholder="Ingrese el título" value={titulo} onChange={handleTituloChange} />
+
+          <Form.Group controlId="codigo">
+            <Form.Label>Codigo Libro:</Form.Label>
+            <Form.Control type="text" placeholder="Ingrese el codigo del libro"
+             value={codigo} 
+             onChange={handleCodigoChange} />
+          </Form.Group>
+
+          <Form.Group controlId="cantidad">
+            <Form.Label>Cantidad de libros existentes:</Form.Label>
+            <Form.Control type="text" placeholder="Ingrese la cantidad de libros"
+             value={cantidad} 
+             onChange={handleCantidadChange} />
+          </Form.Group>
+
+          <Form.Group controlId="nombrelibro">
+            <Form.Label>Nombre del Libro:</Form.Label>
+            <Form.Control type="text" placeholder="Ingrese el Nombre del Libro"
+             value={nombrelibro} 
+             onChange={handleNombrelibroChange} />
+          </Form.Group>
+
+          <Form.Group controlId="actor">
+            <Form.Label>Nombre del Actor:</Form.Label>
+            <Form.Control type="text" placeholder="Ingrese el Nombre del Actor"
+             value={actor} 
+             onChange={handleActorChange} />
           </Form.Group>
 
           <Form.Group controlId="descripcion">
             <Form.Label>Descripción:</Form.Label>
-            <Form.Control as="textarea" rows={3} placeholder="Ingrese la descripción" value={descripcion} onChange={handleDescripcionChange} />
+            <Form.Control as="textarea" rows={1}
+             placeholder="Ingrese la descripción" 
+             value={descripcion} onChange={handleDescripcionChange} />
           </Form.Group>
 
           <Form.Group controlId="imagen">
@@ -122,7 +167,7 @@ function RegistroForm() {
           <br />
           <div className="container text-lg-center">
             <Button className="btn btn-primary text-center" type="submit">
-              Guardar
+              Dar de alta
             </Button>
 
           </div>
