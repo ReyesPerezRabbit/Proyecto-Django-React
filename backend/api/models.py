@@ -15,7 +15,8 @@ class incioseccion(models.Model):
 
 
 class registrousuario(models.Model):
-    matricula = models.AutoField(primary_key=True)
+    idregistrouser = models.AutoField(primary_key=True)
+    matricula = models.CharField(max_length = 15)
     nombrealumno = models.CharField(max_length=100,blank=False)
     apellidoP = models.CharField(max_length=50,blank=False)
     apellidoM = models.CharField(max_length=50,blank=False)
@@ -26,6 +27,13 @@ class registrousuario(models.Model):
     genero = models.CharField(max_length=100,blank=False)
     usuario = models.CharField(max_length=50,blank=False)
     password = models.CharField(max_length=50,blank=False)
+
+    def __str__(self):
+        return self.matricula
+
+    class Meta:
+        db_table = "Registro_user"
+        verbose_name = "Registro de usuarios"
     
 
 # Datos del libro
@@ -39,7 +47,12 @@ class libro(models.Model):
     actor = models.CharField(max_length=100,blank=False)
     descripcion = models.TextField(blank=False)
     # imagen = models.ImageField()
+    def __str__(self):
+        return self.codigo
 
+    class Meta:
+        db_table = "Libros"
+        verbose_name = "Registro de Libros"
 
 ## Inventario
 

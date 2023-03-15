@@ -90,7 +90,7 @@ DATABASES = {
 		'ENGINE': 'django.db.backends.postgresql_psycopg2',
 		'NAME' : 'prueba',
 		'USER' : 'postgres',
-		'PASSWORD' : '1234',
+		'PASSWORD' : 'admin',
 		'HOST' : 'localhost' ,  # la base esta descargado de la rama master 
 		'PORT' : '' 
     }

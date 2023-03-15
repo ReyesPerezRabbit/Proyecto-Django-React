@@ -128,36 +128,36 @@ function RegistroForm() {
           <Form.Group controlId="codigo">
             <Form.Label>Codigo Libro:</Form.Label>
             <Form.Control type="text" placeholder="Ingrese el codigo del libro"
-             value={codigo} 
-             onChange={handleCodigoChange} />
+              value={codigo}
+              onChange={handleCodigoChange} />
           </Form.Group>
 
           <Form.Group controlId="cantidad">
             <Form.Label>Cantidad de libros existentes:</Form.Label>
             <Form.Control type="text" placeholder="Ingrese la cantidad de libros"
-             value={cantidad} 
-             onChange={handleCantidadChange} />
+              value={cantidad}
+              onChange={handleCantidadChange} />
           </Form.Group>
 
           <Form.Group controlId="nombrelibro">
             <Form.Label>Nombre del Libro:</Form.Label>
             <Form.Control type="text" placeholder="Ingrese el Nombre del Libro"
-             value={nombrelibro} 
-             onChange={handleNombrelibroChange} />
+              value={nombrelibro}
+              onChange={handleNombrelibroChange} />
           </Form.Group>
 
           <Form.Group controlId="actor">
             <Form.Label>Nombre del Actor:</Form.Label>
             <Form.Control type="text" placeholder="Ingrese el Nombre del Actor"
-             value={actor} 
-             onChange={handleActorChange} />
+              value={actor}
+              onChange={handleActorChange} />
           </Form.Group>
 
           <Form.Group controlId="descripcion">
             <Form.Label>Descripción:</Form.Label>
             <Form.Control as="textarea" rows={1}
-             placeholder="Ingrese la descripción" 
-             value={descripcion} onChange={handleDescripcionChange} />
+              placeholder="Ingrese la descripción"
+              value={descripcion} onChange={handleDescripcionChange} />
           </Form.Group>
 
           <Form.Group controlId="imagen">
