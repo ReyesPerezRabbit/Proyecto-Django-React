@@ -16,7 +16,7 @@ class libroview(View):
     # para mostrar los datos
 
     def get(self, request, id=0):
-        if id > 0:
+        if (id > 0):
             libreria = list(libro.objects.filter(id=id).values())
             if len(libreria) > 0:
                 libros = libreria[0]
@@ -61,7 +61,7 @@ class libroview(View):
             librerias.save()
             datos = {"mensaje": "Seccess"}
         else:
-            datos = {"message": "register not found..."}
+            datos = {"message": "registro not found..."}
         return JsonResponse(datos)
 
     #    para borrar
@@ -83,9 +83,9 @@ class registrouser(View):
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
 
-    def get(self, request, id=0):
-        if (id > 0):
-            useregister = list(registrousuario.objects.filter(id=id).values())
+    def get(self, request, matricula=0):
+        if (matricula > 0):
+            useregister = list(registrousuario.objects.filter(matricula=matricula).values())
             if len(useregister) > 0:
                 registeruser = useregister[0]
                 datosuser = {"menssage": "Seccess", "useregister": registeruser}
@@ -118,11 +118,11 @@ class registrouser(View):
         datos = {"message": "Success"}
         return JsonResponse(datos)
 
-    def put(self, request, id):
+    def put(self, request, matricula):
         jd = json.loads(request.body)
-        useregister = list(registrousuario.objects.filter(id=id).values())
+        useregister = list(registrousuario.objects.filter(matricula=matricula).values())
         if len(useregister) > 0:
-            registeruser = registrousuario.objects.get(id=id)
+            registeruser = registrousuario.objects.get(matricula=matricula)
             registeruser.matricula = jd["matricula"]
             registeruser.nombrealumno = jd["nombrealumno"]
             registeruser.apellidoP = jd["apellidoP"]
@@ -137,16 +137,16 @@ class registrouser(View):
             registeruser.save()
             datouser = {"message": "Success"}
         else:
-            datouser = {"message": "Company not found..."}
+            datouser = {"message": "Libro not found..."}
         return JsonResponse(datouser)
 
-    def delete(self, request, id):
-        useregister = list(registrousuario.objects.filter(id=id).values())
+    def delete(self, request, matricula):
+        useregister = list(registrousuario.objects.filter(matricula=matricula).values())
         if len(useregister) > 0:
-            registrousuario.objects.filter(id=id).delete()
+            registrousuario.objects.filter(matricula=matricula).delete()
             datouser = {"message": "Success"}
         else:
-            datouser = {"message": "Company not found..."}
+            datouser = {"message": "libro not found..."}
         return JsonResponse(datouser)
 
 

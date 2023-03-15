@@ -72,94 +72,105 @@ function AgregarUsuarios() {
 
   return (
     <div className="container w-75 bg-light mt-5 rounded shadow">
-            <div className="col bg-white p-1 rounded-end">
-      <div className="text-end">
-                    <img src={logo} alt="" width="20% px" />
-                </div>
-    <form onSubmit={handleSubmit}>
-      <Box display="flex" flexDirection="column" alignItems="center" marginBottom={2}>
-       
-      <TextField
-          label="Nombre del Alumno"
-          value={nombrealumno}
-          onChange={handleNombrealumnoChange}
-          margin="normal"
-        />
-         <TextField
-          label="Apellido Paterno"
-          value={apellidoP}
-          onChange={handleApellidoPChange}
-          margin="normal"
-        />
-        <TextField
-          label="Apellido Materno"
-          value={apellidoM}
-          onChange={handleApellidoMChange}
-          margin="normal"
-        />
-        <TextField
-          label="Correo Electronico"
-          value={correo}
-          onChange={handleCorreoChange}
-          margin="normal"
-        />
-        <TextField
-          label="Telefono"
-          value={telefono}
-          type= "tel"
-          onChange={handleTelefonoChange}
-          margin="normal"
-        />
-        <TextField
-          label="Edad"
-          value={edad}
-          onChange={handleEdadChange}
-          margin="normal"
-        />
-        <TextField
-          label="Usuario"
-          value={usuario}
-          onChange={handleUsuarioChange}
-          margin="normal"
-        />
-        <TextField
-          label="Contraseña"
-          value={password}
-          onChange={handlePasswordChange}
-          margin="normal"
-        />
-         <Box display="flex" flexDirection="column" alignItems="center" marginBottom={2}>
-          <InputLabel id="carrera">Carreras</InputLabel>
-          <Select
-            labelId="career-label"
-            value={carrera}
-            onChange={handleCarreraChange}
-            margin="center"
-          >
-            <MenuItem value="Software">Ingeniería de Software</MenuItem>
-            <MenuItem value="Ingenieria">Maestría en Ingeniería</MenuItem>
-            <MenuItem value="Mecatronica">Ingeniería Mecatrónica</MenuItem>
-            <MenuItem value="Financiera">Ingeniería Financiera</MenuItem>
-            <MenuItem value="Ambiental">Ingeniería en Tecnología Ambiental</MenuItem>
-            <MenuItem value="Automotrices">Ingeniería en Sistemas Automotrices</MenuItem>
-            <MenuItem value="Nanotecnología">Ingeniería en Nanotecnología</MenuItem>
-            <MenuItem value="Transporte">Ingeniería en Logística y Transporte</MenuItem>
-            <MenuItem value="Energía">Ingeniería en Energía</MenuItem>
-            <MenuItem value="Animacion">Ingeniería en Animación y Efectos Visuales</MenuItem>
-            <MenuItem value="Agroindustrial">Ingeniería Agroindustrial</MenuItem>
-            <MenuItem value="LenguasExtranjeras">Centro de Estudios de Lenguas Extranjeras</MenuItem>
-          </Select>
-        </Box>
+      <div className="col bg-white p-1 rounded-end">
+        <div className="text-end">
+          <img src={logo} alt="" width="20% px" />
+        </div>
+        <form onSubmit={handleSubmit}>
+          <Box display="flex" flexDirection="column" alignItems="center" marginBottom={2}>
 
+
+            <TextField
+              label="Matricula"
+              value={matricula}
+              onChange={handleMatriculaChange}
+              margin="normal"
+            />
+            <TextField
+              label="Nombre del Alumno"
+              value={nombrealumno}
+              onChange={handleNombrealumnoChange}
+              margin="normal"
+            />
+            <TextField
+              label="Apellido Paterno"
+              value={apellidoP}
+              onChange={handleApellidoPChange}
+              margin="normal"
+            />
+            <TextField
+              label="Apellido Materno"
+              value={apellidoM}
+              onChange={handleApellidoMChange}
+              margin="normal"
+            />
+            <TextField
+              label="Correo Electronico"
+              value={correo}
+              onChange={handleCorreoChange}
+              margin="normal"
+            />
+            <TextField
+              label="Telefono"
+              value={telefono}
+              type="tel"
+              onChange={handleTelefonoChange}
+              margin="normal"
+            />
+            <TextField
+              label="Edad"
+              value={edad}
+              onChange={handleEdadChange}
+              margin="normal"
+            />
+            <TextField
+              label="Usuario"
+              value={usuario}
+              onChange={handleUsuarioChange}
+              margin="normal"
+            />
+            <TextField
+              label="Contraseña"
+              value={password}
+              onChange={handlePasswordChange}
+              margin="normal"
+            />
             <Box
               display="flex"
               flexDirection="column"
               alignItems="center"
+              marginBottom={2}>
+              <InputLabel id="carrera">Carreras</InputLabel>
+              <Select
+                labelId="carrera"
+                value={carrera}
+                onChange={handleCarreraChange}
+                margin="normal"
+              >
+                <MenuItem value="Software">Ingeniería de Software</MenuItem>
+                <MenuItem value="Ingenieria">Maestría en Ingeniería</MenuItem>
+                <MenuItem value="Mecatronica">Ingeniería Mecatrónica</MenuItem>
+                <MenuItem value="Financiera">Ingeniería Financiera</MenuItem>
+                <MenuItem value="Ambiental">Ingeniería en Tecnología Ambiental</MenuItem>
+                <MenuItem value="Automotrices">Ingeniería en Sistemas Automotrices</MenuItem>
+                <MenuItem value="Nanotecnología">Ingeniería en Nanotecnología</MenuItem>
+                <MenuItem value="Transporte">Ingeniería en Logística y Transporte</MenuItem>
+                <MenuItem value="Energía">Ingeniería en Energía</MenuItem>
+                <MenuItem value="Animacion">Ingeniería en Animación y Efectos Visuales</MenuItem>
+                <MenuItem value="Agroindustrial">Ingeniería Agroindustrial</MenuItem>
+                <MenuItem value="LenguasExtranjeras">Centro de Estudios de Lenguas Extranjeras</MenuItem>
+              </Select>
+            </Box>
+
+            <Box
+              display="flex"
+              flexDirection="column"
+              alignItems="left"
               marginBottom={2}
             >
               <InputLabel id="genero">Género</InputLabel>
               <Select
-                labelId="gender-label"
+                labelId="genero"
                 value={genero}
                 onChange={handleGeneroChange}
                 margin="normal"
