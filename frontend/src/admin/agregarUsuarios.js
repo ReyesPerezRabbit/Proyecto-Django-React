@@ -69,6 +69,13 @@ function AgregarUsuarios() {
     <form onSubmit={handleSubmit}>
       <Box display="flex" flexDirection="column" alignItems="center" marginBottom={2}>
        
+
+      <TextField
+          label="Matricula"
+          value={nombrealumno}
+          onChange={handleNombrealumnoChange}
+          margin="normal"
+        />
       <TextField
           label="Nombre del Alumno"
           value={nombrealumno}
