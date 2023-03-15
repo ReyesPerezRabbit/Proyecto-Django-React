@@ -83,9 +83,9 @@ class registrouser(View):
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
 
-    def get(self, request, matricula=0):
-        if (matricula > 0):
-            useregister = list(registrousuario.objects.filter(matricula=matricula).values())
+    def get(self, request, id=0):
+        if (id > 0):
+            useregister = list(registrousuario.objects.filter(id=id).values())
             if len(useregister) > 0:
                 registeruser = useregister[0]
                 datosuser = {"menssage": "Seccess", "useregister": registeruser}
@@ -103,6 +103,7 @@ class registrouser(View):
     def post(self, request):
         jd = json.loads(request.body)
         registrousuario.objects.create(
+            matricula=jd["matricula"],
             nombrealumno=jd["nombrealumno"],
             apellidoP=jd["apellidoP"],
             apellidoM=jd["apellidoM"],
@@ -117,11 +118,12 @@ class registrouser(View):
         datos = {"message": "Success"}
         return JsonResponse(datos)
 
-    def put(self, request, matricula):
+    def put(self, request, id):
         jd = json.loads(request.body)
-        useregister = list(registrousuario.objects.filter(matricula=matricula).values())
+        useregister = list(registrousuario.objects.filter(id=id).values())
         if len(useregister) > 0:
-            registeruser = registrousuario.objects.get(matricula=matricula)
+            registeruser = registrousuario.objects.get(id=id)
+            registeruser.matricula = jd["matricula"]
             registeruser.nombrealumno = jd["nombrealumno"]
             registeruser.apellidoP = jd["apellidoP"]
             registeruser.apellidoM = jd["apellidoM"]
@@ -138,10 +140,10 @@ class registrouser(View):
             datouser = {"message": "Company not found..."}
         return JsonResponse(datouser)
 
-    def delete(self, request, matricula):
-        useregister = list(registrousuario.objects.filter(matricula=matricula).values())
+    def delete(self, request, id):
+        useregister = list(registrousuario.objects.filter(id=id).values())
         if len(useregister) > 0:
-            registrousuario.objects.filter(matricula=matricula).delete()
+            registrousuario.objects.filter(id=id).delete()
             datouser = {"message": "Success"}
         else:
             datouser = {"message": "Company not found..."}
