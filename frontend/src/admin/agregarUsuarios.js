@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   TextField,
   Button,
@@ -7,9 +7,24 @@ import {
   MenuItem,
   InputLabel,
 } from "@material-ui/core";
+import * as userServer from "./userServer"
 import logo from "../img/logo_Integrador.jpeg";
 // import Table from 'react-bootstrap/Table';
 // import Form from 'react-bootstrap/Form';
+
+const userServer = () =>{
+  const [user, setuser] = useState("");
+  const serveruser = () =>{
+    try{
+      const res = userServer.serveruser();
+      console.log(res);
+    }catch(error) {
+      console.log(error);
+    }
+  }
+}
+
+useEffect 
 
 function AgregarUsuarios() {
   const [matricula, setMatricula] = useState("");
@@ -77,12 +92,9 @@ function AgregarUsuarios() {
           <img src={logo} alt="" width="20% px" />
         </div>
         <form onSubmit={handleSubmit}>
-          <Box
-            display="flex"
-            flexDirection="column"
-            alignItems="center"
-            marginBottom={2}
-          >
+          <Box display="flex" flexDirection="column" alignItems="center" marginBottom={2}>
+
+
             <TextField
               label="Matricula"
               value={matricula}
@@ -142,53 +154,38 @@ function AgregarUsuarios() {
               display="flex"
               flexDirection="column"
               alignItems="center"
-              marginBottom={2}
-            >
+              marginBottom={2}>
               <InputLabel id="carrera">Carreras</InputLabel>
               <Select
-                labelId="career-label"
+                labelId="carrera"
                 value={carrera}
                 onChange={handleCarreraChange}
-                margin="center"
+                margin="normal"
               >
                 <MenuItem value="Software">Ingeniería de Software</MenuItem>
                 <MenuItem value="Ingenieria">Maestría en Ingeniería</MenuItem>
                 <MenuItem value="Mecatronica">Ingeniería Mecatrónica</MenuItem>
                 <MenuItem value="Financiera">Ingeniería Financiera</MenuItem>
-                <MenuItem value="Ambiental">
-                  Ingeniería en Tecnología Ambiental
-                </MenuItem>
-                <MenuItem value="Automotrices">
-                  Ingeniería en Sistemas Automotrices
-                </MenuItem>
-                <MenuItem value="Nanotecnología">
-                  Ingeniería en Nanotecnología
-                </MenuItem>
-                <MenuItem value="Transporte">
-                  Ingeniería en Logística y Transporte
-                </MenuItem>
+                <MenuItem value="Ambiental">Ingeniería en Tecnología Ambiental</MenuItem>
+                <MenuItem value="Automotrices">Ingeniería en Sistemas Automotrices</MenuItem>
+                <MenuItem value="Nanotecnología">Ingeniería en Nanotecnología</MenuItem>
+                <MenuItem value="Transporte">Ingeniería en Logística y Transporte</MenuItem>
                 <MenuItem value="Energía">Ingeniería en Energía</MenuItem>
-                <MenuItem value="Animacion">
-                  Ingeniería en Animación y Efectos Visuales
-                </MenuItem>
-                <MenuItem value="Agroindustrial">
-                  Ingeniería Agroindustrial
-                </MenuItem>
-                <MenuItem value="LenguasExtranjeras">
-                  Centro de Estudios de Lenguas Extranjeras
-                </MenuItem>
+                <MenuItem value="Animacion">Ingeniería en Animación y Efectos Visuales</MenuItem>
+                <MenuItem value="Agroindustrial">Ingeniería Agroindustrial</MenuItem>
+                <MenuItem value="LenguasExtranjeras">Centro de Estudios de Lenguas Extranjeras</MenuItem>
               </Select>
             </Box>
 
             <Box
               display="flex"
               flexDirection="column"
-              alignItems="center"
+              alignItems="left"
               marginBottom={2}
             >
               <InputLabel id="genero">Género</InputLabel>
               <Select
-                labelId="gender-label"
+                labelId="genero"
                 value={genero}
                 onChange={handleGeneroChange}
                 margin="normal"
