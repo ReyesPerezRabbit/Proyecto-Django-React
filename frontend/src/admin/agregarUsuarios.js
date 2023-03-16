@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   TextField,
   Button,
@@ -7,9 +7,24 @@ import {
   MenuItem,
   InputLabel,
 } from "@material-ui/core";
+import * as userServer from "./userServer"
 import logo from "../img/logo_Integrador.jpeg";
 // import Table from 'react-bootstrap/Table';
 // import Form from 'react-bootstrap/Form';
+
+const userServer = () =>{
+  const [user, setuser] = useState("");
+  const serveruser = () =>{
+    try{
+      const res = userServer.serveruser();
+      console.log(res);
+    }catch(error) {
+      console.log(error);
+    }
+  }
+}
+
+useEffect 
 
 function AgregarUsuarios() {
   const [matricula, setMatricula] = useState("");
