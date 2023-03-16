@@ -207,8 +207,9 @@ function AgregarUsuarios() {
             </Box>
           </Box>
         </form>
-        {/* <br/>
-    <div>
+      </div>
+       <br/>
+    {/* <div>
     <Form className="d-flex">
                   <Form.Control
                     type="search"
@@ -231,14 +232,20 @@ function AgregarUsuarios() {
           <th>Username</th>
           <th>Username</th>
           <th>Username</th>
+          <th>Username</th>
+          <th>Username</th>
+          <th>Username</th>
+          
+          <th>Username</th>
         </tr>
       </thead>
      
     </Table>
     </div> */}
-      </div>
     </div>
+    
+    
   );
-}
+  }
 
 export default AgregarUsuarios;
