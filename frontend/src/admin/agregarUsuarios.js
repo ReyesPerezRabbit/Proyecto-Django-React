@@ -1,4 +1,6 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+// import Table from 'react-bootstrap/Table';
+// import Form from 'react-bootstrap/Form';
 import {
   TextField,
   Button,
@@ -7,24 +9,8 @@ import {
   MenuItem,
   InputLabel,
 } from "@material-ui/core";
-import * as userServer from "./userServer"
 import logo from "../img/logo_Integrador.jpeg";
-// import Table from 'react-bootstrap/Table';
-// import Form from 'react-bootstrap/Form';
-
-const userServer = () =>{
-  const [user, setuser] = useState("");
-  const serveruser = () =>{
-    try{
-      const res = userServer.serveruser();
-      console.log(res);
-    }catch(error) {
-      console.log(error);
-    }
-  }
-}
-
-useEffect 
+import axios from 'axios';
 
 function AgregarUsuarios() {
   const [matricula, setMatricula] = useState("");
@@ -82,8 +68,30 @@ function AgregarUsuarios() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Aquí puedes agregar la lógica para enviar los datos del formulario a un servidor
+
+    const data = {
+      matricula: matricula,
+      nombrealumno: nombrealumno,
+      apellidoP: apellidoP,
+      apellidoM: apellidoM,
+      correo:correo,
+      telefono:telefono,
+      edad:edad,
+      carrera:carrera,
+      genero:genero,
+      usuario:usuario,
+      password:password,
+    };
+    axios.post('http://127.0.0.1:8000/api/user/',data)
+    .then((response)=>{
+      console.log(response.data);
+    })
+    .catch((error)=>{
+      console.error(error);
+    });
   };
+
+  
 
   return (
     <div className="container w-75 bg-light mt-5 rounded shadow">
@@ -92,9 +100,12 @@ function AgregarUsuarios() {
           <img src={logo} alt="" width="20% px" />
         </div>
         <form onSubmit={handleSubmit}>
-          <Box display="flex" flexDirection="column" alignItems="center" marginBottom={2}>
-
-
+          <Box
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+            marginBottom={2}
+          >
             <TextField
               label="Matricula"
               value={matricula}
@@ -154,7 +165,8 @@ function AgregarUsuarios() {
               display="flex"
               flexDirection="column"
               alignItems="center"
-              marginBottom={2}>
+              marginBottom={2}
+            >
               <InputLabel id="carrera">Carreras</InputLabel>
               <Select
                 labelId="carrera"
@@ -166,14 +178,28 @@ function AgregarUsuarios() {
                 <MenuItem value="Ingenieria">Maestría en Ingeniería</MenuItem>
                 <MenuItem value="Mecatronica">Ingeniería Mecatrónica</MenuItem>
                 <MenuItem value="Financiera">Ingeniería Financiera</MenuItem>
-                <MenuItem value="Ambiental">Ingeniería en Tecnología Ambiental</MenuItem>
-                <MenuItem value="Automotrices">Ingeniería en Sistemas Automotrices</MenuItem>
-                <MenuItem value="Nanotecnología">Ingeniería en Nanotecnología</MenuItem>
-                <MenuItem value="Transporte">Ingeniería en Logística y Transporte</MenuItem>
+                <MenuItem value="Ambiental">
+                  Ingeniería en Tecnología Ambiental
+                </MenuItem>
+                <MenuItem value="Automotrices">
+                  Ingeniería en Sistemas Automotrices
+                </MenuItem>
+                <MenuItem value="Nanotecnología">
+                  Ingeniería en Nanotecnología
+                </MenuItem>
+                <MenuItem value="Transporte">
+                  Ingeniería en Logística y Transporte
+                </MenuItem>
                 <MenuItem value="Energía">Ingeniería en Energía</MenuItem>
-                <MenuItem value="Animacion">Ingeniería en Animación y Efectos Visuales</MenuItem>
-                <MenuItem value="Agroindustrial">Ingeniería Agroindustrial</MenuItem>
-                <MenuItem value="LenguasExtranjeras">Centro de Estudios de Lenguas Extranjeras</MenuItem>
+                <MenuItem value="Animacion">
+                  Ingeniería en Animación y Efectos Visuales
+                </MenuItem>
+                <MenuItem value="Agroindustrial">
+                  Ingeniería Agroindustrial
+                </MenuItem>
+                <MenuItem value="LenguasExtranjeras">
+                  Centro de Estudios de Lenguas Extranjeras
+                </MenuItem>
               </Select>
             </Box>
 
@@ -205,8 +231,8 @@ function AgregarUsuarios() {
           </Box>
         </form>
       </div>
-       <br/>
-    {/* <div>
+      <br />
+      {/* <div>
     <Form className="d-flex">
                   <Form.Control
                     type="search"
@@ -239,10 +265,9 @@ function AgregarUsuarios() {
      
     </Table>
     </div> */}
+    
     </div>
-    
-    
   );
-  }
+}
 
 export default AgregarUsuarios;

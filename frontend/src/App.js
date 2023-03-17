@@ -15,7 +15,7 @@ import InicioAdmin from "./admin/InicioAdmin";
 import InicioUsuario from "./usuario/InicioUsuario";
 import LibrosDisponibles from "./usuario/LibrosDisponibles";
 import BlogForm from "./admin/BlogForm"
-import "./css/BackgroundAnimation.css";
+
 
 // import "./components/css/navbar.css";
 //import axios from 'axios';

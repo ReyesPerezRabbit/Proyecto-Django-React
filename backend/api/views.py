@@ -16,7 +16,7 @@ class libroview(View):
     # para mostrar los datos
 
     def get(self, request, id=0):
-        if (id > 0):
+        if id > 0:
             libreria = list(libro.objects.filter(id=id).values())
             if len(libreria) > 0:
                 libros = libreria[0]
@@ -84,8 +84,10 @@ class registrouser(View):
         return super().dispatch(request, *args, **kwargs)
 
     def get(self, request, matricula=0):
-        if (matricula > 0):
-            useregister = list(registrousuario.objects.filter(matricula=matricula).values())
+        if matricula > 0:
+            useregister = list(
+                registrousuario.objects.filter(matricula=matricula).values()
+            )
             if len(useregister) > 0:
                 registeruser = useregister[0]
                 datosuser = {"menssage": "Seccess", "useregister": registeruser}
@@ -150,4 +152,35 @@ class registrouser(View):
         return JsonResponse(datouser)
 
 
-#
+# @csrf_exempt
+# def user(request):
+#     if request.method == 'POST':
+#         matricula = request.POST.get("matricula")
+#         nombrealumno = request.POST.get("nombrealumno")
+#         apellidoP = request.POST.get("apellidoP")
+#         apellidoM = request.POST.get("apellidoM")
+#         correo = request.POST.get("correo")
+#         telefono = request.POST.get("telefono")
+#         edad = request.POST.get("edad")
+#         carrera = request.POST.get("carrera")
+#         genero = request.POST.get("genero")
+#         usuario = request.POST.get("usuario")
+#         password = request.POST.get("password")
+
+#         user_register = registeruser(
+#             matricula=matricula,
+#             nombrealumno=nombrealumno,
+#             apellidoP=apellidoP,
+#             apellidoM=apellidoM,
+#             correo=correo,
+#             telefono=telefono,
+#             edad=edad,
+#             carrera=carrera,
+#             genero=genero,
+#             usuario=usuario,
+#             password=password
+#         )
+#         user_register.save()
+
+#         return JsonResponse({'status': 'success'})
+#     return JsonResponse({'status': 'error'})

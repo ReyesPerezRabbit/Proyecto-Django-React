@@ -68,14 +68,15 @@
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import logo from '../img/logo_Integrador.jpeg'
+import axios from 'axios';
 
-function RegistroForm() {
+function Agregarlibros() {
   const [codigo, setCodigo] = useState('');
   const [cantidad, setCantidad] = useState('');
   const [nombrelibro, setNombrelibro] = useState('');
   const [actor, setActor] = useState('');
   const [descripcion, setDescripcion] = useState('');
-  const [imagen, setImagen] = useState(null);
+  // const [imagen, setImagen] = useState(null);
 
   const handleCodigoChange = (e) => {
     setCodigo(e.target.value);
@@ -97,23 +98,27 @@ function RegistroForm() {
     setDescripcion(e.target.value);
   };
 
-  const handleImagenChange = (e) => {
-    setImagen(e.target.files[0]);
-  };
+  // const handleImagenChange = (e) => {
+  //   setImagen(e.target.files[0]);
+  // };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Crear un objeto FormData para enviar los datos al servidor
-    const formData = new FormData();
-    formData.append('codigo', codigo);
-    formData.append('cantidad', cantidad);
-    formData.append('nombrelibro', nombrelibro);
-    formData.append('actor', actor);
-    formData.append('descripcion', descripcion);
-    formData.append('imagen', imagen);
-
-    // Realizar la petición al servidor utilizando AJAX o fetch
-    // ...
+    
+    const data = {
+     codigo:codigo,
+     cantidad:cantidad,
+     nombrelibro:nombrelibro,
+     actor:actor,
+     descripcion:descripcion,
+    };
+    axios.post('http://127.0.0.1:8000/api/libro/',data)
+    .then((response)=>{
+      console.log(response.data);
+    })
+    .catch((error)=>{
+      console.error(error);
+    });
   };
 
   return (
@@ -160,10 +165,10 @@ function RegistroForm() {
               value={descripcion} onChange={handleDescripcionChange} />
           </Form.Group>
 
-          <Form.Group controlId="imagen">
+          {/* <Form.Group controlId="imagen">
             <Form.Label>Imagen:</Form.Label>
             <Form.Control type="file" accept="image/*" onChange={handleImagenChange} />
-          </Form.Group>
+          </Form.Group> */}
           <br />
           <div className="container text-lg-center">
             <Button className="btn btn-primary text-center" type="submit">
@@ -176,4 +181,4 @@ function RegistroForm() {
     </div>
   );
 }
-export default RegistroForm;
+export default Agregarlibros;
