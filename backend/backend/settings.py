@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'corsheaders',
     'api',
 ]
 
@@ -49,7 +50,14 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "corsheaders.middleware.CorsMiddleware"
 ]
+
+CORS_ORIGIN_WHITELIST = (
+    'http://localhost',
+    'http://localhost:3000',
+    'http://localhost:4200',
+)
 
 ROOT_URLCONF = 'backend.urls'
 
@@ -77,14 +85,14 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 
 DATABASES = {
     'default': {
-          'ENGINE': 'django.db.backends.sqlite3',
-          'NAME': BASE_DIR / 'db.sqlite3',
-		# 'ENGINE': 'django.db.backends.postgresql_psycopg2',
-		# 'NAME' : 'db_biblioteca',
-		# 'USER' : 'postgres',
-		# 'PASSWORD' : 'admin',
-		# 'HOST' : 'localhost' ,  # la base esta descargado de la rama master 
-		# 'PORT' : '' 
+        #   'ENGINE': 'django.db.backends.sqlite3',
+        #   'NAME': BASE_DIR / 'db.sqlite3',
+		'ENGINE': 'django.db.backends.postgresql_psycopg2',
+		'NAME' : 'prueba',
+		'USER' : 'postgres',
+		'PASSWORD' : 'admin',
+		'HOST' : 'localhost' ,  # la base esta descargado de la rama master 
+		'PORT' : '' 
     }
 }
 

@@ -31,7 +31,7 @@
 //   render() {
 //     return (
 //       <div className="container w-75 mt-5 rounded shadow">
-      
+
 //       <form onSubmit={this.handleSubmit}>
 //         <label>
 //           Título:
@@ -67,57 +67,118 @@
 
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
+import logo from '../img/logo_Integrador.jpeg'
+import axios from 'axios';
 
-function RegistroForm() {
-  const [titulo, setTitulo] = useState('');
+function Agregarlibros() {
+  const [codigo, setCodigo] = useState('');
+  const [cantidad, setCantidad] = useState('');
+  const [nombrelibro, setNombrelibro] = useState('');
+  const [actor, setActor] = useState('');
   const [descripcion, setDescripcion] = useState('');
-  const [imagen, setImagen] = useState(null);
+  // const [imagen, setImagen] = useState(null);
 
-  const handleTituloChange = (e) => {
-    setTitulo(e.target.value);
+  const handleCodigoChange = (e) => {
+    setCodigo(e.target.value);
+  };
+
+  const handleCantidadChange = (e) => {
+    setCantidad(e.target.value);
+  };
+
+  const handleNombrelibroChange = (e) => {
+    setNombrelibro(e.target.value);
+  };
+
+  const handleActorChange = (e) => {
+    setActor(e.target.value);
   };
 
   const handleDescripcionChange = (e) => {
     setDescripcion(e.target.value);
   };
 
-  const handleImagenChange = (e) => {
-    setImagen(e.target.files[0]);
-  };
+  // const handleImagenChange = (e) => {
+  //   setImagen(e.target.files[0]);
+  // };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Crear un objeto FormData para enviar los datos al servidor
-    const formData = new FormData();
-    formData.append('titulo', titulo);
-    formData.append('descripcion', descripcion);
-    formData.append('imagen', imagen);
-
-    // Realizar la petición al servidor utilizando AJAX o fetch
-    // ...
+    
+    const data = {
+     codigo:codigo,
+     cantidad:cantidad,
+     nombrelibro:nombrelibro,
+     actor:actor,
+     descripcion:descripcion,
+    };
+    axios.post('http://127.0.0.1:8000/api/libro/',data)
+    .then((response)=>{
+      console.log(response.data);
+    })
+    .catch((error)=>{
+      console.error(error);
+    });
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
-      <Form.Group controlId="titulo">
-        <Form.Label>Título:</Form.Label>
-        <Form.Control type="text" placeholder="Ingrese el título" value={titulo} onChange={handleTituloChange} />
-      </Form.Group>
+    <div className="container w-75 bg-light mt-5 rounded shadow">
+      <div className="col bg-white p-1 rounded-end">
+        <div className="text-end">
+          <img src={logo} alt="" width="20% px" />
+        </div>
 
-      <Form.Group controlId="descripcion">
-        <Form.Label>Descripción:</Form.Label>
-        <Form.Control as="textarea" rows={3} placeholder="Ingrese la descripción" value={descripcion} onChange={handleDescripcionChange} />
-      </Form.Group>
+        <Form onSubmit={handleSubmit}>
 
-      <Form.Group controlId="imagen">
-        <Form.Label>Imagen:</Form.Label>
-        <Form.Control type="file" accept="image/*" onChange={handleImagenChange} />
-      </Form.Group>
+          <Form.Group controlId="codigo">
+            <Form.Label>Codigo Libro:</Form.Label>
+            <Form.Control type="text" placeholder="Ingrese el codigo del libro"
+              value={codigo}
+              onChange={handleCodigoChange} />
+          </Form.Group>
 
-      <Button variant="primary" type="submit">
-        Guardar
-      </Button>
-    </Form>
+          <Form.Group controlId="cantidad">
+            <Form.Label>Cantidad de libros existentes:</Form.Label>
+            <Form.Control type="text" placeholder="Ingrese la cantidad de libros"
+              value={cantidad}
+              onChange={handleCantidadChange} />
+          </Form.Group>
+
+          <Form.Group controlId="nombrelibro">
+            <Form.Label>Nombre del Libro:</Form.Label>
+            <Form.Control type="text" placeholder="Ingrese el Nombre del Libro"
+              value={nombrelibro}
+              onChange={handleNombrelibroChange} />
+          </Form.Group>
+
+          <Form.Group controlId="actor">
+            <Form.Label>Nombre del Actor:</Form.Label>
+            <Form.Control type="text" placeholder="Ingrese el Nombre del Actor"
+              value={actor}
+              onChange={handleActorChange} />
+          </Form.Group>
+
+          <Form.Group controlId="descripcion">
+            <Form.Label>Descripción:</Form.Label>
+            <Form.Control as="textarea" rows={1}
+              placeholder="Ingrese la descripción"
+              value={descripcion} onChange={handleDescripcionChange} />
+          </Form.Group>
+
+          {/* <Form.Group controlId="imagen">
+            <Form.Label>Imagen:</Form.Label>
+            <Form.Control type="file" accept="image/*" onChange={handleImagenChange} />
+          </Form.Group> */}
+          <br />
+          <div className="container text-lg-center">
+            <Button className="btn btn-primary text-center" type="submit">
+              Dar de alta
+            </Button>
+
+          </div>
+        </Form>
+      </div>
+    </div>
   );
 }
-export default RegistroForm;
+export default Agregarlibros;

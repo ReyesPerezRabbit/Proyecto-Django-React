@@ -1,62 +1,38 @@
-import React from 'react'
-// import { Typography} from '@material-ui/core'
+import React from "react";
+//import { Link } from 'react-router-dom'
+import { Typography } from "@material-ui/core";
+import logo from "../../src/img/logo_Integrador.jpeg";
+import Figure from "react-bootstrap/Figure";
 
-
-// const InicioAdmin = () => {
-//   return (
-//     <container>
-//       <div className="container w-75 mt-5 rounded shadow text-center">
-//        <Typography variant="h3" gutterBottom>Querido administrador este es tu panel</Typography>
-//       </div>
-//       <div className="container w-75 mt-5 rounded shadow text-center">
-//         <p> Queridos usuarios, esta es la plataforma digital para poder hacer
-//           su solicutud de libros de la Escuela Politecnica de Tapachula la cual va a consistir
-//           en llenar unos formularios para poder hacer el prestamo del libro y asi poder tener el libro que usted
-//           va a requerir asi mismo al momento de rellenar los campos debera hacerlo de manera correcta para que
-//           no valla a ver problemas mas adelante son su peticion </p>
-//       </div>     
-//     </container>
-//   )
-// }
-
-// export default InicioAdmin
-import { Typography, Box, List, ListItem, ListItemIcon, ListItemText, Divider } from '@material-ui/core';
-import { Link } from 'react-router-dom';
-import { Dashboard, People, Event, Settings } from '@material-ui/icons';
-
-function AdminPanel({ children }) {
+const InicioAdmin = () => {
   return (
-    <Box display="flex" flexDirection="row" height="100vh">
-      <Box bgcolor="primary.main" color="primary.contrastText" p={2} width="250px">
-        <Typography variant="h5" gutterBottom>Admin Panel</Typography>
-        <Divider />
-        <List>
-          <ListItem button component={Link} to="/admin/inicio">
-            <ListItemIcon><Dashboard /></ListItemIcon>
-            <ListItemText primary="Dashboard" />
-          </ListItem>
-          <ListItem button component={Link} to="/admin/agregarUsuarios">
-            <ListItemIcon><People /></ListItemIcon>
-            <ListItemText primary="Users" />
-          </ListItem>
-          <ListItem button component={Link} to="/events">
-            <ListItemIcon><Event /></ListItemIcon>
-            <ListItemText primary="Events" />
-          </ListItem>
-        </List>
-        <Divider />
-        <List>
-          <ListItem button component={Link} to="/settings">
-            <ListItemIcon><Settings /></ListItemIcon>
-            <ListItemText primary="Settings" />
-          </ListItem>
-        </List>
-      </Box>
-      <Box flexGrow={1} p={2}>
-        {children}
-      </Box>
-    </Box>
+    <div>
+      <container>
+        <div className="container w-100 mt-5 rounded text-left">
+          <Typography variant="h3" gutterBottom>
+            Panel de Administrador
+          </Typography>
+        </div>
+        <div className="w-90 mt-5 col-4 text-left">
+          <p>
+            {" "}
+            El panel de Administrador tiene la funcion de permitir tener el
+            acesso completo al sistema de Gestion de biblioteca. Las funciones
+            que integra el Panel de Administrador es dar de alta a Usuarios y
+            subir los libros existentes para asi los usuarios puedan elegir el
+            libro y llenar el formato de prestamo{" "}
+          </p>
+        </div>
+      </container>
+      <div className="text-center">
+        {/* Figura */}
+        <Figure>
+          <Figure.Image width={300} height={210} alt="171x180" src={logo} />
+          <Figure.Caption>Java Crew.</Figure.Caption>
+        </Figure>
+      </div>
+    </div>
   );
-}
+};
 
-export default AdminPanel;
+export default InicioAdmin;

@@ -1,298 +1,273 @@
-// // import React, { useState } from "react";
+import { useState } from "react";
+// import Table from 'react-bootstrap/Table';
+// import Form from 'react-bootstrap/Form';
+import {
+  TextField,
+  Button,
+  Box,
+  Select,
+  MenuItem,
+  InputLabel,
+} from "@material-ui/core";
+import logo from "../img/logo_Integrador.jpeg";
+import axios from 'axios';
 
-// // const AgregarUsuarios = () => {
-// //     const [nombre, setNombre] = useState("");
-// //     const [AP, setApellidop] = useState("");
-// //     const [AM, setApellidom] = useState("");
-// //     const [email, setEmail] = useState("");
-// //     const [sexo, setSexo] = useState("");
-// //     const [carrera, setCarrera] = useState("");
-// //     const [cuatri, setCuatri] = useState("");
+function AgregarUsuarios() {
+  const [matricula, setMatricula] = useState("");
+  const [nombrealumno, setNombrealumno] = useState("");
+  const [apellidoP, setApellidoP] = useState("");
+  const [apellidoM, setApellidoM] = useState("");
+  const [correo, setCorreo] = useState("");
+  const [telefono, setTelefono] = useState("");
+  const [edad, setEdad] = useState("");
+  const [carrera, setCarrera] = useState("");
+  const [genero, setGenero] = useState("");
+  const [usuario, setUsuario] = useState("");
+  const [password, setPassword] = useState("");
 
-// //     const handleSubmit = (event) => {
-// //         event.preventDefault();
+  const handleMatriculaChange = (event) => {
+    setMatricula(event.target.value);
+  };
+  const handleNombrealumnoChange = (event) => {
+    setNombrealumno(event.target.value);
+  };
+  const handleApellidoPChange = (event) => {
+    setApellidoP(event.target.value);
+  };
 
-// //         // Enviar los datos a Django aquí
-// //     };
+  const handleApellidoMChange = (event) => {
+    setApellidoM(event.target.value);
+  };
 
-// //     return (
-// //         <div className="text-left mb-4">
-// //             <h1>AGREGAR USUARIOS</h1>
-// //             <div/>
-// //             <div className="text mb-2"></div>
-// //             <div className="container w-75 mt-5 rounded shadow">
-// //                 <div class="container">
-// //                     <form onSubmit={handleSubmit}>
-// //                         <label htmlFor="nombre">Nombre(s):</label>
-// //                         <input
-// //                             type="text"
-// //                             id="nombre"
-// //                             value={nombre}
-// //                             onChange={(event) => setNombre(event.target.value)}
-// //                         />
-// //                         <br />
-// //                         <br />
+  const handleCorreoChange = (event) => {
+    setCorreo(event.target.value);
+  };
 
-// //                         <label htmlFor="AP">Apellido Paterno:</label>
-// //                         <input
-// //                             type="text"
-// //                             id="AP"
-// //                             value={AP}
-// //                             onChange={(event) => setApellidop(event.target.value)}
-// //                         />
-// //                         <br />
-// //                         <br />
+  const handleTelefonoChange = (event) => {
+    setTelefono(event.target.value);
+  };
 
-// //                         <label htmlFor="AM">Apellido Materno:</label>
-// //                         <input
-// //                             type="text"
-// //                             id="AM"
-// //                             value={AM}
-// //                             onChange={(event) => setApellidom(event.target.value)}
-// //                         />
+  const handleEdadChange = (event) => {
+    setEdad(event.target.value);
+  };
 
-// //                         <br />
-// //                         <br />
-// //                         <label htmlFor="sexo">Sexo:</label>
-// //                         <input
-// //                             type="text"
-// //                             id="sexo"
-// //                             value={sexo}
-// //                             onChange={(event) => setSexo(event.target.value)}
-// //                         />
-// //                         <br />
-// //                         <br />
+  const handleCarreraChange = (event) => {
+    setCarrera(event.target.value);
+  };
 
-// //                         <label htmlFor="email">Correo Institucional:</label>
-// //                         <input
-// //                             type="email"
-// //                             id="email"
-// //                             value={email}
-// //                             onChange={(event) => setEmail(event.target.value)}
-// //                         />
-// //                         <br />
-// //                         <br />
+  const handleGeneroChange = (event) => {
+    setGenero(event.target.value);
+  };
 
-// //                         <label htmlFor="cuatri">Cuatrimestre:</label>
-// //                         <input
-// //                             type="text"
-// //                             id="cuatri"
-// //                             value={cuatri}
-// //                             onChange={(event) => setCuatri(event.target.value)}
-// //                         />
-// //                         <br />
-// //                         <br />
-
-// //                         <label htmlFor="carrera">Carrera:</label>
-// //                         <input
-// //                             type="text"
-// //                             id="carrera"
-// //                             value={carrera}
-// //                             onChange={(event) => setCarrera(event.target.value)}
-// //                         />
-// //                         <br />
-// //                         <br />
-
-// //                         <button type="submit">Agregar Usuario</button>
-// //                     </form>
-// //                 </div>
-// //             </div>
-// //         </div>
-// //     );
-// // };
-
-// // export default AgregarUsuarios;
-
-
-
-// //nuevo formulario para guardar los datos en añador usuarios
-// import React, { useState } from 'react';
-
-// const AgregarUsuarios = () => {
-//     const [formData, setFormData] = useState({
-//         name: '',
-//         email: '',
-//         message: ''
-//     });
-
-//     const handleChange = event => {
-//         setFormData({
-//             ...formData,
-//             [event.target.name]: event.target.value
-//         });
-//     };
-
-//     const handleSubmit = event => {
-//         event.preventDefault();
-//         fetch('/save_form_data/', {
-//             method: 'POST',
-//             headers: {
-//                 'Content-Type': 'application/json'
-//             },
-//             body: JSON.stringify(formData)
-//         });
-//     };
-
-//     return (
-//         <div className="text-left mb-2">
-//            <div className="container w-75 mt-5 rounded shadow">
-//         <form onSubmit={handleSubmit}>
-//            nombre <input
-//                 type="text"
-//                 name="name"
-//                 value={formData.name}
-//                 onChange={handleChange}
-//             />
-//            email <input
-//                 type="email"
-//                 name="email"
-//                 value={formData.email}
-//                 onChange={handleChange}
-//             />
-//            mensaje <textarea
-//                 name="message"
-//                 value={formData.message}
-//                 onChange={handleChange}
-//             />
-//             <button type="submit">Submit</button>
-//         </form>
-//         </div>
-//          </div>
-
-//     );
-// };
-
-// export default AgregarUsuarios;
-
-///////////////////////
-
-
-import { useState } from 'react';
-import { TextField, Button, Box, Select, MenuItem, InputLabel } from '@material-ui/core';
-
-function Registro() {
-  const [name, setName] = useState('');
-  const [paternalLastName, setPaternalLastName] = useState('');
-  const [maternalLastName, setMaternalLastName] = useState('');
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
-  const [career, setCareer] = useState('');
-  const [gender, setGender] = useState('');
-
-  const handleNameChange = (event) => {
-    setName(event.target.value);
-  }
-
-  const handlePaternalLastNameChange = (event) => {
-    setPaternalLastName(event.target.value);
-  }
-
-  const handleMaternalLastNameChange = (event) => {
-    setMaternalLastName(event.target.value);
-  }
-
-  const handleEmailChange = (event) => {
-    setEmail(event.target.value);
-  }
-
-  const handlePhoneChange = (event) => {
-    setPhone(event.target.value);
-  }
-
-  const handleCareerChange = (event) => {
-    setCareer(event.target.value);
-  }
-
-  const handleGenderChange = (event) => {
-    setGender(event.target.value);
-  }
+  const handleUsuarioChange = (event) => {
+    setUsuario(event.target.value);
+  };
+  const handlePasswordChange = (event) => {
+    setPassword(event.target.value);
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Aquí puedes agregar la lógica para enviar los datos del formulario a un servidor
-  }
+
+    const data = {
+      matricula: matricula,
+      nombrealumno: nombrealumno,
+      apellidoP: apellidoP,
+      apellidoM: apellidoM,
+      correo:correo,
+      telefono:telefono,
+      edad:edad,
+      carrera:carrera,
+      genero:genero,
+      usuario:usuario,
+      password:password,
+    };
+    axios.post('http://127.0.0.1:8000/api/user/',data)
+    .then((response)=>{
+      console.log(response.data);
+    })
+    .catch((error)=>{
+      console.error(error);
+    });
+  };
+
+  
 
   return (
-    <form onSubmit={handleSubmit}>
-      <Box display="flex" flexDirection="column" alignItems="center" marginBottom={2}>
-        <TextField
-          label="Nombre"
-          value={name}
-          onChange={handleNameChange}
-          margin="normal"
-        />
-        <TextField
-          label="Apellido paterno"
-          value={paternalLastName}
-          onChange={handlePaternalLastNameChange}
-          margin="normal"
-        />
-        <TextField
-          label="Apellido materno"
-          value={maternalLastName}
-          onChange={handleMaternalLastNameChange}
-          margin="normal"
-        />
-        <TextField
-          label="Correo electrónico"
-          type="email"
-          value={email}
-          onChange={handleEmailChange}
-          margin="normal"
-        />
-        <TextField
-          label="Teléfono"
-          type="tel"
-          value={phone}
-          onChange={handlePhoneChange}
-          margin="normal"
-        />
-         <Box display="flex" flexDirection="column" alignItems="center" marginBottom={2}>
-          <InputLabel id="career-label">Carrera</InputLabel>
-          <Select
-            labelId="career-label"
-            value={career}
-            onChange={handleCareerChange}
-            margin="normal"
+    <div className="container w-75 bg-light mt-5 rounded shadow">
+      <div className="col bg-white p-1 rounded-end">
+        <div className="text-end">
+          <img src={logo} alt="" width="20% px" />
+        </div>
+        <form onSubmit={handleSubmit}>
+          <Box
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+            marginBottom={2}
           >
-            <MenuItem value="Software">Ingeniería de Software</MenuItem>
-            <MenuItem value="Ingenieria">Maestría en Ingeniería</MenuItem>
-            <MenuItem value="Mecatronica">Ingeniería Mecatrónica</MenuItem>
-            <MenuItem value="Informática">Ingeniería Financiera</MenuItem>
-            <MenuItem value="Informática">Ingeniería en Tecnología Ambiental</MenuItem>
-            <MenuItem value="Informática">Ingeniería en Sistemas Automotrices</MenuItem>
-            <MenuItem value="Informática">Ingeniería en Nanotecnología</MenuItem>
-            <MenuItem value="Informática">Ingeniería en Logística y Transporte</MenuItem>
-            <MenuItem value="Electrónica">Ingeniería en Energía</MenuItem>
-            <MenuItem value="Derecho">Ingeniería en Animación y Efectos Visuales</MenuItem>
-            <MenuItem value="Administración">Ingeniería Agroindustrial</MenuItem>
-            <MenuItem value="Psicología">Centro de Estudios de Lenguas Extranjeras</MenuItem>
-          </Select>
-        </Box>
-        <Box display="flex" flexDirection="column" alignItems="center" marginBottom={2}>
-          <InputLabel id="gender-label">Género</InputLabel>
-          <Select
-            labelId="gender-label"
-            value={gender}
-            onChange={handleGenderChange}
-            margin="normal"
-          >
-            <MenuItem value="Masculino">Masculino</MenuItem>
-            <MenuItem value="Femenino">Femenino</MenuItem>
-            <MenuItem value="No binario">No binario</MenuItem>
-            <MenuItem value="Prefiero no decirlo">Prefiero no decirlo</MenuItem>
-          </Select>
-        </Box>
-          <Box mt={2}>
-          <Button variant="contained" color="primary" type="submit">
-            Registrarse
-          </Button>
-        </Box>
-      </Box>
-      
+            <TextField
+              label="Matricula"
+              value={matricula}
+              onChange={handleMatriculaChange}
+              margin="normal"
+            />
+            <TextField
+              label="Nombre del Alumno"
+              value={nombrealumno}
+              onChange={handleNombrealumnoChange}
+              margin="normal"
+            />
+            <TextField
+              label="Apellido Paterno"
+              value={apellidoP}
+              onChange={handleApellidoPChange}
+              margin="normal"
+            />
+            <TextField
+              label="Apellido Materno"
+              value={apellidoM}
+              onChange={handleApellidoMChange}
+              margin="normal"
+            />
+            <TextField
+              label="Correo Electronico"
+              value={correo}
+              onChange={handleCorreoChange}
+              margin="normal"
+            />
+            <TextField
+              label="Telefono"
+              value={telefono}
+              type="tel"
+              onChange={handleTelefonoChange}
+              margin="normal"
+            />
+            <TextField
+              label="Edad"
+              value={edad}
+              onChange={handleEdadChange}
+              margin="normal"
+            />
+            <TextField
+              label="Usuario"
+              value={usuario}
+              onChange={handleUsuarioChange}
+              margin="normal"
+            />
+            <TextField
+              label="Contraseña"
+              value={password}
+              onChange={handlePasswordChange}
+              margin="normal"
+            />
+            <Box
+              display="flex"
+              flexDirection="column"
+              alignItems="center"
+              marginBottom={2}
+            >
+              <InputLabel id="carrera">Carreras</InputLabel>
+              <Select
+                labelId="carrera"
+                value={carrera}
+                onChange={handleCarreraChange}
+                margin="normal"
+              >
+                <MenuItem value="Software">Ingeniería de Software</MenuItem>
+                <MenuItem value="Ingenieria">Maestría en Ingeniería</MenuItem>
+                <MenuItem value="Mecatronica">Ingeniería Mecatrónica</MenuItem>
+                <MenuItem value="Financiera">Ingeniería Financiera</MenuItem>
+                <MenuItem value="Ambiental">
+                  Ingeniería en Tecnología Ambiental
+                </MenuItem>
+                <MenuItem value="Automotrices">
+                  Ingeniería en Sistemas Automotrices
+                </MenuItem>
+                <MenuItem value="Nanotecnología">
+                  Ingeniería en Nanotecnología
+                </MenuItem>
+                <MenuItem value="Transporte">
+                  Ingeniería en Logística y Transporte
+                </MenuItem>
+                <MenuItem value="Energía">Ingeniería en Energía</MenuItem>
+                <MenuItem value="Animacion">
+                  Ingeniería en Animación y Efectos Visuales
+                </MenuItem>
+                <MenuItem value="Agroindustrial">
+                  Ingeniería Agroindustrial
+                </MenuItem>
+                <MenuItem value="LenguasExtranjeras">
+                  Centro de Estudios de Lenguas Extranjeras
+                </MenuItem>
+              </Select>
+            </Box>
+
+            <Box
+              display="flex"
+              flexDirection="column"
+              alignItems="left"
+              marginBottom={2}
+            >
+              <InputLabel id="genero">Género</InputLabel>
+              <Select
+                labelId="genero"
+                value={genero}
+                onChange={handleGeneroChange}
+                margin="normal"
+              >
+                <MenuItem value="Masculino">Masculino</MenuItem>
+                <MenuItem value="Femenino">Femenino</MenuItem>
+                <MenuItem value="binario">No binario</MenuItem>
+                <MenuItem value="indefinido">Prefiero no decirlo</MenuItem>
+              </Select>
+            </Box>
+            <br />
+            <Box mt={2}>
+              <Button variant="contained" color="primary" type="submit">
+                Dar de alta
+              </Button>
+            </Box>
+          </Box>
+        </form>
+      </div>
+      <br />
+      {/* <div>
+    <Form className="d-flex">
+                  <Form.Control
+                    type="search"
+                    placeholder="Search"
+                    className="me-2"
+                    aria-label="Search"
+                  />
+                  <Button variant="outline-success">Search</Button>
+                </Form>
+    <Table striped bordered hover>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Username</th>
+          <th>Username</th>
+          <th>Username</th>
+          <th>Username</th>
+          <th>Username</th>
+          <th>Username</th>
+          <th>Username</th>
+          <th>Username</th>
+          <th>Username</th>
+          <th>Username</th>
+          
+          <th>Username</th>
+        </tr>
+      </thead>
      
-    </form>
+    </Table>
+    </div> */}
+    
+    </div>
   );
 }
 
-export default Registro;
+export default AgregarUsuarios;
