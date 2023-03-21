@@ -139,7 +139,7 @@ function Agregarlibros() {
 
           <Form.Group controlId="cantidad">
             <Form.Label>Cantidad de libros existentes:</Form.Label>
-            <Form.Control type="text" required placeholder="Ingrese la cantidad de libros"
+            <Form.Control type="number" required placeholder="Ingrese la cantidad de libros"
               value={cantidad}
               onChange={handleCantidadChange} />
           </Form.Group>
