@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -38,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'corsheaders',
     'api',
 ]
 
@@ -49,7 +51,14 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "corsheaders.middleware.CorsMiddleware"
 ]
+
+CORS_ORIGIN_WHITELIST = (
+    'http://localhost',
+    'http://localhost:3000',
+    'http://localhost:4200',
+)
 
 ROOT_URLCONF = 'backend.urls'
 
@@ -77,8 +86,10 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 
 DATABASES = {
     'default': {
+        #   'ENGINE': 'django.db.backends.sqlite3',
+        #   'NAME': BASE_DIR / 'db.sqlite3',
 		'ENGINE': 'django.db.backends.postgresql_psycopg2',
-		'NAME' : 'db_biblioteca',
+		'NAME' : 'prueba',
 		'USER' : 'postgres',
 		'PASSWORD' : 'zellendust123',
 		'HOST' : 'localhost' ,  # la base esta descargado de la rama master 
@@ -122,6 +133,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
