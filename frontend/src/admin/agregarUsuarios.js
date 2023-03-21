@@ -160,6 +160,7 @@ function AgregarUsuarios() {
               value={apellidoM}
               onChange={handleApellidoMChange}
               margin="normal"
+              required
             />
             <TextField
               label="Correo Electronico"
