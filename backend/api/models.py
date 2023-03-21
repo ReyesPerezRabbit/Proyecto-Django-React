@@ -46,7 +46,9 @@ class libro(models.Model):
     nombrelibro = models.CharField(max_length=150,blank=False)
     actor = models.CharField(max_length=100,blank=False)
     descripcion = models.TextField(blank=False)
-    # imagen = models.ImageField()
+    imagen = models.ImageField(upload_to='libros/', null=True, blank=True)
+
+    
     def __str__(self):
         return self.codigo
 

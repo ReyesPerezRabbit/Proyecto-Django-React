@@ -10,7 +10,7 @@ import {
   InputLabel,
 } from "@material-ui/core";
 import logo from "../img/logo_Integrador.jpeg";
-import axios from 'axios';
+import axios from "axios";
 
 function AgregarUsuarios() {
   const [matricula, setMatricula] = useState("");
@@ -66,32 +66,60 @@ function AgregarUsuarios() {
     setPassword(event.target.value);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
+
+    if (
+      !matricula ||
+      !nombrealumno ||
+      !apellidoP ||
+      !apellidoM ||
+      !correo ||
+      !telefono ||
+      !edad ||
+      !carrera ||
+      !genero ||
+      !usuario ||
+      !password
+    ) {
+      alert("Por favor complete todos los campos obligatorios");
+      return;
+    }
+
+    // if (isNaN(edad)) {
+    //   alert('El campo edad debe ser un número');
+    //   return;
+    // }
 
     const data = {
       matricula: matricula,
       nombrealumno: nombrealumno,
       apellidoP: apellidoP,
       apellidoM: apellidoM,
-      correo:correo,
-      telefono:telefono,
-      edad:edad,
-      carrera:carrera,
-      genero:genero,
-      usuario:usuario,
-      password:password,
+      correo: correo,
+      telefono: telefono,
+      edad: edad,
+      carrera: carrera,
+      genero: genero,
+      usuario: usuario,
+      password: password,
     };
-    axios.post('http://127.0.0.1:8000/api/user/',data)
-    .then((response)=>{
-      console.log(response.data);
-    })
-    .catch((error)=>{
-      console.error(error);
-    });
-  };
+    // axios.post('http://127.0.0.1:8000/api/user/',data)
+    // .then((response)=>{
+    //   console.log(response.data);
+    // })
+    // .catch((error)=>{
+    //   console.error(error);
+    // });
 
-  
+    try {
+      await axios.post("http://127.0.0.1:8000/api/user/", data);
+      alert("Estudiante guardado correctamente");
+    } catch (error) {
+      console.error(error);
+      alert("error al guadar usuario");
+    }
+  };
 
   return (
     <div className="container w-75 bg-light mt-5 rounded shadow">
@@ -111,18 +139,21 @@ function AgregarUsuarios() {
               value={matricula}
               onChange={handleMatriculaChange}
               margin="normal"
+              required
             />
             <TextField
               label="Nombre del Alumno"
               value={nombrealumno}
               onChange={handleNombrealumnoChange}
               margin="normal"
+              required
             />
             <TextField
               label="Apellido Paterno"
               value={apellidoP}
               onChange={handleApellidoPChange}
               margin="normal"
+              required
             />
             <TextField
               label="Apellido Materno"
@@ -135,31 +166,37 @@ function AgregarUsuarios() {
               value={correo}
               onChange={handleCorreoChange}
               margin="normal"
+              required
             />
             <TextField
               label="Telefono"
               value={telefono}
-              type="tel"
+              type="number"
               onChange={handleTelefonoChange}
               margin="normal"
+              required
             />
             <TextField
               label="Edad"
               value={edad}
+              type="number"
               onChange={handleEdadChange}
               margin="normal"
+              required
             />
             <TextField
               label="Usuario"
               value={usuario}
               onChange={handleUsuarioChange}
               margin="normal"
+              required
             />
             <TextField
               label="Contraseña"
               value={password}
               onChange={handlePasswordChange}
               margin="normal"
+              required
             />
             <Box
               display="flex"
@@ -173,6 +210,7 @@ function AgregarUsuarios() {
                 value={carrera}
                 onChange={handleCarreraChange}
                 margin="normal"
+                required
               >
                 <MenuItem value="Software">Ingeniería de Software</MenuItem>
                 <MenuItem value="Ingenieria">Maestría en Ingeniería</MenuItem>
@@ -215,6 +253,7 @@ function AgregarUsuarios() {
                 value={genero}
                 onChange={handleGeneroChange}
                 margin="normal"
+                required
               >
                 <MenuItem value="Masculino">Masculino</MenuItem>
                 <MenuItem value="Femenino">Femenino</MenuItem>
@@ -265,7 +304,6 @@ function AgregarUsuarios() {
      
     </Table>
     </div> */}
-    
     </div>
   );
 }

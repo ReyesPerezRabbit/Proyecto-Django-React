@@ -1,3 +1,4 @@
+from django.shortcuts import render
 from django.http.response import JsonResponse
 from django.views import View
 from django.utils.decorators import method_decorator
@@ -5,6 +6,7 @@ from django.views.decorators.csrf import csrf_exempt
 import json
 from .models import libro
 from .models import registrousuario
+from PIL import Image
 
 
 # tabla de la base de libro
@@ -43,6 +45,7 @@ class libroview(View):
             nombrelibro=jd["nombrelibro"],
             actor=jd["actor"],
             descripcion=jd["descripcion"],
+            
         )
         datos = {"mensaje": "Seccess"}
         return JsonResponse(datos)
