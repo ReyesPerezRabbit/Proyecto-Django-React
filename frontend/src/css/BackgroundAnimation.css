@@ -31,17 +31,21 @@
     background: beige;
     background-image: var(--gradient);
     background-size: 400%;
-    animation: fondo-anim 20s infinite alternate;
+    animation: fondo-anim 10s infinite alternate;
   }
   @keyframes fondo-anim{
     0%{background-position: left;} /*por defecto*/
     100%{background-position: right;}
     0% { background-position: 0 50% }
+    25% { background-position: 100% 25% }
     50% { background-position: 100% 50% }
-    100% { background-position: 0 50% }
+    75% { background-position: 100% 75% }
+    100% { background-position: 0 100% }
   }
   @keyframes fluido {
     0% { background-position: 0 50% }
+    25% { background-position: 100% 25% }
     50% { background-position: 100% 50% }
-    100% { background-position: 0 50% }
+    75% { background-position: 100% 75% }
+    100% { background-position: 0 100% }
 }

@@ -166,6 +166,7 @@ function AgregarUsuarios() {
               value={correo}
               onChange={handleCorreoChange}
               margin="normal"
+              type="email"
               required
             />
             <TextField
