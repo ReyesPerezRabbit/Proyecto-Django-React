@@ -102,7 +102,7 @@ function Agregarlibros() {
   //   setImagen(e.target.files[0]);
   // };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     
     const data = {
@@ -112,13 +112,13 @@ function Agregarlibros() {
      actor:actor,
      descripcion:descripcion,
     };
-    axios.post('http://127.0.0.1:8000/api/libro/',data)
-    .then((response)=>{
-      console.log(response.data);
-    })
-    .catch((error)=>{
+    try {
+      await axios.post("http://127.0.0.1:8000/api/libro/", data);
+      alert("Libro guardado");
+    } catch (error) {
       console.error(error);
-    });
+      alert("Error al guardar libro intentelo otra vez");
+    }
   };
 
   return (
@@ -132,14 +132,14 @@ function Agregarlibros() {
 
           <Form.Group controlId="codigo">
             <Form.Label>Codigo Libro:</Form.Label>
-            <Form.Control type="text" placeholder="Ingrese el codigo del libro"
+            <Form.Control type="text" required placeholder="Ingrese el codigo del libro"
               value={codigo}
               onChange={handleCodigoChange} />
           </Form.Group>
 
           <Form.Group controlId="cantidad">
             <Form.Label>Cantidad de libros existentes:</Form.Label>
-            <Form.Control type="text" placeholder="Ingrese la cantidad de libros"
+            <Form.Control type="number" required placeholder="Ingrese la cantidad de libros"
               value={cantidad}
               onChange={handleCantidadChange} />
           </Form.Group>
@@ -153,7 +153,7 @@ function Agregarlibros() {
 
           <Form.Group controlId="actor">
             <Form.Label>Nombre del Actor:</Form.Label>
-            <Form.Control type="text" placeholder="Ingrese el Nombre del Actor"
+            <Form.Control type="text" required placeholder="Ingrese el Nombre del Actor"
               value={actor}
               onChange={handleActorChange} />
           </Form.Group>
@@ -162,13 +162,14 @@ function Agregarlibros() {
             <Form.Label>Descripción:</Form.Label>
             <Form.Control as="textarea" rows={1}
               placeholder="Ingrese la descripción"
+              required
               value={descripcion} onChange={handleDescripcionChange} />
           </Form.Group>
 
-          {/* <Form.Group controlId="imagen">
+          <Form.Group controlId="imagen">
             <Form.Label>Imagen:</Form.Label>
-            <Form.Control type="file" accept="image/*" onChange={handleImagenChange} />
-          </Form.Group> */}
+            <Form.Control type="file" accept="image/*"  />
+          </Form.Group>
           <br />
           <div className="container text-lg-center">
             <Button className="btn btn-primary text-center" type="submit">
