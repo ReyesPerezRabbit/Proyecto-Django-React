@@ -108,17 +108,17 @@ class registrouser(View):
     def post(self, request):
         jd = json.loads(request.body)
         registrousuario.objects.create(
-            matricula=jd["matricula"],
+            # matricula=jd["matricula"],
             nombrealumno=jd["nombrealumno"],
             apellidoP=jd["apellidoP"],
-            apellidoM=jd["apellidoM"],
-            correo=jd["correo"],
+            # apellidoM=jd["apellidoM"],
+            # correo=jd["correo"],
             telefono=jd["telefono"],
             edad=jd["edad"],
             carrera=jd["carrera"],
-            usuario=jd["usuario"],
+            #usuario=jd["usuario"],
             genero=jd["genero"],
-            password=jd["password"],
+            # password=jd["password"],
         )
         datos = {"message": "Success"}
         return JsonResponse(datos)
