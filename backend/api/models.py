@@ -16,17 +16,17 @@ class incioseccion(models.Model):
 
 class registrousuario(models.Model):
     idregistrouser = models.AutoField(primary_key=True)
-    matricula = models.CharField(max_length = 15)
+    #matricula = models.CharField(max_length = 15)
     nombrealumno = models.CharField(max_length=100,blank=False)
     apellidoP = models.CharField(max_length=50,blank=False)
-    apellidoM = models.CharField(max_length=50,blank=False)
-    correo = models.EmailField(blank=False)
+    #apellidoM = models.CharField(max_length=50,blank=False)
+    #correo = models.EmailField(blank=False)
     telefono = models.CharField(max_length=20, blank=False, null=False)
     edad = models.IntegerField( blank=True)
     carrera = models.CharField(max_length=100,blank=False)
     genero = models.CharField(max_length=100,blank=False)
-    usuario = models.CharField(max_length=50,blank=False)
-    password = models.CharField(max_length=50,blank=False)
+    #usuario = models.CharField(max_length=50,blank=False)
+    #password = models.CharField(max_length=50,blank=False)
 
     def __str__(self):
         return self.matricula

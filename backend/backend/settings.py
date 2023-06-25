@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 import os
+import dj_database_url
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,12 +23,21 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-jn*tg=mj)6*qu+h05u@sx%f$sx6ty^u=3(en77!li6=imhzkg0'
+SECRET_KEY = os.environ.get('SECRET_KEY', default='your secret key')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+#Para produccion asi debe de estar
+DEBUG = 'RENDER' not in os.environ
+
+#Para estar en desarollo debe de estar en 
+# DEBUG= True
 
 ALLOWED_HOSTS = []
+
+
+RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+if RENDER_EXTERNAL_HOSTNAME:
+    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 
 
 # Application definition
@@ -51,7 +62,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    "corsheaders.middleware.CorsMiddleware"
+    'corsheaders.middleware.CorsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 CORS_ORIGIN_WHITELIST = (
@@ -85,17 +97,24 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        #   'ENGINE': 'django.db.backends.sqlite3',
-        #   'NAME': BASE_DIR / 'db.sqlite3',
-		'ENGINE': 'django.db.backends.postgresql_psycopg2',
-		'NAME' : 'prueba',
-		'USER' : 'postgres',
-		'PASSWORD' : 'admin',
-		'HOST' : 'localhost' ,  # la base esta descargado de la rama master 
-		'PORT' : '' 
-    }
+'default': dj_database_url.config(
+        default='postgresql://postgres:postgres@localhost/biblioteca',
+        conn_max_age=600
+   )
+        #Para la base de datos en desarrollo!!!!!!!!
+        
+        # #   'ENGINE': 'django.db.backends.sqlite3',
+        # #   'NAME': BASE_DIR / 'db.sqlite3',
+    #    'default':{ 
+	# 	'ENGINE': 'django.db.backends.postgresql_psycopg2',
+	# 	'NAME' : 'prueba',
+	# 	'USER' : 'postgres',
+	# 	'PASSWORD' : 'admin',
+	# 	'HOST' : 'localhost' ,  # la base esta descargado de la rama master 
+	# 	'PORT' : '' 
+    # }
 }
+
 
 
 # Password validation
@@ -133,9 +152,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
-
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+if not DEBUG:
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+    
+    #MEDIA_URL = '/media/'
+    #MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 # Default primary key field type
