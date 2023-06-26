@@ -30,7 +30,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', default='your secret key')
 DEBUG = 'RENDER' not in os.environ
 
 #Para estar en desarollo debe de estar en 
-# DEBUG= True
+DEBUG= True
 
 ALLOWED_HOSTS = []
 
