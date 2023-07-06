@@ -1,33 +1,77 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 const FormularioDatosPersonales = () => {
-  const [nombre, setNombre] = useState('');
-  const [apellido, setApellido] = useState('');
-  const [genero, setGenero] = useState('');
+  const [matricula, setMatricula] = useState("");
+  const [nombrealumno, setNombreAlumno] = useState("");
+  const [apellidoP, setApellidoP] = useState("");
+  const [apellidoM, setApellidoM] = useState("");
+  const [correo, setCorreo] = useState("");
+  const [telefono, setTelefono] = useState("");
+  const [edad, setEdad] = useState("");
+  const [carrera, setCarrera] = useState("");
+  const [genero, setGenero] = useState("");
+  const [user, setUser] = useState("");
+  const [password, setPassword] = useState("");
   const [datos, setDatos] = useState([]);
-  const [terminoBusqueda, setTerminoBusqueda] = useState('');
+  const [terminoBusqueda, setTerminoBusqueda] = useState("");
   const [indiceEditar, setIndiceEditar] = useState(-1);
 
-  const handleNombreChange = (event) => {
-    setNombre(event.target.value);
+  const handleMatriculaChange = (event) => {
+    setMatricula(event.target.value);
+  };
+  const handleNombreAlumnoChange = (event) => {
+    setNombreAlumno(event.target.value);
   };
 
-  const handleApellidoChange = (event) => {
-    setApellido(event.target.value);
+  const handleApellidoPChange = (event) => {
+    setApellidoP(event.target.value);
   };
 
+  const handleApellidoMChange = (event) => {
+    setApellidoP(event.target.value);
+  };
+  const handleCorreoChange = (event) => {
+    setCorreo(event.target.value);
+  };
+  const handleTelefonoPChange = (event) => {
+    setTelefono(event.target.value);
+  };
+  const handleEdadPChange = (event) => {
+    setEdad(event.target.value);
+  };
+  const handleCarreraChange = (event) => {
+    setCarrera(event.target.value);
+  };
   const handleGeneroChange = (event) => {
     setGenero(event.target.value);
+  };
+  const handleUserPChange = (event) => {
+    setUser(event.target.value);
+  };
+  const handlePasswordChange = (event) => {
+    setPassword(event.target.value);
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    if (nombre.trim() !== '' && apellido.trim() !== '' && genero !== '') {
+    if (matricula.trim() !== "" &&nombrealumno.trim() !== "" && apellidoP.trim() !== ""&& 
+    apellidoM.trim() !== ""&& correo.trim() !== ""&& 
+    telefono.trim() !== ""&& edad.trim() !== "" && carrera !== "" &&
+    genero.trim() !== "" && user.trim() !== "" && password.trim() !== "") {
       const nuevoDato = {
-        nombre,
-        apellido,
-        genero,
+        
+        matricula:"",
+        nombrealumno: "",
+        apellidoP: "",
+        apellidoM: "",
+        correo: "",
+        telefono: "",
+        edad: "",
+        carrera: "",
+        genero: "",
+        user: "",
+        password: "",
       };
 
       if (indiceEditar !== -1) {
@@ -39,9 +83,17 @@ const FormularioDatosPersonales = () => {
         setDatos([...datos, nuevoDato]);
       }
 
-      setNombre('');
-      setApellido('');
-      setGenero('');
+      setMatricula("");
+      setNombreAlumno("");
+      setApellidoP("");
+      setApellidoM("");
+      setCorreo("");
+      setTelefono("");
+      setEdad("");
+      setCarrera("");
+      setGenero("");
+      setUser("");
+      setPassword("");
     }
   };
 
@@ -51,9 +103,16 @@ const FormularioDatosPersonales = () => {
 
   const handleEditarDato = (index) => {
     const datoEditar = datos[index];
-    setNombre(datoEditar.nombre);
-    setApellido(datoEditar.apellido);
+    setMatricula(datoEditar.matricula);
+    setNombreAlumno(datoEditar.nombrealumno);
+    setApellidoP(datoEditar.apellidoP);
+    setApellidoM(datoEditar.apellidoM);
+    setCorreo(datoEditar.correo);
+    setEdad(datoEditar.edad);
+    setCarrera(datoEditar.carrera);
     setGenero(datoEditar.genero);
+    setUser(datoEditar.user);
+    setPassword(datoEditar.password);
     setIndiceEditar(index);
   };
 
@@ -75,8 +134,8 @@ const FormularioDatosPersonales = () => {
             <input
               type="text"
               className="form-control"
-              value={nombre}
-              onChange={handleNombreChange}
+              value={nombrealumno}
+              onChange={handleNombreAlumnoChange}
             />
           </div>
           <div className="mb-3">
@@ -84,8 +143,8 @@ const FormularioDatosPersonales = () => {
             <input
               type="text"
               className="form-control"
-              value={apellido}
-              onChange={handleApellidoChange}
+              value={apellidoM}
+              onChange={handleApellidoMChange}
             />
           </div>
           <div className="mb-3">
@@ -102,7 +161,7 @@ const FormularioDatosPersonales = () => {
             </select>
           </div>
           <button type="submit" className="btn btn-primary">
-            {indiceEditar !== -1 ? 'Actualizar' : 'Guardar'}
+            {indiceEditar !== -1 ? "Actualizar" : "Guardar"}
           </button>
         </form>
       </div>
