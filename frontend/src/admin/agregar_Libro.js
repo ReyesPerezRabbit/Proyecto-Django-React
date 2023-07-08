@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 
 const Formulario = () => {
   const [datosPersonales, setDatosPersonales] = useState({
+    folio:'',
     nombre: '',
     apellido: '',
     imagen: null
@@ -51,11 +52,33 @@ const Formulario = () => {
 
   return (
     <div className="container">
-      <div>
-        <h2>Formulario</h2>
+      <div className="col-5">
+        <h2>Registro de libros de la Biblioteca</h2>
         <form onSubmit={handleSubmit}>
+        <div className="form-group">
+            <label>Codigo:</label>
+            <input
+              type="text"
+              className="form-control"
+              name="nombre"
+              required
+              value={datosPersonales.nombre}
+              onChange={handleChange}
+            />
+          </div>
           <div className="form-group">
-            <label>Nombre:</label>
+            <label>Nombre del Libro:</label>
+            <input
+              type="text"
+              className="form-control"
+              name="nombre"
+              required
+              value={datosPersonales.nombre}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="form-group">
+            <label>Autor:</label>
             <input
               type="text"
               className="form-control"
@@ -65,7 +88,27 @@ const Formulario = () => {
             />
           </div>
           <div className="form-group">
-            <label>Apellido:</label>
+            <label>Descripcion:</label>
+            <input
+              type="text"
+              className="form-control"
+              name="apellido"
+              value={datosPersonales.apellido}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="form-group">
+            <label>cantidad:</label>
+            <input
+              type="text"
+              className="form-control"
+              name="apellido"
+              value={datosPersonales.apellido}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="form-group">
+            <label>Descripcion:</label>
             <input
               type="text"
               className="form-control"
@@ -84,7 +127,6 @@ const Formulario = () => {
             />
             {datosPersonales.imagen && (
               <div className="mt-3">
-               
                 <img
                   src={URL.createObjectURL(datosPersonales.imagen)}
                   alt="Imagen seleccionada"
