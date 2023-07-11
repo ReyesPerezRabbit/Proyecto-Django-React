@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 
 const FormularioDatosPersonales = () => {
   const [matricula, setMatricula] = useState("");
@@ -81,6 +82,18 @@ const FormularioDatosPersonales = () => {
         user: "",
         password: "",
       };
+
+            // Make an HTTP POST request to save the data
+            axios.post("http://127.0.0.1:8000/api/user/", nuevoDato)
+            .then((response) => {
+              // Handle the response if needed
+              console.log(response.data);
+            })
+            .catch((error) => {
+              // Handle any errors that occurred during the request
+              console.error(error);
+            });
+    
 
       if (indiceEditar !== -1) {
         const nuevosDatos = [...datos];
@@ -195,7 +208,7 @@ const FormularioDatosPersonales = () => {
             <div className="mb-3">
               <label className="form-label">Edad:</label>
               <input
-                type="text"
+                type="number"
                 className="form-control"
                 value={edad}
                 onChange={handleEdadPChange}

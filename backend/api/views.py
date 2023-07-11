@@ -42,8 +42,8 @@ class libroview(View):
         libro.objects.create(
             codigo=jd["codigo"],
             cantidad=jd["cantidad"],
-            nombrelibro=jd["nombrelibro"],
-            actor=jd["actor"],
+            nombreLibro=jd["nombreLibro"],
+            autor=jd["autor"],
             descripcion=jd["descripcion"],
             
         )
@@ -58,8 +58,8 @@ class libroview(View):
             librerias = libro.objects.get(id=id)
             librerias.codigo = jd["codigo"]
             librerias.cantidad = jd["cantidad"]
-            librerias.nombrelibro = jd["nombrelibro"]
-            librerias.actor = jd["actor"]
+            librerias.nombreLibro = jd["nombreLibro"]
+            librerias.autor = jd["autor"]
             librerias.descripcion = jd["descripcion"]
             librerias.save()
             datos = {"mensaje": "Seccess"}
@@ -108,17 +108,17 @@ class registrouser(View):
     def post(self, request):
         jd = json.loads(request.body)
         registrousuario.objects.create(
-            # matricula=jd["matricula"],
+            matricula=jd["matricula"],
             nombrealumno=jd["nombrealumno"],
             apellidoP=jd["apellidoP"],
-            # apellidoM=jd["apellidoM"],
-            # correo=jd["correo"],
+            apellidoM=jd["apellidoM"],
+            correo=jd["correo"],
             telefono=jd["telefono"],
             edad=jd["edad"],
             carrera=jd["carrera"],
-            #usuario=jd["usuario"],
+            user=jd["user"],
             genero=jd["genero"],
-            # password=jd["password"],
+            password=jd["password"],
         )
         datos = {"message": "Success"}
         return JsonResponse(datos)
@@ -136,7 +136,7 @@ class registrouser(View):
             registeruser.telefono = jd["telefono"]
             registeruser.edad = jd["edad"]
             registeruser.carrera = jd["carrera"]
-            registeruser.usuario = jd["usuario"]
+            registeruser.user = jd["user"]
             registeruser.genero = jd["genero"]
             registeruser.password = jd["password"]
             registeruser.save()
@@ -187,3 +187,67 @@ class registrouser(View):
 
 #         return JsonResponse({'status': 'success'})
 #     return JsonResponse({'status': 'error'})
+
+################################################################################################################################
+
+#para Libros
+
+# @csrf_exempt
+# def guardar_libro(request):
+#     if request.method == 'POST':
+#         codigo = request.POST.get('codigo')
+#         nombreLibro = request.POST.get('nombreLibro')
+#         autor = request.POST.get('autor')
+#         cantidad = request.POST.get('cantidad')
+#         descripcion = request.POST.get('descripcion')
+#         imagen = request.FILES.get('imagen')
+        
+#         Libro = libro(
+#             codigo=codigo,
+#             nombreLibro=nombreLibro,
+#             autor=autor,
+#             cantidad=cantidad,
+#             descripcion=descripcion,
+#             imagen=imagen
+#         )
+#         Libro.save()
+        
+#         return JsonResponse({'mensaje': 'Libro guardado correctamente.'})
+    
+#     return JsonResponse({'error': 'Método no permitido.'})
+
+# @csrf_exempt
+# def borrar_libro(request, libro_id):
+#     if request.method == 'POST':
+#         try:
+#             Libro = libro.objects.get(id=libro_id)
+#             Libro.delete()
+#             return JsonResponse({'mensaje': 'Libro borrado correctamente.'})
+#         except libro.DoesNotExist:
+#             return JsonResponse({'error': 'Libro no encontrado.'})
+    
+#     return JsonResponse({'error': 'Método no permitido.'})
+
+# @csrf_exempt
+# def editar_libro(request, libro_id):
+#     if request.method == 'POST':
+#         try:
+#             Libro = libro.objects.get(id=libro_id)
+#             Libro.codigo = request.POST.get('codigo')
+#             Libro.nombreLibro = request.POST.get('nombreLibro')
+#             Libro.autor = request.POST.get('autor')
+#             Libro.cantidad = request.POST.get('cantidad')
+#             Libro.descripcion = request.POST.get('descripcion')
+#             Libro.imagen = request.FILES.get('imagen')
+#             Libro.save()
+            
+#             return JsonResponse({'mensaje': 'Libro editado correctamente.'})
+#         except Libro.DoesNotExist:
+#             return JsonResponse({'error': 'Libro no encontrado.'})
+    
+#     return JsonResponse({'error': 'Método no permitido.'})
+
+
+################################################################################################
+
+#Para Usuario

@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 //import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 //import { faImage } from '@fortawesome/free-solid-svg-icons';
 
 const Formulario = () => {
-  const [datosPersonales, setDatosPersonales] = useState({
-    folio:'',
-    nombre: '',
-    apellido: '',
+  const [datosLibros, setDatosLibros] = useState({
+    codigo:'',
+    nombreLibro: '',
+    autor: '',
+    cantidad: '',
+    descripcion: '',
     imagen: null
   });
 
@@ -15,12 +18,12 @@ const Formulario = () => {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setDatosPersonales({ ...datosPersonales, [name]: value });
+    setDatosLibros({ ...datosLibros, [name]: value });
   };
 
   const handleImageChange = (event) => {
     const imagen = event.target.files[0];
-    setDatosPersonales({ ...datosPersonales, imagen });
+    setDatosLibros({ ...datosLibros, imagen });
   };
 
   const handleSubmit = (event) => {
@@ -29,15 +32,24 @@ const Formulario = () => {
     if (editandoIndex !== -1) {
       // Editar datos existentes
       const nuevosDatos = [...listaDatos];
-      nuevosDatos[editandoIndex] = datosPersonales;
+      nuevosDatos[editandoIndex] = datosLibros;
       setListaDatos(nuevosDatos);
       setEditandoIndex(-1);
     } else {
       // Agregar nuevos datos
-      setListaDatos([...listaDatos, datosPersonales]);
+      setListaDatos([...listaDatos, datosLibros]);
+
+      axios.post("http://127.0.0.1:8000/api/libro/", datosLibros)
+        .then(response => {
+          console.log('Datos guardados en la base de datos:', response.data);
+        })
+        .catch(error => {
+          console.error('Error al guardar los datos:', error);
+        });
+    
     }
 
-    setDatosPersonales({ nombre: '', apellido: '', imagen: null });
+    setDatosLibros({ codigo: '',nombreLibro: '',descripcion: '',cantidad: '', autor: '', imagen: null });
   };
 
   const handleDelete = (index) => {
@@ -46,7 +58,7 @@ const Formulario = () => {
 
   const handleEdit = (index) => {
     const datosEditados = listaDatos[index];
-    setDatosPersonales(datosEditados);
+    setDatosLibros(datosEditados);
     setEditandoIndex(index);
   };
 
@@ -60,9 +72,9 @@ const Formulario = () => {
             <input
               type="text"
               className="form-control"
-              name="nombre"
+              name="codigo"
               required
-              value={datosPersonales.nombre}
+              value={datosLibros.codigo}
               onChange={handleChange}
             />
           </div>
@@ -71,9 +83,9 @@ const Formulario = () => {
             <input
               type="text"
               className="form-control"
-              name="nombre"
+              name="nombreLibro"
               required
-              value={datosPersonales.nombre}
+              value={datosLibros.nombreLibro}
               onChange={handleChange}
             />
           </div>
@@ -82,8 +94,8 @@ const Formulario = () => {
             <input
               type="text"
               className="form-control"
-              name="nombre"
-              value={datosPersonales.nombre}
+              name="autor"
+              value={datosLibros.autor}
               onChange={handleChange}
             />
           </div>
@@ -92,28 +104,18 @@ const Formulario = () => {
             <input
               type="text"
               className="form-control"
-              name="apellido"
-              value={datosPersonales.apellido}
+              name="descripcion"
+              value={datosLibros.descripcion}
               onChange={handleChange}
             />
           </div>
           <div className="form-group">
             <label>cantidad:</label>
             <input
-              type="text"
+              type="number"
               className="form-control"
-              name="apellido"
-              value={datosPersonales.apellido}
-              onChange={handleChange}
-            />
-          </div>
-          <div className="form-group">
-            <label>Descripcion:</label>
-            <input
-              type="text"
-              className="form-control"
-              name="apellido"
-              value={datosPersonales.apellido}
+              name="cantidad"
+              value={datosLibros.cantidad}
               onChange={handleChange}
             />
           </div>
@@ -125,10 +127,10 @@ const Formulario = () => {
               accept="image/*"
               onChange={handleImageChange}
             />
-            {datosPersonales.imagen && (
+            {datosLibros.imagen && (
               <div className="mt-3">
                 <img
-                  src={URL.createObjectURL(datosPersonales.imagen)}
+                  src={URL.createObjectURL(datosLibros.imagen)}
                   alt="Imagen seleccionada"
                   className="mt-2"
                   style={{ maxWidth: '200px' }}
@@ -146,17 +148,24 @@ const Formulario = () => {
         <table className="table">
           <thead>
             <tr>
-              <th>Nombre</th>
-              <th>Apellido</th>
-              <th>Imagen</th>
+              <th>Codigo</th>
+              <th>Nombre del Libro</th>
+              <th>Autor</th>
+              <th>Cantidad de Libro</th>
+              <th>Descipcion</th>
+              
               <th>Acciones</th>
             </tr>
           </thead>
           <tbody>
             {listaDatos.map((datos, index) => (
               <tr key={index}>
-                <td>{datos.nombre}</td>
-                <td>{datos.apellido}</td>
+                <td>{datos.codigo}</td>
+                <td>{datos.nombreLibro}</td>
+                <td>{datos.autor}</td>
+                <td>{datos.cantidad}</td>
+                <td>{datos.codigo}</td>
+                <td>{datos.descripcion}</td>
                 <td>{datos.imagen ? datos.imagen.name : ''}</td>
                 <td>
                   <button
