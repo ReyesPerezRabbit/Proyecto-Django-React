@@ -306,14 +306,14 @@ const FormularioDatosPersonales = () => {
                   <button
                     className="btn btn-danger"
                     onClick={() => handleBorrarDato(index)}
-                  >
-                    Borrar
+                  > 
+                    Borrar datos
                   </button>
                   <button
                     className="btn btn-primary ms-2"
                     onClick={() => handleEditarDato(index)}
                   >
-                    Editar
+                    Editar datos
                   </button>
                 </td>
               </tr>
