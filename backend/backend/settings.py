@@ -27,10 +27,10 @@ SECRET_KEY = os.environ.get('SECRET_KEY', default='your secret key')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 #Para produccion asi debe de estar
-DEBUG = 'RENDER' not in os.environ
+# DEBUG = 'RENDER' not in os.environ
 
 #Para estar en desarollo debe de estar en 
-# DEBUG= True
+DEBUG= True
 
 ALLOWED_HOSTS = []
 
@@ -97,22 +97,22 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
-'default': dj_database_url.config(
-        default='postgresql://postgres:postgres@localhost/biblioteca',
-        conn_max_age=600
-   )
+# 'default': dj_database_url.config(
+#         default='postgresql://postgres:postgres@localhost/biblioteca',
+#         conn_max_age=600
+#    )
         #Para la base de datos en desarrollo!!!!!!!!
         
         # #   'ENGINE': 'django.db.backends.sqlite3',
         # #   'NAME': BASE_DIR / 'db.sqlite3',
-    #    'default':{ 
-	# 	'ENGINE': 'django.db.backends.postgresql_psycopg2',
-	# 	'NAME' : 'prueba',
-	# 	'USER' : 'postgres',
-	# 	'PASSWORD' : 'admin',
-	# 	'HOST' : 'localhost' ,  # la base esta descargado de la rama master 
-	# 	'PORT' : '' 
-    # }
+        'default':{ 
+		'ENGINE': 'django.db.backends.postgresql_psycopg2',
+		'NAME' : 'prueba',
+		'USER' : 'postgres',
+		'PASSWORD' : 'admin',
+		'HOST' : 'localhost' ,  # la base esta descargado de la rama master 
+		'PORT' : '' 
+    }
 }
 
 
