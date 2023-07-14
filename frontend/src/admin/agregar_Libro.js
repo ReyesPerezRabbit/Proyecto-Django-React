@@ -153,7 +153,6 @@ const Formulario = () => {
               <th>Autor</th>
               <th>Cantidad de Libro</th>
               <th>Descipcion</th>
-              
               <th>Acciones</th>
             </tr>
           </thead>
