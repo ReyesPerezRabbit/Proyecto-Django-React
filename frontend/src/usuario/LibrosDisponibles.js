@@ -1,199 +1,106 @@
-import React from "react";
-import cleancode from "../img/Clean Code.jpg";
-import desing from "../img/Design Patterns.jpg";
-import refact from "../img/Refactoring.jpg";
-import { Link } from "react-router-dom";
-import { Button, Box } from "@material-ui/core";
-import { Row, Col, Container } from "react-bootstrap";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-const LibrosDisponibles = () => {
-  return (
-    <Container className="text-center mt-5">
-      <Row>
-        <Col md={12} className="mx-auto bg-white p-4 rounded">
-          <div className="container-fluid">
-            <div className="text-xl-center">
-              <h1>Libros disponibles</h1>
-            </div>
+class BookCatalog extends React.Component {
+  constructor(props) {
+    super(props);
 
-            <br />
-            <div>
-              <Row>
-                <Col md={5}>
-                  <div style={{ backgroundColor: "#eee" }}>
-                    <h2 style={{ marginBottom: "10px" }}>
-                      {" "}
-                      Clean Code: A Handbook of Agile Software Craftsmanship
-                    </h2>
-                    <img
-                      style={{ width: "20%", marginBottom: "10px" }}
-                      src={cleancode}
-                      alt="Descripción de la imagen"
-                    />
-                    <p style={{ marginBottom: "10px" }}>
-                      Este libro de Robert C. Martin se enfoca en la escritura
-                      de un código limpio y de calidad, abordando principios,
-                      patrones y prácticas que permiten crear un software
-                      sostenible a largo plazo.
-                    </p>
-                    <div class="btn-group mx-5" role="group">
-                      <Box mt={4}>
-                        <Button
-                          variant="contained"
-                          color="primary"
-                          component={Link}
-                          to="/usuario/prestamo_Externo"
-                        >
-                          Prestamo Externo
-                        </Button>
-                      </Box>
-                      <Box mt={4}>
-                        <Button
-                          variant="contained"
-                          color="primary"
-                          component={Link}
-                          to="/usuario/prestamo_Interno"
-                        >
-                          Prestamo Interno
-                        </Button>
-                      </Box>
+    this.state = {
+      categories: [
+        {
+          name: 'Ficción',
+          books: [
+            {
+              author: 'Autor 1',
+              title: 'Libro 1',
+              description: 'Descripción del Libro 1',
+              image: 'https://example.com/image1.jpg'
+            },
+            {
+              author: 'Autor 2',
+              title: 'Libro 2',
+              description: 'Descripción del Libro 2',
+              image: 'https://example.com/image2.jpg'
+            },
+            // Agrega más libros aquí
+          ]
+        },
+        {
+          name: 'No Ficción',
+          books: [
+            {
+              author: 'Autor 3',
+              title: 'Libro 3',
+              description: 'Descripción del Libro 3',
+              image: 'https://example.com/image3.jpg'
+            },
+            {
+              author: 'Autor 4',
+              title: 'Libro 4',
+              description: 'Descripción del Libro 4',
+              image: 'https://example.com/image4.jpg'
+            },
+            // Agrega más libros aquí
+          ]
+        },
+        // Agrega más categorías aquí
+      ],
+      searchQuery: ''
+    };
+  }
+
+  handleSearchChange = (event) => {
+    this.setState({ searchQuery: event.target.value });
+  }
+
+  render() {
+    const { searchQuery } = this.state;
+
+    const filteredCategories = this.state.categories.map(category => ({
+      name: category.name,
+      books: category.books.filter(book => {
+        const title = book.title.toLowerCase();
+        const author = book.author.toLowerCase();
+        const query = searchQuery.toLowerCase();
+        return title.includes(query) || author.includes(query);
+      })
+    })).filter(category => category.books.length > 0);
+
+    return (
+      <div className="container">
+        <div className="mb-3">
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Buscar libros..."
+            value={searchQuery}
+            onChange={this.handleSearchChange}
+          />
+        </div>
+        {filteredCategories.map(category => (
+          <div key={category.name}>
+            <h2>{category.name}</h2>
+            <div className="row">
+              {category.books.map(book => (
+                <div key={book.title} className="col-md-6">
+                  <div className="card mb-3">
+                    <img src={book.image} className="card-img-top" alt={book.title} />
+                    <div className="card-body">
+                      <h5 className="card-title">{book.title}</h5>
+                      <p className="card-text">Autor: {book.author}</p>
+                      <p className="card-text">{book.description}</p>
+                      <Link to={`/book-details/${book.title}`} className="btn btn-primary mr-2">Detalles</Link>
+                      <Link to={`/buy-book/${book.title}`} className="btn btn-success">Comprar</Link>
                     </div>
                   </div>
-                  <br />
-                </Col>
-                <Col md={2}></Col>
-                <Col md={5}>
-                  <div style={{ backgroundColor: "#ccc" }}>
-                    <h2 style={{ marginBottom: "10px" }}>
-                      Refactoring: Improving the Design of Existing Code de
-                      Martin Fowler
-                    </h2>
-                    <img
-                      style={{ width: "20%", marginBottom: "10px" }}
-                      src={refact}
-                      alt="Descripción de la imagen"
-                    />
-                    <p style={{ marginBottom: "10px" }}>
-                      Se enfoca en enseñar a los desarrolladores a mejorar el
-                      diseño de código existente mediante la refactorización. .
-                    </p>
-                    <div class="btn-group mx-5" role="group">
-                      <Box mt={4}>
-                        <Button
-                          variant="contained"
-                          color="primary"
-                          component={Link}
-                          to="/usuario/prestamo_Externo"
-                        >
-                          Prestamo Externo
-                        </Button>
-                      </Box>
-                      <Box mt={4}>
-                        <Button
-                          variant="contained"
-                          color="primary"
-                          component={Link}
-                          to="/usuario/prestamo_Interno"
-                        >
-                          Prestamo Interno
-                        </Button>
-                      </Box>
-                    </div>
-                  </div>
-                  <br />
-                </Col>
-              </Row>
-              <Row>
-                <Col md={5}>
-                  <div style={{ backgroundColor: "#aaa" }}>
-                    <h2 style={{ marginBottom: "10px" }}>
-                      The Pragmatic Programmer: From Journeyman to Master
-                    </h2>
-                    <img
-                      style={{ width: "20%", marginBottom: "10px" }}
-                      src={desing}
-                      alt="Descripción de la imagen"
-                    />
-                    <p style={{ marginBottom: "10px" }}>
-                      Se enfoca en enseñar a los desarrolladores a pensar de
-                      manera pragmática y a tomar decisiones informadas sobre
-                      cómo escribir software de alta calidad.
-                    </p>
-                    <div class="btn-group mx-5" role="group">
-                      <Box mt={4}>
-                        <Button
-                          variant="contained"
-                          color="primary"
-                          component={Link}
-                          to="/usuario/prestamo_Externo"
-                        >
-                          Prestamo Externo
-                        </Button>
-                      </Box>
-                      <Box mt={4}>
-                        <Button
-                          variant="contained"
-                          color="primary"
-                          component={Link}
-                          to="/usuario/prestamo_Interno"
-                        >
-                          Prestamo Interno
-                        </Button>
-                      </Box>
-                    </div>
-                  </div>
-                </Col>
-                <Col md={2}></Col>
-                <Col md={5}>
-                  <div style={{ backgroundColor: "#bbb" }}>
-                    <div style={{ backgroundColor: "#eee" }}>
-                      <h2 style={{ marginBottom: "10px" }}>
-                        {" "}
-                        Clean Code: A Handbook of Agile Software Craftsmanship
-                      </h2>
-                      <img
-                        style={{ width: "20%", marginBottom: "10px" }}
-                        src={cleancode}
-                        alt="Descripción de la imagen"
-                      />
-                      <p style={{ marginBottom: "10px" }}>
-                        Este libro de Robert C. Martin se enfoca en la escritura
-                        de un código limpio y de calidad, abordando principios,
-                        patrones y prácticas que permiten crear un software
-                        sostenible a largo plazo.
-                      </p>
-                      <div class="btn-group mx-5" role="group">
-                        <Box mt={4}>
-                          <Button
-                            variant="contained"
-                            color="primary"
-                            component={Link}
-                            to="/usuario/prestamo_Externo"
-                          >
-                            Prestamo Externo
-                          </Button>
-                        </Box>
-                        <Box mt={4}>
-                          <Button
-                            variant="contained"
-                            color="primary"
-                            component={Link}
-                            to="/usuario/prestamo_Interno"
-                          >
-                            Prestamo Interno
-                          </Button>
-                        </Box>
-                      </div>
-                    </div>
-                  </div>
-                </Col>
-              </Row>
+                </div>
+              ))}
             </div>
           </div>
-        </Col>
-      </Row>
-    </Container>
-  );
-};
+        ))}
+      </div>
+    );
+  }
+}
 
-export default LibrosDisponibles;
+export default BookCatalog;
