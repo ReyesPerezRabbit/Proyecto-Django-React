@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Button } from "@material-ui/core";
 
 class BookCatalog extends React.Component {
   constructor(props) {
@@ -89,8 +90,22 @@ class BookCatalog extends React.Component {
                       <h5 className="card-title">{book.title}</h5>
                       <p className="card-text">Autor: {book.author}</p>
                       <p className="card-text">{book.description}</p>
-                      <Link to={`/book-details/${book.title}`} className="btn btn-primary mr-2">Detalles</Link>
-                      <Link to={`/buy-book/${book.title}`} className="btn btn-success">Comprar</Link>
+                      <Button
+                            variant="contained"
+                            color="primary"
+                            component={Link}
+                            to="/usuario/prestamo_Externo"
+                          >
+                            Prestamo Externo
+                          </Button>
+                      <Button
+                            variant="contained"
+                            color="primary"
+                            component={Link}
+                            to="/usuario/prestamo_Interno"
+                          >
+                            Prestamo Interno
+                          </Button>
                     </div>
                   </div>
                 </div>
