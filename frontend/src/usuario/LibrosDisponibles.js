@@ -46,33 +46,36 @@ class BookCatalog extends React.Component {
           name: "Ingeniera en Animacion y Efectos visuales",
           books: [
             {
-              author: "Autor 3",
-              title: "Libro 3",
-              description: "Descripción del Libro 3",
+              author: "Richard Williams",
+              title: "The Animator's Survival Kit",
+              description:
+                "Este libro clásico es una guía completa para animadores de todos los niveles",
               image: "https://example.com/image3.jpg",
             },
             {
-              author: "Autor 4",
-              title: "Libro 4",
-              description: "Descripción del Libro 4",
+              author: "Jeremy Birn",
+              title: "Digital Lighting and Rendering",
+              description:
+                "Este libro es una referencia fundamental para aprender sobre iluminación y renderizado en la animación digital. ",
               image: "https://exampzle.com/image4.jpg",
             },
-
           ],
         },
         {
           name: "Ingeniera en Nanotecnologia ",
           books: [
             {
-              author: "Autor 3",
-              title: "Libro 3",
-              description: "Descripción del Libro 3",
+              author: "Charles P. Poole Jr. y Frank J. Owens",
+              title: "Introduction to Nanotechnology",
+              description:
+                "Este libro ofrece una introducción completa a la nanotecnología y sus aplicaciones en diversos campos.",
               image: "https://example.com/image3.jpg",
             },
             {
-              author: "Autor 4",
-              title: "Libro 4",
-              description: "Descripción del Libro 4",
+              author: "Ben Rogers, Sumita Pennathur y Jesse Adams",
+              title: "Nanotechnology: Understanding Small Systems",
+              description:
+                "Este libro proporciona una introducción práctica a la nanotecnología, centrándose en los aspectos físicos y aplicaciones prácticas de los sistemas a escala nanométrica.",
               image: "https://example.com/image4.jpg",
             },
             // Agrega más libros aquí
@@ -82,15 +85,18 @@ class BookCatalog extends React.Component {
           name: "Ingeniería Agroindustrial",
           books: [
             {
-              author: "Autor 3",
-              title: "Libro 3",
-              description: "Descripción del Libro 3",
+              author:
+                "Gustavo V. Barbosa-Cánovas, María S. Tapia, M. Pilar Cano y Pablo Juliano",
+              title: "Introducción a la Ingeniería Agroindustrial",
+              description:
+                "Proporciona una introducción completa a la ingeniería agroindustrial, abordando los principios y conceptos fundamentales de esta disciplina.",
               image: "https://example.com/image3.jpg",
             },
             {
-              author: "Autor 4",
-              title: "Libro 4",
-              description: "Descripción del Libro 4",
+              author: "Carmen González-Laredo y Gustavo V. Barbosa-Cánovas",
+              title: "Ingeniería Agroindustrial: Teoría y práctica",
+              description:
+                "Este libro combina la teoría y la práctica de la ingeniería agroindustrial, brindando una visión integral de los procesos y operaciones en esta área.",
               image: "https://example.com/image4.jpg",
             },
             // Agrega más libros aquí
@@ -100,15 +106,18 @@ class BookCatalog extends React.Component {
           name: "Ingeniería en Energía",
           books: [
             {
-              author: "Autor 3",
-              title: "Libro 3",
-              description: "Descripción del Libro 3",
+              author: "Frank Kreith y Susan Krumdieck",
+              title: "Principles of Sustainable Energy Systems",
+              description:
+                "Este libro proporciona una visión completa de los principios y conceptos fundamentales de los sistemas de energía sostenible.",
               image: "https://example.com/image3.jpg",
             },
             {
-              author: "Autor 4",
-              title: "Libro 4",
-              description: "Descripción del Libro 4",
+              author: "Francis Vanek, Louis D. Albright y Largus Angenent",
+              title:
+                "Energy Systems Engineering: Evaluation and Implementation",
+              description:
+                "Este libro se enfoca en la evaluación y la implementación de sistemas energéticos eficientes y sostenibles.",
               image: "https://example.com/image4.jpg",
             },
             // Agrega más libros aquí
@@ -118,15 +127,19 @@ class BookCatalog extends React.Component {
           name: "Ingeniería en Logística y Transporte",
           books: [
             {
-              author: "Autor 3",
-              title: "Libro 3",
-              description: "Descripción del Libro 3",
+              author: "Sunil Chopra y Peter Meindl",
+              title:
+                "Supply Chain Management: Strategy, Planning, and Operation",
+              description:
+                "Este libro es una referencia completa sobre la gestión de la cadena de suministro, abarcando estrategias, planificación y operaciones. ",
               image: "https://example.com/image3.jpg",
             },
             {
-              author: "Autor 4",
-              title: "Libro 4",
-              description: "Descripción del Libro 4",
+              author:
+                "ohn J. Coyle, Robert A. Novack, Brian Gibson y Edward J. Bardi",
+              title: "Transportation: A Global Supply Chain Perspective",
+              description:
+                "Este libro se centra en la perspectiva global de la gestión del transporte y su papel en la cadena de suministro. ",
               image: "https://example.com/image4.jpg",
             },
             // Agrega más libros aquí
@@ -136,15 +149,18 @@ class BookCatalog extends React.Component {
           name: "Ingeniería en Sistemas Automotrices",
           books: [
             {
-              author: "Autor 3",
-              title: "Libro 3",
-              description: "Descripción del Libro 3",
+              author: "James D. Halderman",
+              title:
+                "Automotive Technology: Principles, Diagnosis, and Service",
+              description:
+                "Este libro abarca los principios fundamentales de la tecnología automotriz, el diagnóstico y el servicio de vehículos. ",
               image: "https://example.com/image3.jpg",
             },
             {
-              author: "Ingeniería en Tecnología Ambiental",
-              title: "Libro 4",
-              description: "Descripción del Libro 4",
+              author: "James E. Duffy",
+              title: "Modern Automotive Technology",
+              description:
+                "Este libro ofrece una visión completa de la tecnología automotriz moderna, incluyendo los sistemas electrónicos y de control presentes en los vehículos actuales.",
               image: "https://example.com/image4.jpg",
             },
             // Agrega más libros aquí
@@ -154,15 +170,17 @@ class BookCatalog extends React.Component {
           name: "Ingeniería Financiera",
           books: [
             {
-              author: "Autor 3",
-              title: "Libro 3",
-              description: "Descripción del Libro 3",
+              author: "John C. Hull",
+              title: "Options, Futures, and Other Derivatives",
+              description:
+                "Este libro es un recurso completo sobre derivados financieros, incluyendo opciones, futuros, swaps y otros instrumentos financieros. ",
               image: "https://example.com/image3.jpg",
             },
             {
-              author: "Autor 4",
-              title: "Libro 4",
-              description: "Descripción del Libro 4",
+              author: "Tanya S. Beder y Cara M. Marshall",
+              title: "Financial Engineering: The Evolution of a Profession",
+              description:
+                "Este libro ofrece una visión general de la ingeniería financiera como profesión, abordando su evolución, los marcos conceptuales y las herramientas utilizadas en el campo. ",
               image: "https://example.com/image4.jpg",
             },
             // Agrega más libros aquí
@@ -172,15 +190,17 @@ class BookCatalog extends React.Component {
           name: "Ingeniería Mecatrónica",
           books: [
             {
-              author: "Autor 3",
-              title: "Libro 3",
-              description: "Descripción del Libro 3",
+              author: "Godfrey C. Onwubolu",
+              title: "Mechatronics: Principles and Applications",
+              description:
+                " Este libro ofrece una introducción completa a los principios y aplicaciones de la mecatrónica.",
               image: "https://example.com/image3.jpg",
             },
             {
-              author: "Autor 4",
-              title: "Libro 4",
-              description: "Descripción del Libro 4",
+              author: "W. Bolton",
+              title: "Mechatronics: Electronic Control Systems in Mechanical",
+              description:
+                " Este libro presenta los principios y aplicaciones de los sistemas de control electrónico en ingeniería mecánica y eléctrica.",
               image: "https://example.com/image4.jpg",
             },
             // Agrega más libros aquí
@@ -190,33 +210,18 @@ class BookCatalog extends React.Component {
           name: "Maestría en Ingeniería",
           books: [
             {
-              author: "Autor 3",
-              title: "Libro 3",
-              description: "Descripción del Libro 3",
+              author: "Ranjit Kumar",
+              title: "Research Methodology: A Step-by-Step Guide for Beginners",
+              description:
+                "Este libro es una guía paso a paso para la investigación científica en ingeniería. ",
               image: "https://example.com/image3.jpg",
             },
             {
-              author: "Autor 4",
-              title: "Libro 4",
-              description: "Descripción del Libro 4",
-              image: "https://example.com/image4.jpg",
-            },
-            // Agrega más libros aquí
-          ],
-        },
-        {
-          name: "Centro de Estudios de Lenguas Extranjeras",
-          books: [
-            {
-              author: "Autor 3",
-              title: "Libro 3",
-              description: "Descripción del Libro 3",
-              image: "https://example.com/image3.jpg",
-            },
-            {
-              author: "Autor 4",
-              title: "Libro 4",
-              description: "Descripción del Libro 4",
+              author: "Stuart G. Walesh",
+              title:
+                "Engineering Your Future: The Professional Practice of Engineering",
+              description:
+                "Este libro se centra en el aspecto profesional de la ingeniería, proporcionando orientación sobre el desarrollo de una carrera exitosa en el campo de la ingeniería.",
               image: "https://example.com/image4.jpg",
             },
             // Agrega más libros aquí
