@@ -120,6 +120,26 @@ const Formulario = () => {
             />
           </div>
           <div className="form-group">
+            <label>Carrera:</label>
+            <input
+              type="text"
+              className="form-control"
+              name="carrera"
+              value={datosLibros.carrera}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="form-group">
+            <label>Categoria:</label>
+            <input
+              type="text"
+              className="form-control"
+              name="categoria"
+              value={datosLibros.categoria}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="form-group">
             <label>Imagen:</label>
             <input
               type="file"
@@ -153,7 +173,6 @@ const Formulario = () => {
               <th>Autor</th>
               <th>Cantidad de Libro</th>
               <th>Descipcion</th>
-              
               <th>Acciones</th>
             </tr>
           </thead>

@@ -1,7 +1,10 @@
+//import React, { useState,useEffect } from "react";
 import React, { useState } from "react";
+import { Container, Row, Col } from "react-bootstrap";
+import "../css/AgregarUsuarios.css";
 import axios from "axios";
 
-const FormularioDatosPersonales = () => {
+const AgregarUsuarios = () => {
   const [matricula, setMatricula] = useState("");
   const [nombrealumno, setNombreAlumno] = useState("");
   const [apellidoP, setApellidoP] = useState("");
@@ -16,6 +19,9 @@ const FormularioDatosPersonales = () => {
   const [datos, setDatos] = useState([]);
   const [terminoBusqueda, setTerminoBusqueda] = useState("");
   const [indiceEditar, setIndiceEditar] = useState(-1);
+  const [guardadoExitoso, setGuardadoExitoso] = useState(false);
+  const [errorCampos, setErrorCampos] = useState(false);
+  const [errorNumerico, setErrorNumerico] = useState(false);
 
   const handleMatriculaChange = (event) => {
     setMatricula(event.target.value);
@@ -34,10 +40,10 @@ const FormularioDatosPersonales = () => {
   const handleCorreoChange = (event) => {
     setCorreo(event.target.value);
   };
-  const handleTelefonoPChange = (event) => {
+  const handleTelefonoChange = (event) => {
     setTelefono(event.target.value);
   };
-  const handleEdadPChange = (event) => {
+  const handleEdadChange = (event) => {
     setEdad(event.target.value);
   };
   const handleCarreraChange = (event) => {
@@ -46,15 +52,16 @@ const FormularioDatosPersonales = () => {
   const handleGeneroChange = (event) => {
     setGenero(event.target.value);
   };
-  const handleUserPChange = (event) => {
+  const handleUsuarioChange = (event) => {
     setUser(event.target.value);
   };
-  const handlePasswordChange = (event) => {
+  const handleContrasenaChange = (event) => {
     setPassword(event.target.value);
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    
 
     if (
       matricula.trim() !== "" &&
@@ -69,36 +76,47 @@ const FormularioDatosPersonales = () => {
       user.trim() !== "" &&
       password.trim() !== ""
     ) {
+      if (isNaN(parseInt(telefono)) || isNaN(parseInt(edad))) {
+        setErrorNumerico(true);
+        setErrorCampos(false);
+        return;
+      }
+
       const nuevoDato = {
-        matricula: "",
-        nombrealumno: "",
-        apellidoP: "",
-        apellidoM: "",
-        correo: "",
-        telefono: "",
-        edad: "",
-        carrera: "",
-        genero: "",
-        user: "",
-        password: "",
+        matricula: matricula,
+        nombrealumno: nombrealumno,
+        apellidoP: apellidoP,
+        apellidoM: apellidoM,
+        correo: correo,
+        telefono: telefono,
+        edad: edad,
+        carrera: carrera,
+        genero: genero,
+        user: user,
+        password: password,
       };
 
-            // Make an HTTP POST request to save the data
-            axios.post("http://127.0.0.1:8000/api/user/", nuevoDato)
-            .then((response) => {
-              // Handle the response if needed
-              console.log(response.data);
-            })
-            .catch((error) => {
-              // Handle any errors that occurred during the request
-              console.error(error);
-            });
-    
+      // Make an HTTP POST request to save the data
+      axios
+        .post("http://127.0.0.1:8000/api/user/", nuevoDato)
+        .then((response) => {
+          console.log(response.data);
+          setGuardadoExitoso(true);
+        })
+        .catch((error) => {
+          console.error(error);
+          setGuardadoExitoso(false);
+        });
 
       if (indiceEditar !== -1) {
-        const nuevosDatos = [...datos];
-        nuevosDatos[indiceEditar] = nuevoDato;
-        setDatos(nuevosDatos);
+        const datosActualizados = datos.map((dato, index) => {
+          if (index === indiceEditar) {
+            return nuevoDato;
+          }
+          return dato;
+        });
+
+        setDatos(datosActualizados);
         setIndiceEditar(-1);
       } else {
         setDatos([...datos, nuevoDato]);
@@ -115,6 +133,11 @@ const FormularioDatosPersonales = () => {
       setGenero("");
       setUser("");
       setPassword("");
+      setErrorCampos(false);
+      setErrorNumerico(false);
+    } else {
+      setErrorCampos(true);
+      setErrorNumerico(false);
     }
   };
 
@@ -124,205 +147,300 @@ const FormularioDatosPersonales = () => {
 
   const handleEditarDato = (index) => {
     const datoEditar = datos[index];
+
     setMatricula(datoEditar.matricula);
     setNombreAlumno(datoEditar.nombrealumno);
     setApellidoP(datoEditar.apellidoP);
     setApellidoM(datoEditar.apellidoM);
     setCorreo(datoEditar.correo);
+    setTelefono(datoEditar.telefono);
     setEdad(datoEditar.edad);
     setCarrera(datoEditar.carrera);
     setGenero(datoEditar.genero);
     setUser(datoEditar.user);
     setPassword(datoEditar.password);
     setIndiceEditar(index);
+    setErrorCampos(false);
+    setErrorNumerico(false);
   };
 
   const handleBusquedaChange = (event) => {
     setTerminoBusqueda(event.target.value);
   };
 
+  // useEffect(() => {
+  //   // Fetch data from the API and store it in the 'datos' state
+  //   axios
+  //     .get("http://127.0.0.1:8000/api/user/")
+  //     .then((response) => {
+  //       setDatos(response.data);
+  //     })
+  //     .catch((error) => {
+  //       console.error(error);
+  //     });
+  // }, []);
+
   const datosFiltrados = datos.filter((dato) => {
-    const nombreCompleto = `${dato.matricula} ${dato.nombrealumno}${dato.apellidoP}${dato.apellidoM}${dato.correo}${dato.edad}${dato.carrera}${dato.genero}${dato.user}${dato.password}`;
+    const nombreCompleto = `${dato.matricula} ${dato.nombrealumno} ${dato.apellidoP} ${dato.apellidoM} ${dato.correo} ${dato.edad} ${dato.carrera} ${dato.genero} ${dato.user} ${dato.password}`;
     return nombreCompleto.toLowerCase().includes(terminoBusqueda.toLowerCase());
   });
 
   return (
-    <div>
-      <div>
-        <div className="col-5">
-          <form onSubmit={handleSubmit}>
-            <div className="mb-1">
-              <label className="form-label">Matricula:</label>
-              <input
-                type="text"
-                className="form-control"
-                value={matricula}
-                onChange={handleMatriculaChange}
-              />
+    <Container className="text-center mt-5">
+      <Row>
+        <Col md={12} className="mx-auto bg-white p-4 rounded">
+          <div className="table-container">
+            <div className="col-12">
+              <form onSubmit={handleSubmit}>
+                <Row>
+                  <Col md={6}>
+                    <div className="mb-1">
+                      <label className="form-label">Matricula:</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        value={matricula}
+                        required
+                        onChange={handleMatriculaChange}
+                      />
+                    </div>
+                    <div className="mb-3">
+                      <label className="form-label">Nombre:</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        value={nombrealumno}
+                        required
+                        onChange={handleNombreAlumnoChange}
+                      />
+                    </div>
+                    <div className="mb-3">
+                      <label className="form-label">Apellido Paterno:</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        value={apellidoP}
+                        required
+                        onChange={handleApellidoPChange}
+                      />
+                    </div>
+                    <div className="mb-3">
+                      <label className="form-label">Apellido Materno:</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        value={apellidoM}
+                        required
+                        onChange={handleApellidoMChange}
+                      />
+                    </div>
+                  </Col>
+                  <Col md={6}>
+                    <div className="mb-3">
+                      <label className="form-label">Correo:</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        value={correo}
+                        required
+                        onChange={handleCorreoChange}
+                      />
+                    </div>
+                    <div className="mb-3">
+                      <label className="form-label">Telefono:</label>
+                      <input
+                        type="number"
+                        className="form-control"
+                        value={telefono}
+                        required
+                        onChange={handleTelefonoChange}
+                      />
+                    </div>
+                    <div className="mb-3">
+                      <label className="form-label">Edad:</label>
+                      <input
+                        type="number"
+                        className="form-control"
+                        value={edad}
+                        required
+                        onChange={handleEdadChange}
+                      />
+                    </div>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col md={6}>
+                    <div className="mb-3">
+                      <label className="form-label">Género:</label>
+                      <select
+                        className="form-select"
+                        value={genero}
+                        required
+                        onChange={handleGeneroChange}
+                      >
+                        <option value="">Seleccionar</option>
+                        <option value="Masculino">Masculino</option>
+                        <option value="Femenino">Femenino</option>
+                        <option value="Otro">Otro</option>
+                      </select>
+                    </div>
+                  </Col>
+                  <Col md={6}>
+                    <div className="mb-3">
+                      <label className="form-label">Carrera:</label>
+                      <select
+                        className="form-select"
+                        value={carrera}
+                        required
+                        onChange={handleCarreraChange}
+                      >
+                        <option selected>Selección de carreras.</option>
+                        <option value="Ingeniería Agroindustrial">Ingeniería Agroindustrial</option>
+                        <option value="Ingeniería de Software">Ingeniería de Software</option>
+                        <option value="Ingeniería en Animación y Efectos Visuales">
+                          Ingeniería en Animación y Efectos Visuales
+                        </option>
+                        <option value="Ingeniería en Energía">Ingeniería en Energía</option>
+                        <option value="Ingeniería en Logística y Transporte">
+                          Ingeniería en Logística y Transporte
+                        </option>
+                        <option value="Ingeniería en Nanotecnología">Ingeniería en Nanotecnología</option>
+                        <option value="Ingeniería en Sistemas Automotrices">
+                          Ingeniería en Sistemas Automotrices
+                        </option>
+                        <option value="Ingeniería en Tecnología Ambiental">
+                          Ingeniería en Tecnología Ambiental
+                        </option>
+                        <option value="Ingeniería Financiera">Ingeniería Financiera</option>
+                        <option value="Ingeniería Mecatrónica">Ingeniería Mecatrónica</option>
+                        <option value="Maestría en Ingeniería">Maestría en Ingeniería</option>
+                        <option value="Centro de Estudios de Lenguas Extranjeras">
+                          Centro de Estudios de Lenguas Extranjeras
+                        </option>
+                      </select>
+                    </div>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col md={6}>
+                    <div className="mb-3">
+                      <label className="form-label">Usuario:</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        value={user}
+                        required
+                        onChange={handleUsuarioChange}
+                      />
+                    </div>
+                  </Col>
+                  <Col md={6}>
+                    <div className="mb-3">
+                      <label className="form-label">Contraseña:</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        value={password}
+                        required
+                        onChange={handleContrasenaChange}
+                      />
+                    </div>
+                  </Col>
+                </Row>
+                <button type="submit" className="btn btn-primary">
+                  {indiceEditar !== -1 ? "Actualizar" : "Guardar"}
+                </button>
+              </form>
+              {errorCampos && (
+                <div className="alert alert-danger mt-4">
+                  Por favor, completa todos los campos.
+                </div>
+              )}
+              {errorNumerico && (
+                <div className="alert alert-danger mt-4">
+                  Por favor, ingresa un valor numérico válido en los campos de teléfono y edad.
+                </div>
+              )}
+              {guardadoExitoso && (
+                <div className="alert alert-success mt-4">
+                  Los datos se guardaron correctamente.
+                </div>
+              )}
+              {guardadoExitoso === false && (
+                <div className="alert alert-danger mt-4">
+                  Hubo un error al guardar los datos.
+                </div>
+              )}
             </div>
-            <div className="mb-3">
-              <label className="form-label">Nombre:</label>
-              <input
-                type="text"
-                className="form-control"
-                value={nombrealumno}
-                onChange={handleNombreAlumnoChange}
-              />
+          </div>
+          <div className="mt-4 col-12">
+            <input
+              type="text"
+              className="form-control mt-4"
+              placeholder="Buscar por usuario..."
+              value={terminoBusqueda}
+              onChange={handleBusquedaChange}
+            />
+          </div>
+          <div className="table-wrapper">
+            <div className="table">
+              <table className="table-responsive">
+                <thead>
+                  <tr>
+                    <th>Matricula</th>
+                    <th>Nombre</th>
+                    <th>Apellido Paterno</th>
+                    <th>Apellido Materno</th>
+                    <th>Correo</th>
+                    <th>Telefono</th>
+                    <th>Edad</th>
+                    <th>Género</th>
+                    <th>Carrera</th>
+                    <th>Usuario</th>
+                    <th>Contraseña</th>
+                    <th>Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {datosFiltrados.map((dato, index) => (
+                    <tr key={index}>
+                      <td>{dato.matricula}</td>
+                      <td>{dato.nombrealumno}</td>
+                      <td>{dato.apellidoP}</td>
+                      <td>{dato.apellidoM}</td>
+                      <td>{dato.correo}</td>
+                      <td>{dato.telefono}</td>
+                      <td>{dato.edad}</td>
+                      <td>{dato.genero}</td>
+                      <td>{dato.carrera}</td>
+                      <td>{dato.user}</td>
+                      <td>{dato.password}</td>
+                      <td>
+                        <div className="d-flex align-items-center">
+                          <button
+                            className="btn btn-danger me-2"
+                            onClick={() => handleBorrarDato(index)}
+                          >
+                            Borrar
+                          </button>
+                          <button
+                            className="btn btn-primary"
+                            onClick={() => handleEditarDato(index)}
+                          >
+                            Editar
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
-            <div className="mb-3">
-              <label className="form-label">Apellido Paterno:</label>
-              <input
-                type="text"
-                className="form-control"
-                value={apellidoP}
-                onChange={handleApellidoPChange}
-              />
-            </div>
-            <div className="mb-3">
-              <label className="form-label">Apellido Materno:</label>
-              <input
-                type="text"
-                className="form-control"
-                value={apellidoM}
-                onChange={handleApellidoMChange}
-              />
-            </div>
-            <div className="mb-3">
-              <label className="form-label">Correo:</label>
-              <input
-                type="text"
-                className="form-control"
-                value={correo}
-                onChange={handleCorreoChange}
-              />
-            </div>
-            <div className="mb-3">
-              <label className="form-label">Telefono:</label>
-              <input
-                type="text"
-                className="form-control"
-                value={telefono}
-                onChange={handleTelefonoPChange}
-              />
-            </div>
-            <div className="mb-3">
-              <label className="form-label">Edad:</label>
-              <input
-                type="number"
-                className="form-control"
-                value={edad}
-                onChange={handleEdadPChange}
-              />
-            </div>
-            <div className="mb-3">
-              <label className="form-label">Género:</label>
-              <select
-                className="form-select"
-                value={genero}
-                onChange={handleGeneroChange}
-              >
-                <option value="">Seleccionar</option>
-                <option value="Masculino">Masculino</option>
-                <option value="Femenino">Femenino</option>
-                <option value="Otro">Otro</option>
-              </select>
-            </div>
-            <div className="mb-3">
-              <label className="form-label">Carrera:</label>
-              <select
-                className="form-select"
-                value={carrera}
-                onChange={handleCarreraChange}
-              >
-                <option value="">Seleccionar</option>
-                <option value="Masculino">Masculino</option>
-                <option value="Femenino">Femenino</option>
-                <option value="Otro">Otro</option>
-              </select>
-            </div>
-            <div className="mb-3">
-              <label className="form-label">Usuario:</label>
-              <input
-                type="text"
-                className="form-control"
-                value={user}
-                onChange={handleUserPChange}
-              />
-            </div>
-            <div className="mb-3">
-              <label className="form-label">Contraseña:</label>
-              <input
-                type="text"
-                className="form-control"
-                value={password}
-                onChange={handlePasswordChange}
-              />
-            </div>
-            <button type="submit" className="btn btn-primary">
-              {indiceEditar !== -1 ? "Actualizar" : "Guardar"}
-            </button>
-          </form>
-        </div>
-      </div>
-      <div className="mt-4 col-4">
-        <input
-          type="text"
-          className="form-control"
-          placeholder="Buscar..."
-          value={terminoBusqueda}
-          onChange={handleBusquedaChange}
-        />
-      </div>
-      <div className="mt-4">
-        <table className="table">
-          <thead>
-            <tr>
-              <th>Matricula</th>
-              <th>Nombre</th>
-              <th>Apellido Paterno</th>
-              <th>Apellido Materno</th>
-              <th>Correo</th>
-              <th>Carrera</th>
-              <th>Usuario</th>
-              <th>Contraseña</th>
-              <th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            {datosFiltrados.map((dato, index) => (
-              <tr key={index}>
-                <td>{dato.matricula}</td>
-                <td>{dato.nombrealumno}</td>
-                <td>{dato.apellidoP}</td>
-                <td>{dato.apellidoM}</td>
-                <td>{dato.correo}</td>
-                <td>{dato.telefono}</td>
-                <td>{dato.edad}</td>
-                <td>{dato.genero}</td>
-                <td>{dato.carrera}</td>
-                <td>{dato.user}</td>
-                <td>{dato.password}</td>
-                <td>
-                  <button
-                    className="btn btn-danger"
-                    onClick={() => handleBorrarDato(index)}
-                  > 
-                    Borrar datos
-                  </button>
-                  <button
-                    className="btn btn-primary ms-2"
-                    onClick={() => handleEditarDato(index)}
-                  >
-                    Editar datos
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </div>
+          </div>
+        </Col>
+      </Row>
+    </Container>
   );
 };
 
-export default FormularioDatosPersonales;
+export default AgregarUsuarios;
