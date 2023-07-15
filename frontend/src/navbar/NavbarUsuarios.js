@@ -26,12 +26,12 @@ const NavbarUsuarios = () => {
                             <li className="nav-item">
                                 <Link className="nav-link" to="/usuario/libros_Disponibles">Libros disponibles</Link>
                             </li>
-                            <li className="nav-item">
+                            {/* <li className="nav-item">
                                 <Link className="nav-link" to="/usuario/prestamo_Externo">Prestamos externos</Link>
                             </li>
                             <li className="nav-item">
                                 <Link className="nav-link" to="/usuario/prestamo_Interno">Prestamos internos</Link>
-                            </li>
+                            </li> */}
                             <li className="nav-item">
                                 <Link className="nav-link" to="/">Cerrar sesión</Link>
                             </li>
