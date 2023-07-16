@@ -149,6 +149,7 @@ const AgregarUsuarios = () => {
         <Col md={12} className="mx-auto bg-white p-4 rounded">
           <div className="table-container">
             <div className="col-12">
+              <h2>Registro de usuarios de la biblioteca</h2>
               <form onSubmit={handleSubmit}>
                 <Row>
                   <Col md={6}>
@@ -244,27 +245,38 @@ const AgregarUsuarios = () => {
                         onChange={handleCarreraChange}
                       >
                         <option selected>Selección de carreras.</option>
-                        <option value="Ingeniería Agroindustrial">Ingeniería Agroindustrial</option>
-                        <option value="Ingeniería de Software">Ingeniería de Software</option>
+                        <option value="Ingeniería Agroindustrial">
+                          Ingeniería Agroindustrial
+                        </option>
+                        <option value="Ingeniería de Software">
+                          Ingeniería de Software
+                        </option>
                         <option value="Ingeniería en Animación y Efectos Visuales">
                           Ingeniería en Animación y Efectos Visuales
                         </option>
-                        <option value="Ingeniería en Energía">Ingeniería en Energía</option>
+                        <option value="Ingeniería en Energía">
+                          Ingeniería en Energía
+                        </option>
                         <option value="Ingeniería en Logística y Transporte">
                           Ingeniería en Logística y Transporte
                         </option>
-                        <option value="Ingeniería en Nanotecnología">Ingeniería en Nanotecnología</option>
+                        <option value="Ingeniería en Nanotecnología">
+                          Ingeniería en Nanotecnología
+                        </option>
                         <option value="Ingeniería en Sistemas Automotrices">
                           Ingeniería en Sistemas Automotrices
                         </option>
                         <option value="Ingeniería en Tecnología Ambiental">
                           Ingeniería en Tecnología Ambiental
                         </option>
-                        <option value="Ingeniería Financiera">Ingeniería Financiera</option>
-                        <option value="Ingeniería Mecatrónica">Ingeniería Mecatrónica</option>
-                        <option value="Maestría en Ingeniería">Maestría en Ingeniería</option>
-                        <option value="Centro de Estudios de Lenguas Extranjeras">
-                          Centro de Estudios de Lenguas Extranjeras
+                        <option value="Ingeniería Financiera">
+                          Ingeniería Financiera
+                        </option>
+                        <option value="Ingeniería Mecatrónica">
+                          Ingeniería Mecatrónica
+                        </option>
+                        <option value="Maestría en Ingeniería">
+                          Maestría en Ingeniería
                         </option>
                       </select>
                     </div>
@@ -309,7 +321,8 @@ const AgregarUsuarios = () => {
               onChange={handleBusquedaChange}
             />
           </div>
-          <div className="table-wrapper">
+          <div className="mt-4">
+            <h2>Datos Guardados</h2>
             <div className="table">
               <table className="table-responsive">
                 <thead>

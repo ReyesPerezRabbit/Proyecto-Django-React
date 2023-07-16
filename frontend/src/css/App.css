@@ -1,4 +1,4 @@
-/* html, body {
+html, body {
     margin: 0;
     padding: 0;
     font-family: Poppins;
@@ -11,9 +11,9 @@
     background-position: top left;
     background-attachment: fixed;
   }
-   */
+  
 
-html, body {
+/* html, body {
     margin: 0;
     padding: 0;
     font-family: Poppins;
@@ -24,7 +24,7 @@ body {
     background: linear-gradient(to bottom right, rgba(0, 128, 0, 0.7) 0%, rgba(76, 189, 124, 0.7) 30%, rgba(122, 210, 145, 0.7) 40%, rgba(152, 255, 152, 0.7) 45%, rgba(191, 239, 174, 0.7) 48%, rgba(199, 221, 186, 0.7) 50%, rgba(209, 202, 198, 0.7) 52%, rgba(128, 0, 128, 0.7) 55%, rgba(176, 89, 139, 0.7) 60%, rgba(200, 162, 200, 0.7) 65%, rgba(227, 175, 214, 0.7) 70%, rgba(255, 209, 220, 0.7) 75%, rgba(255, 192, 203, 0.7) 80%, rgba(255, 138, 174, 0.7) 85%, rgba(255, 84, 144, 0.7) 90%, rgba(255, 84, 144, 0.7) 100%);
     background-size: 100% 100%;
     background-position: top left;
-  }
+  } */
   
   
   

@@ -1,0 +1,5 @@
+.card-img-top {
+  width: 100px; /* Ajusta el tamaño según tus necesidades */
+  height: auto; /* Permite que la altura se ajuste proporcionalmente */
+  margin: 0 auto; /* Centra horizontalmente la imagen */
+}
