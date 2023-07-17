@@ -334,6 +334,7 @@ const SolicitudPrestamoExterno = () => {
             <div className="d-grid">
               <span>
                 <Link
+                  type="button"
                   className="reset btn btn-success nav-link col-2 my-auto mx-auto"
                   to="/usuario/inicio"
                 >
