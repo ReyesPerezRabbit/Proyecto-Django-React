@@ -1,0 +1,21 @@
+.table-container {
+    overflow-x: auto;
+  }
+  
+  .table-wrapper {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+  }
+  
+  .table {
+    width: fit-content;
+    table-layout: fixed;
+  }
+  
+  .table td,
+  .table th {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }

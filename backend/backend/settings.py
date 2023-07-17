@@ -107,7 +107,7 @@ DATABASES = {
         # #   'NAME': BASE_DIR / 'db.sqlite3',
         'default':{ 
 		'ENGINE': 'django.db.backends.postgresql_psycopg2',
-		'NAME' : 'prueba',
+		'NAME' : 'db_biblioteca',
 		'USER' : 'postgres',
 		'PASSWORD' : 'admin',
 		'HOST' : 'localhost' ,  # la base esta descargado de la rama master 
