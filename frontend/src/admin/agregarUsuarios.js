@@ -5,8 +5,7 @@ import "../css/AgregarUsuarios.css";
 const AgregarUsuarios = () => {
   const [matricula, setMatricula] = useState("");
   const [nombrealumno, setNombreAlumno] = useState("");
-  const [apellidoP, setApellidoP] = useState("");
-  const [apellidoM, setApellidoM] = useState("");
+  const [apellidos, setApellidos] = useState("");
   const [correo, setCorreo] = useState("");
   const [telefono, setTelefono] = useState("");
   const [edad, setEdad] = useState("");
@@ -25,13 +24,10 @@ const AgregarUsuarios = () => {
     setNombreAlumno(event.target.value);
   };
 
-  const handleApellidoPChange = (event) => {
-    setApellidoP(event.target.value);
+  const handleApellidosChange = (event) => {
+    setApellidos(event.target.value);
   };
 
-  const handleApellidoMChange = (event) => {
-    setApellidoM(event.target.value);
-  };
   const handleCorreoChange = (event) => {
     setCorreo(event.target.value);
   };
@@ -60,8 +56,7 @@ const AgregarUsuarios = () => {
     if (
       matricula.trim() !== "" &&
       nombrealumno.trim() !== "" &&
-      apellidoP.trim() !== "" &&
-      apellidoM.trim() !== "" &&
+      apellidos.trim() !== "" &&
       correo.trim() !== "" &&
       telefono.trim() !== "" &&
       edad.trim() !== "" &&
@@ -73,8 +68,7 @@ const AgregarUsuarios = () => {
       const nuevoDato = {
         matricula: matricula,
         nombrealumno: nombrealumno,
-        apellidoP: apellidoP,
-        apellidoM: apellidoM,
+        apellidos: apellidos,
         correo: correo,
         telefono: telefono,
         edad: edad,
@@ -100,8 +94,7 @@ const AgregarUsuarios = () => {
 
       setMatricula("");
       setNombreAlumno("");
-      setApellidoP("");
-      setApellidoM("");
+      setApellidos("");
       setCorreo("");
       setTelefono("");
       setEdad("");
@@ -121,8 +114,7 @@ const AgregarUsuarios = () => {
 
     setMatricula(datoEditar.matricula);
     setNombreAlumno(datoEditar.nombrealumno);
-    setApellidoP(datoEditar.apellidoP);
-    setApellidoM(datoEditar.apellidoM);
+    setApellidos(datoEditar.apellidos);
     setCorreo(datoEditar.correo);
     setTelefono(datoEditar.telefono);
     setEdad(datoEditar.edad);
@@ -138,7 +130,7 @@ const AgregarUsuarios = () => {
   };
 
   const datosFiltrados = datos.filter((dato) => {
-    const nombreCompleto = `${dato.matricula} ${dato.nombrealumno}${dato.apellidoP}${dato.apellidoM}
+    const nombreCompleto = `${dato.matricula} ${dato.nombrealumno}${dato.apellidos}
     ${dato.correo}${dato.edad}${dato.carrera}${dato.genero}${dato.usuario}${dato.contrasena}`;
     return nombreCompleto.toLowerCase().includes(terminoBusqueda.toLowerCase());
   });
@@ -172,21 +164,12 @@ const AgregarUsuarios = () => {
                       />
                     </div>
                     <div className="mb-3">
-                      <label className="form-label">Apellido Paterno:</label>
+                      <label className="form-label">Apellidos:</label>
                       <input
                         type="text"
                         className="form-control"
-                        value={apellidoP}
-                        onChange={handleApellidoPChange}
-                      />
-                    </div>
-                    <div className="mb-3">
-                      <label className="form-label">Apellido Materno:</label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        value={apellidoM}
-                        onChange={handleApellidoMChange}
+                        value={apellidos}
+                        onChange={handleApellidosChange}
                       />
                     </div>
                   </Col>
@@ -329,8 +312,7 @@ const AgregarUsuarios = () => {
                   <tr>
                     <th>Matricula</th>
                     <th>Nombre</th>
-                    <th>Apellido Paterno</th>
-                    <th>Apellido Materno</th>
+                    <th>Apellidos</th>
                     <th>Correo</th>
                     <th>Telefono</th>
                     <th>Edad</th>
@@ -346,8 +328,7 @@ const AgregarUsuarios = () => {
                     <tr key={index}>
                       <td>{dato.matricula}</td>
                       <td>{dato.nombrealumno}</td>
-                      <td>{dato.apellidoP}</td>
-                      <td>{dato.apellidoM}</td>
+                      <td>{dato.apellidos}</td>
                       <td>{dato.correo}</td>
                       <td>{dato.telefono}</td>
                       <td>{dato.edad}</td>
