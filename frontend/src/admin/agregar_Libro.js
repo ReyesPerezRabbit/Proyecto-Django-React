@@ -148,7 +148,7 @@ const Formulario = () => {
                         onChange={handleChange}
                       >
                         <option selected>Selección de carreras.</option>
-                        <option value="Ingeniería Agroindustrial" required>
+                        <option value="Ingeniería Agroindustrial">
                           Ingeniería Agroindustrial
                         </option>
                         <option value="Ingeniería de Software">
@@ -222,7 +222,7 @@ const Formulario = () => {
               <thead>
                 <tr>
                   <th>Código</th>
-                  <th>Nom Libro</th>
+                  <th>Nombre del Libro</th>
                   <th>Autor</th>
                   <th>Descripción</th>
                   <th>Cantidad</th>

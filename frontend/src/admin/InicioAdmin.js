@@ -28,7 +28,6 @@ const InicioAdmin = () => {
                 className="img-fluid"
                 width={200}
                 height={140}
-                alt="171x180"
                 src={logo}
               />
               <Figure.Caption>Java Crew</Figure.Caption>

@@ -306,57 +306,55 @@ const AgregarUsuarios = () => {
           </div>
           <div className="mt-4">
             <h2>Datos Guardados</h2>
-            <div className="table">
-              <table className="table-responsive">
-                <thead>
-                  <tr>
-                    <th>Matricula</th>
-                    <th>Nombre</th>
-                    <th>Apellidos</th>
-                    <th>Correo</th>
-                    <th>Telefono</th>
-                    <th>Edad</th>
-                    <th>Género</th>
-                    <th>Carrera</th>
-                    <th>Usuario</th>
-                    <th>Contraseña</th>
-                    <th>Acciones</th>
+            <table className="table">
+              <thead>
+                <tr>
+                  <th>Matricula</th>
+                  <th>Nombre</th>
+                  <th>Apellidos</th>
+                  <th>Correo</th>
+                  <th>Telefono</th>
+                  <th>Edad</th>
+                  <th>Género</th>
+                  <th>Carrera</th>
+                  <th>Usuario</th>
+                  <th>Contraseña</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                {datosFiltrados.map((dato, index) => (
+                  <tr key={index}>
+                    <td>{dato.matricula}</td>
+                    <td>{dato.nombrealumno}</td>
+                    <td>{dato.apellidos}</td>
+                    <td>{dato.correo}</td>
+                    <td>{dato.telefono}</td>
+                    <td>{dato.edad}</td>
+                    <td>{dato.genero}</td>
+                    <td>{dato.carrera}</td>
+                    <td>{dato.usuario}</td>
+                    <td>{dato.contrasena}</td>
+                    <td>
+                      <div className="d-flex align-items-center">
+                        <button
+                          className="btn btn-danger me-2"
+                          onClick={() => handleBorrarDato(index)}
+                        >
+                          Borrar
+                        </button>
+                        <button
+                          className="btn btn-primary"
+                          onClick={() => handleEditarDato(index)}
+                        >
+                          Editar
+                        </button>
+                      </div>
+                    </td>
                   </tr>
-                </thead>
-                <tbody>
-                  {datosFiltrados.map((dato, index) => (
-                    <tr key={index}>
-                      <td>{dato.matricula}</td>
-                      <td>{dato.nombrealumno}</td>
-                      <td>{dato.apellidos}</td>
-                      <td>{dato.correo}</td>
-                      <td>{dato.telefono}</td>
-                      <td>{dato.edad}</td>
-                      <td>{dato.genero}</td>
-                      <td>{dato.carrera}</td>
-                      <td>{dato.usuario}</td>
-                      <td>{dato.contrasena}</td>
-                      <td>
-                        <div className="d-flex align-items-center">
-                          <button
-                            className="btn btn-danger me-2"
-                            onClick={() => handleBorrarDato(index)}
-                          >
-                            Borrar
-                          </button>
-                          <button
-                            className="btn btn-primary"
-                            onClick={() => handleEditarDato(index)}
-                          >
-                            Editar
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+                ))}
+              </tbody>
+            </table>
           </div>
         </Col>
       </Row>
