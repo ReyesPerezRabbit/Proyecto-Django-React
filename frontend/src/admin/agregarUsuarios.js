@@ -1,21 +1,27 @@
+//import React, { useState,useEffect } from "react";
 import React, { useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import "../css/AgregarUsuarios.css";
+import axios from "axios";
 
 const AgregarUsuarios = () => {
   const [matricula, setMatricula] = useState("");
   const [nombrealumno, setNombreAlumno] = useState("");
-  const [apellidos, setApellidos] = useState("");
+  const [apellidoP, setApellidoP] = useState("");
+  const [apellidoM, setApellidoM] = useState("");
   const [correo, setCorreo] = useState("");
   const [telefono, setTelefono] = useState("");
   const [edad, setEdad] = useState("");
   const [carrera, setCarrera] = useState("");
   const [genero, setGenero] = useState("");
-  const [usuario, setUsuario] = useState("");
-  const [contrasena, setContrasena] = useState("");
+  const [user, setUser] = useState("");
+  const [password, setPassword] = useState("");
   const [datos, setDatos] = useState([]);
   const [terminoBusqueda, setTerminoBusqueda] = useState("");
   const [indiceEditar, setIndiceEditar] = useState(-1);
+  const [guardadoExitoso, setGuardadoExitoso] = useState(false);
+  const [errorCampos, setErrorCampos] = useState(false);
+  const [errorNumerico, setErrorNumerico] = useState(false);
 
   const handleMatriculaChange = (event) => {
     setMatricula(event.target.value);
@@ -24,10 +30,13 @@ const AgregarUsuarios = () => {
     setNombreAlumno(event.target.value);
   };
 
-  const handleApellidosChange = (event) => {
-    setApellidos(event.target.value);
+  const handleApellidoPChange = (event) => {
+    setApellidoP(event.target.value);
   };
 
+  const handleApellidoMChange = (event) => {
+    setApellidoM(event.target.value);
+  };
   const handleCorreoChange = (event) => {
     setCorreo(event.target.value);
   };
@@ -44,10 +53,10 @@ const AgregarUsuarios = () => {
     setGenero(event.target.value);
   };
   const handleUsuarioChange = (event) => {
-    setUsuario(event.target.value);
+    setUser(event.target.value);
   };
   const handleContrasenaChange = (event) => {
-    setContrasena(event.target.value);
+    setPassword(event.target.value);
   };
 
   const handleSubmit = (event) => {
@@ -56,27 +65,47 @@ const AgregarUsuarios = () => {
     if (
       matricula.trim() !== "" &&
       nombrealumno.trim() !== "" &&
-      apellidos.trim() !== "" &&
+      apellidoP.trim() !== "" &&
+      apellidoM.trim() !== "" &&
       correo.trim() !== "" &&
       telefono.trim() !== "" &&
       edad.trim() !== "" &&
       carrera !== "" &&
       genero.trim() !== "" &&
-      usuario.trim() !== "" &&
-      contrasena.trim() !== ""
+      user.trim() !== "" &&
+      password.trim() !== ""
     ) {
+      if (isNaN(parseInt(telefono)) || isNaN(parseInt(edad))) {
+        setErrorNumerico(true);
+        setErrorCampos(false);
+        return;
+      }
+
       const nuevoDato = {
         matricula: matricula,
         nombrealumno: nombrealumno,
-        apellidos: apellidos,
+        apellidoP: apellidoP,
+        apellidoM: apellidoM,
         correo: correo,
         telefono: telefono,
         edad: edad,
         carrera: carrera,
         genero: genero,
-        usuario: usuario,
-        contrasena: contrasena,
+        user: user,
+        password: password,
       };
+
+      // Make an HTTP POST request to save the data
+      axios
+        .post("http://127.0.0.1:8000/api/user/", nuevoDato)
+        .then((response) => {
+          console.log(response.data);
+          setGuardadoExitoso(true);
+        })
+        .catch((error) => {
+          console.error(error);
+          setGuardadoExitoso(false);
+        });
 
       if (indiceEditar !== -1) {
         const datosActualizados = datos.map((dato, index) => {
@@ -94,14 +123,20 @@ const AgregarUsuarios = () => {
 
       setMatricula("");
       setNombreAlumno("");
-      setApellidos("");
+      setApellidoP("");
+      setApellidoM("");
       setCorreo("");
       setTelefono("");
       setEdad("");
       setCarrera("");
       setGenero("");
-      setUsuario("");
-      setContrasena("");
+      setUser("");
+      setPassword("");
+      setErrorCampos(false);
+      setErrorNumerico(false);
+    } else {
+      setErrorCampos(true);
+      setErrorNumerico(false);
     }
   };
 
@@ -114,24 +149,38 @@ const AgregarUsuarios = () => {
 
     setMatricula(datoEditar.matricula);
     setNombreAlumno(datoEditar.nombrealumno);
-    setApellidos(datoEditar.apellidos);
+    setApellidoP(datoEditar.apellidoP);
+    setApellidoM(datoEditar.apellidoM);
     setCorreo(datoEditar.correo);
     setTelefono(datoEditar.telefono);
     setEdad(datoEditar.edad);
     setCarrera(datoEditar.carrera);
     setGenero(datoEditar.genero);
-    setUsuario(datoEditar.usuario);
-    setContrasena(datoEditar.contrasena);
+    setUser(datoEditar.user);
+    setPassword(datoEditar.password);
     setIndiceEditar(index);
+    setErrorCampos(false);
+    setErrorNumerico(false);
   };
 
   const handleBusquedaChange = (event) => {
     setTerminoBusqueda(event.target.value);
   };
 
+  // useEffect(() => {
+  //   // Fetch data from the API and store it in the 'datos' state
+  //   axios
+  //     .get("http://127.0.0.1:8000/api/user/")
+  //     .then((response) => {
+  //       setDatos(response.data);
+  //     })
+  //     .catch((error) => {
+  //       console.error(error);
+  //     });
+  // }, []);
+
   const datosFiltrados = datos.filter((dato) => {
-    const nombreCompleto = `${dato.matricula} ${dato.nombrealumno}${dato.apellidos}
-    ${dato.correo}${dato.edad}${dato.carrera}${dato.genero}${dato.usuario}${dato.contrasena}`;
+    const nombreCompleto = `${dato.matricula} ${dato.nombrealumno} ${dato.apellidoP} ${dato.apellidoM} ${dato.correo} ${dato.edad} ${dato.carrera} ${dato.genero} ${dato.user} ${dato.password}`;
     return nombreCompleto.toLowerCase().includes(terminoBusqueda.toLowerCase());
   });
 
@@ -141,7 +190,6 @@ const AgregarUsuarios = () => {
         <Col md={12} className="mx-auto bg-white p-4 rounded">
           <div className="table-container">
             <div className="col-12">
-              <h2>Registro de usuarios de la biblioteca</h2>
               <form onSubmit={handleSubmit}>
                 <Row>
                   <Col md={6}>
@@ -151,6 +199,7 @@ const AgregarUsuarios = () => {
                         type="text"
                         className="form-control"
                         value={matricula}
+                        required
                         onChange={handleMatriculaChange}
                       />
                     </div>
@@ -160,16 +209,28 @@ const AgregarUsuarios = () => {
                         type="text"
                         className="form-control"
                         value={nombrealumno}
+                        required
                         onChange={handleNombreAlumnoChange}
                       />
                     </div>
                     <div className="mb-3">
-                      <label className="form-label">Apellidos:</label>
+                      <label className="form-label">Apellido Paterno:</label>
                       <input
                         type="text"
                         className="form-control"
-                        value={apellidos}
-                        onChange={handleApellidosChange}
+                        value={apellidoP}
+                        required
+                        onChange={handleApellidoPChange}
+                      />
+                    </div>
+                    <div className="mb-3">
+                      <label className="form-label">Apellido Materno:</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        value={apellidoM}
+                        required
+                        onChange={handleApellidoMChange}
                       />
                     </div>
                   </Col>
@@ -180,24 +241,27 @@ const AgregarUsuarios = () => {
                         type="text"
                         className="form-control"
                         value={correo}
+                        required
                         onChange={handleCorreoChange}
                       />
                     </div>
                     <div className="mb-3">
                       <label className="form-label">Telefono:</label>
                       <input
-                        type="text"
+                        type="number"
                         className="form-control"
                         value={telefono}
+                        required
                         onChange={handleTelefonoChange}
                       />
                     </div>
                     <div className="mb-3">
                       <label className="form-label">Edad:</label>
                       <input
-                        type="text"
+                        type="number"
                         className="form-control"
                         value={edad}
+                        required
                         onChange={handleEdadChange}
                       />
                     </div>
@@ -210,6 +274,7 @@ const AgregarUsuarios = () => {
                       <select
                         className="form-select"
                         value={genero}
+                        required
                         onChange={handleGeneroChange}
                       >
                         <option value="">Seleccionar</option>
@@ -225,6 +290,7 @@ const AgregarUsuarios = () => {
                       <select
                         className="form-select"
                         value={carrera}
+                        required
                         onChange={handleCarreraChange}
                       >
                         <option selected>Selección de carreras.</option>
@@ -261,6 +327,9 @@ const AgregarUsuarios = () => {
                         <option value="Maestría en Ingeniería">
                           Maestría en Ingeniería
                         </option>
+                        <option value="Centro de Estudios de Lenguas Extranjeras">
+                          Centro de Estudios de Lenguas Extranjeras
+                        </option>
                       </select>
                     </div>
                   </Col>
@@ -272,7 +341,8 @@ const AgregarUsuarios = () => {
                       <input
                         type="text"
                         className="form-control"
-                        value={usuario}
+                        value={user}
+                        required
                         onChange={handleUsuarioChange}
                       />
                     </div>
@@ -283,7 +353,8 @@ const AgregarUsuarios = () => {
                       <input
                         type="text"
                         className="form-control"
-                        value={contrasena}
+                        value={password}
+                        required
                         onChange={handleContrasenaChange}
                       />
                     </div>
@@ -293,6 +364,27 @@ const AgregarUsuarios = () => {
                   {indiceEditar !== -1 ? "Actualizar" : "Guardar"}
                 </button>
               </form>
+              {errorCampos && (
+                <div className="alert alert-danger mt-4">
+                  Por favor, completa todos los campos.
+                </div>
+              )}
+              {errorNumerico && (
+                <div className="alert alert-danger mt-4">
+                  Por favor, ingresa un valor numérico válido en los campos de
+                  teléfono y edad.
+                </div>
+              )}
+              {guardadoExitoso && (
+                <div className="alert alert-success mt-4">
+                  Los datos se guardaron correctamente.
+                </div>
+              )}
+              {guardadoExitoso === false && (
+                <div className="alert alert-danger mt-4">
+                  Hubo un error al guardar los datos.
+                </div>
+              )}
             </div>
           </div>
           <div className="mt-4 col-12">
@@ -304,14 +396,14 @@ const AgregarUsuarios = () => {
               onChange={handleBusquedaChange}
             />
           </div>
-          <div className="mt-4">
-            <h2>Datos Guardados</h2>
+          <div className="table-wrapper">
             <table className="table">
               <thead>
                 <tr>
                   <th>Matricula</th>
                   <th>Nombre</th>
-                  <th>Apellidos</th>
+                  <th>Apellido Paterno</th>
+                  <th>Apellido Materno</th>
                   <th>Correo</th>
                   <th>Telefono</th>
                   <th>Edad</th>
@@ -327,14 +419,15 @@ const AgregarUsuarios = () => {
                   <tr key={index}>
                     <td>{dato.matricula}</td>
                     <td>{dato.nombrealumno}</td>
-                    <td>{dato.apellidos}</td>
+                    <td>{dato.apellidoP}</td>
+                    <td>{dato.apellidoM}</td>
                     <td>{dato.correo}</td>
                     <td>{dato.telefono}</td>
                     <td>{dato.edad}</td>
                     <td>{dato.genero}</td>
                     <td>{dato.carrera}</td>
-                    <td>{dato.usuario}</td>
-                    <td>{dato.contrasena}</td>
+                    <td>{dato.user}</td>
+                    <td>{dato.password}</td>
                     <td>
                       <div className="d-flex align-items-center">
                         <button

@@ -16,6 +16,7 @@ const Formulario = () => {
   const [listaDatos, setListaDatos] = useState([]);
   const [editandoIndex, setEditandoIndex] = useState(-1);
   const [error] = useState("");
+  const [setGuardadoExitoso] = useState(false);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -43,10 +44,12 @@ const Formulario = () => {
       axios
         .post("http://127.0.0.1:8000/api/libro/", datosLibros)
         .then((response) => {
-          console.log("Datos guardados en la base de datos:", response.data);
+          console.log(response.data);
+          setGuardadoExitoso(true);
         })
         .catch((error) => {
-          console.error("Error al guardar los datos:", error);
+          console.error(error);
+          setGuardadoExitoso(false);
         });
     }
 
@@ -70,6 +73,17 @@ const Formulario = () => {
     setDatosLibros(datosEditados);
     setEditandoIndex(index);
   };
+
+  /*useEffect(() => {
+    axios
+      .get("http://127.0.0.1:8000/api/libro/")
+      .then((response) => {
+        setListaDatos(response.data); // Actualizar el estado con los datos obtenidos
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);*/
 
   return (
     <Container className="text-center mt-5">
@@ -210,9 +224,11 @@ const Formulario = () => {
                     </div>
                   )}
                 </div>
-                <button type="submit" className="btn btn-primary mt-3">
-                  {editandoIndex !== -1 ? "Guardar Edición" : "Guardar"}
-                </button>
+                <div className="mb-3">
+                  <button type="submit" className="btn btn-primary mt-3">
+                    {editandoIndex !== -1 ? "Guardar Edición" : "Guardar"}
+                  </button>
+                </div>
               </form>
             </div>
           </div>

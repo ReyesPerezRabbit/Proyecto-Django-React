@@ -25,8 +25,13 @@ const Formulario = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    if (datosPersonales.nombre.trim() === "" || datosPersonales.apellido.trim() === "") {
-      setError("Por favor, complete todos los campos pinche pendejo de mierda ojala te de un cancen el huevo derecho");
+    if (
+      datosPersonales.nombre.trim() === "" ||
+      datosPersonales.apellido.trim() === ""
+    ) {
+      setError(
+        "Por favor, complete todos los campos pinche pendejo de mierda ojala te de un cancen el huevo derecho"
+      );
       return;
     }
 
@@ -103,7 +108,8 @@ const Formulario = () => {
                   </div>
                 )}
               </div>
-              {error && <div className="alert alert-danger mt-3">{error}</div>} {/* Agregar margen superior al mensaje de error */}
+              {error && <div className="alert alert-danger mt-3">{error}</div>}{" "}
+              {/* Agregar margen superior al mensaje de error */}
               <button type="submit" className="btn btn-primary mt-3">
                 {editandoIndex !== -1 ? "Guardar Edición" : "Guardar"}
               </button>
@@ -166,4 +172,3 @@ const Formulario = () => {
 };
 
 export default Formulario;
-
