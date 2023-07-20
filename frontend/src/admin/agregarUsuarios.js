@@ -1,5 +1,5 @@
-//import React, { useState,useEffect } from "react";
-import React, { useState } from "react";
+//import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import "../css/AgregarUsuarios.css";
 import axios from "axios";
@@ -61,7 +61,6 @@ const AgregarUsuarios = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    
 
     if (
       matricula.trim() !== "" &&
@@ -168,18 +167,19 @@ const AgregarUsuarios = () => {
     setTerminoBusqueda(event.target.value);
   };
 
-  // useEffect(() => {
-  //   // Fetch data from the API and store it in the 'datos' state
-  //   axios
-  //     .get("http://127.0.0.1:8000/api/user/")
-  //     .then((response) => {
-  //       setDatos(response.data);
-  //     })
-  //     .catch((error) => {
-  //       console.error(error);
-  //     });
-  // }, []);
+  useEffect(() => {
+    // Fetch data from the API and store it in the 'datos' state
+    axios
+      .get("http://127.0.0.1:8000/api/user/")
+      .then((response) => {
+        setDatos(response.data.useregister); // Assuming the API response has a 'useregister' key with the user data
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
 
+  // ... (rest of the code)
   const datosFiltrados = datos.filter((dato) => {
     const nombreCompleto = `${dato.matricula} ${dato.nombrealumno} ${dato.apellidoP} ${dato.apellidoM} ${dato.correo} ${dato.edad} ${dato.carrera} ${dato.genero} ${dato.user} ${dato.password}`;
     return nombreCompleto.toLowerCase().includes(terminoBusqueda.toLowerCase());
@@ -191,6 +191,7 @@ const AgregarUsuarios = () => {
         <Col md={12} className="mx-auto bg-white p-4 rounded">
           <div className="table-container">
             <div className="col-12">
+              <h2>Registro de usuarios de la biblioteca</h2>
               <form onSubmit={handleSubmit}>
                 <Row>
                   <Col md={6}>
@@ -295,25 +296,39 @@ const AgregarUsuarios = () => {
                         onChange={handleCarreraChange}
                       >
                         <option selected>Selección de carreras.</option>
-                        <option value="Ingeniería Agroindustrial">Ingeniería Agroindustrial</option>
-                        <option value="Ingeniería de Software">Ingeniería de Software</option>
+                        <option value="Ingeniería Agroindustrial">
+                          Ingeniería Agroindustrial
+                        </option>
+                        <option value="Ingeniería de Software">
+                          Ingeniería de Software
+                        </option>
                         <option value="Ingeniería en Animación y Efectos Visuales">
                           Ingeniería en Animación y Efectos Visuales
                         </option>
-                        <option value="Ingeniería en Energía">Ingeniería en Energía</option>
+                        <option value="Ingeniería en Energía">
+                          Ingeniería en Energía
+                        </option>
                         <option value="Ingeniería en Logística y Transporte">
                           Ingeniería en Logística y Transporte
                         </option>
-                        <option value="Ingeniería en Nanotecnología">Ingeniería en Nanotecnología</option>
+                        <option value="Ingeniería en Nanotecnología">
+                          Ingeniería en Nanotecnología
+                        </option>
                         <option value="Ingeniería en Sistemas Automotrices">
                           Ingeniería en Sistemas Automotrices
                         </option>
                         <option value="Ingeniería en Tecnología Ambiental">
                           Ingeniería en Tecnología Ambiental
                         </option>
-                        <option value="Ingeniería Financiera">Ingeniería Financiera</option>
-                        <option value="Ingeniería Mecatrónica">Ingeniería Mecatrónica</option>
-                        <option value="Maestría en Ingeniería">Maestría en Ingeniería</option>
+                        <option value="Ingeniería Financiera">
+                          Ingeniería Financiera
+                        </option>
+                        <option value="Ingeniería Mecatrónica">
+                          Ingeniería Mecatrónica
+                        </option>
+                        <option value="Maestría en Ingeniería">
+                          Maestría en Ingeniería
+                        </option>
                         <option value="Centro de Estudios de Lenguas Extranjeras">
                           Centro de Estudios de Lenguas Extranjeras
                         </option>
@@ -358,7 +373,8 @@ const AgregarUsuarios = () => {
               )}
               {errorNumerico && (
                 <div className="alert alert-danger mt-4">
-                  Por favor, ingresa un valor numérico válido en los campos de teléfono y edad.
+                  Por favor, ingresa un valor numérico válido en los campos de
+                  teléfono y edad.
                 </div>
               )}
               {guardadoExitoso && (
@@ -382,60 +398,59 @@ const AgregarUsuarios = () => {
               onChange={handleBusquedaChange}
             />
           </div>
-          <div className="table-wrapper">
-            <div className="table">
-              <table className="table-responsive">
-                <thead>
-                  <tr>
-                    <th>Matricula</th>
-                    <th>Nombre</th>
-                    <th>Apellido Paterno</th>
-                    <th>Apellido Materno</th>
-                    <th>Correo</th>
-                    <th>Telefono</th>
-                    <th>Edad</th>
-                    <th>Género</th>
-                    <th>Carrera</th>
-                    <th>Usuario</th>
-                    <th>Contraseña</th>
-                    <th>Acciones</th>
+          <div className="mt-4">
+            <h2>Datos Guardados</h2>
+            <table className="table">
+              <thead>
+                <tr>
+                  <th>Matricula</th>
+                  <th>Nombre</th>
+                  <th>Apellido Paterno</th>
+                  <th>Apellido Materno</th>
+                  <th>Correo</th>
+                  <th>Telefono</th>
+                  <th>Edad</th>
+                  <th>Género</th>
+                  <th>Carrera</th>
+                  <th>Usuario</th>
+                  <th>Contraseña</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                {datosFiltrados.map((dato, index) => (
+                  <tr key={index}>
+                    <td>{dato.matricula}</td>
+                    <td>{dato.nombrealumno}</td>
+                    <td>{dato.apellidoP}</td>
+                    <td>{dato.apellidoM}</td>
+                    <td>{dato.correo}</td>
+                    <td>{dato.telefono}</td>
+                    <td>{dato.edad}</td>
+                    <td>{dato.genero}</td>
+                    <td>{dato.carrera}</td>
+                    <td>{dato.user}</td>
+                    <td>{dato.password}</td>
+                    <td>
+                      <div className="d-flex align-items-center">
+                        <button
+                          className="btn btn-danger me-2"
+                          onClick={() => handleBorrarDato(index)}
+                        >
+                          Borrar
+                        </button>
+                        <button
+                          className="btn btn-primary"
+                          onClick={() => handleEditarDato(index)}
+                        >
+                          Editar
+                        </button>
+                      </div>
+                    </td>
                   </tr>
-                </thead>
-                <tbody>
-                  {datosFiltrados.map((dato, index) => (
-                    <tr key={index}>
-                      <td>{dato.matricula}</td>
-                      <td>{dato.nombrealumno}</td>
-                      <td>{dato.apellidoP}</td>
-                      <td>{dato.apellidoM}</td>
-                      <td>{dato.correo}</td>
-                      <td>{dato.telefono}</td>
-                      <td>{dato.edad}</td>
-                      <td>{dato.genero}</td>
-                      <td>{dato.carrera}</td>
-                      <td>{dato.user}</td>
-                      <td>{dato.password}</td>
-                      <td>
-                        <div className="d-flex align-items-center">
-                          <button
-                            className="btn btn-danger me-2"
-                            onClick={() => handleBorrarDato(index)}
-                          >
-                            Borrar
-                          </button>
-                          <button
-                            className="btn btn-primary"
-                            onClick={() => handleEditarDato(index)}
-                          >
-                            Editar
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+                ))}
+              </tbody>
+            </table>
           </div>
         </Col>
       </Row>
