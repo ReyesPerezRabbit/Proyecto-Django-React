@@ -1,21 +1,39 @@
+/* Estilo para la tabla */
+.table {
+  width: 100%;
+  font-size: 14px; /* Puedes ajustar este valor según tus necesidades */
+  table-layout: fixed;
+}
+
+/* Ajustar el tamaño de fuente del encabezado de la tabla, si es necesario */
+.table th {
+  font-size: 16px; /* Puedes ajustar este valor según tus necesidades */
+}
+
+/* Ajustar el tamaño de fuente del pie de tabla, si es necesario */
+.table td {
+  font-size: 14px; /* Puedes ajustar este valor según tus necesidades */
+  word-wrap: break-word; /* Permite que el texto se ajuste automáticamente dentro de las celdas */
+}
+
+/* Estilo para el contenedor con desplazamiento horizontal */
 .table-container {
-    overflow-x: auto;
-  }
-  
-  .table-wrapper {
-    width: 100%;
-    max-width: 100%;
-    overflow-x: auto;
-  }
-  
-  .table {
-    width: fit-content;
-    table-layout: fixed;
-  }
-  
-  .table td,
-  .table th {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+/* Ajustar el ancho de columnas específicas, si es necesario */
+.table th:nth-child(1), .table td:nth-child(1) {
+  width: 100px; /* Puedes ajustar este valor según tus necesidades */
+}
+
+.table th:nth-child(2), .table td:nth-child(2) {
+  width: 150px; /* Puedes ajustar este valor según tus necesidades */
+}
+
+/* Estilo para la columna fija (posición pegajosa) */
+.sticky-col {
+  position: sticky;
+  left: 0;
+  background-color: white;
+}
