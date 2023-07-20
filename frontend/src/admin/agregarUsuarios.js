@@ -1,5 +1,5 @@
-//import React, { useState,useEffect } from "react";
-import React, { useState } from "react";
+//import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import "../css/AgregarUsuarios.css";
 import axios from "axios";
@@ -167,18 +167,19 @@ const AgregarUsuarios = () => {
     setTerminoBusqueda(event.target.value);
   };
 
-  // useEffect(() => {
-  //   // Fetch data from the API and store it in the 'datos' state
-  //   axios
-  //     .get("http://127.0.0.1:8000/api/user/")
-  //     .then((response) => {
-  //       setDatos(response.data);
-  //     })
-  //     .catch((error) => {
-  //       console.error(error);
-  //     });
-  // }, []);
+  useEffect(() => {
+    // Fetch data from the API and store it in the 'datos' state
+    axios
+      .get("http://127.0.0.1:8000/api/user/")
+      .then((response) => {
+        setDatos(response.data.useregister); // Assuming the API response has a 'useregister' key with the user data
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
 
+  // ... (rest of the code)
   const datosFiltrados = datos.filter((dato) => {
     const nombreCompleto = `${dato.matricula} ${dato.nombrealumno} ${dato.apellidoP} ${dato.apellidoM} ${dato.correo} ${dato.edad} ${dato.carrera} ${dato.genero} ${dato.user} ${dato.password}`;
     return nombreCompleto.toLowerCase().includes(terminoBusqueda.toLowerCase());
@@ -190,6 +191,7 @@ const AgregarUsuarios = () => {
         <Col md={12} className="mx-auto bg-white p-4 rounded">
           <div className="table-container">
             <div className="col-12">
+              <h2>Registro de usuarios de la biblioteca</h2>
               <form onSubmit={handleSubmit}>
                 <Row>
                   <Col md={6}>
@@ -396,7 +398,8 @@ const AgregarUsuarios = () => {
               onChange={handleBusquedaChange}
             />
           </div>
-          <div className="table-wrapper">
+          <div className="mt-4">
+            <h2>Datos Guardados</h2>
             <table className="table">
               <thead>
                 <tr>
