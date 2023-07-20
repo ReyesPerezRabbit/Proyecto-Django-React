@@ -1,0 +1,5 @@
+.book-image {
+  max-width: 100px; /* Ajusta el valor del ancho máximo según tus necesidades */
+  height: auto; /* Permite que la altura se ajuste proporcionalmente */
+  margin: 0 auto; /* Centra horizontalmente la imagen */
+}

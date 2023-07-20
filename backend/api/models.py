@@ -39,18 +39,18 @@ class registrousuario(models.Model):
 # Datos del libro
 
 
-class libro(models.Model):
+class Libro(models.Model):
     id_libro = models.AutoField(primary_key=True)
-    codigo = models.CharField(max_length = 150,blank=False)
+    codigo = models.CharField(max_length=150, blank=False)
     cantidad = models.IntegerField(blank=False)
-    nombreLibro = models.CharField(max_length=150,blank=False)
-    autor = models.CharField(max_length=100,blank=False)
+    nombreLibro = models.CharField(max_length=150, blank=False)
+    autor = models.CharField(max_length=100, blank=False)
     descripcion = models.TextField(blank=False)
+    carrera = models.CharField(max_length=150, blank=False)
     imagen = models.ImageField(upload_to='libros/', null=True, blank=True)
 
-    
     def __str__(self):
-        return self.codigo
+        return self.nombreLibro
 
     class Meta:
         db_table = "Libros"

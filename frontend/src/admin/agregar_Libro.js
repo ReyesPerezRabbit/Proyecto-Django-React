@@ -1,20 +1,37 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-//import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-//import { faImage } from '@fortawesome/free-solid-svg-icons';
+import React, { useState, useEffect } from "react";
+import { Container, Row, Col } from "react-bootstrap";
+import axios from "axios";
 
-const Formulario = () => {
+const AgregarLibros = () => {
   const [datosLibros, setDatosLibros] = useState({
-    codigo:'',
-    nombreLibro: '',
-    autor: '',
-    cantidad: '',
-    descripcion: '',
-    imagen: null
+    codigo: "",
+    nombreLibro: "",
+    autor: "",
+    cantidad: "",
+    descripcion: "",
+    carrera: "",
+    imagen: null,
   });
 
   const [listaDatos, setListaDatos] = useState([]);
   const [editandoIndex, setEditandoIndex] = useState(-1);
+  const [errorCampos] = useState(false);
+  const [errorNumerico] = useState(false);
+  const [terminoBusqueda, setTerminoBusqueda] = useState("");
+  const [guardadoExitoso, setGuardadoExitoso] = useState(false);
+  const [borradoExitoso, setBorradoExitoso] = useState(false);
+
+  // useEffect(() => {
+  //   // Fetch data from the API and store it in the 'listaDatos' state
+  //   axios
+  //     .get("http://127.0.0.1:8000/api/libro/")
+  //     .then((response) => {
+  //       setListaDatos(response.data);
+  //     })
+  //     .catch((error) => {
+  //       console.error(error);
+  //     });
+  // }, []);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -39,174 +56,315 @@ const Formulario = () => {
       // Agregar nuevos datos
       setListaDatos([...listaDatos, datosLibros]);
 
-      axios.post("http://127.0.0.1:8000/api/libro/", datosLibros)
-        .then(response => {
-          console.log('Datos guardados en la base de datos:', response.data);
+      axios
+        .post("http://127.0.0.1:3000/api/libro/", datosLibros)
+        .then((response) => {
+          console.log(response.data);
+          setGuardadoExitoso(true);
         })
-        .catch(error => {
-          console.error('Error al guardar los datos:', error);
+        .catch((error) => {
+          console.error(error);
+          setGuardadoExitoso(false);
         });
-    
     }
 
-    setDatosLibros({ codigo: '',nombreLibro: '',descripcion: '',cantidad: '', autor: '', imagen: null });
+    setDatosLibros({
+      codigo: "",
+      nombreLibro: "",
+      descripcion: "",
+      cantidad: "",
+      autor: "",
+      carrera: "",
+      imagen: null,
+    });
+  };
+  useEffect(() => {
+    axios
+      .get("http://127.0.0.1:3000/api/libro/") // Cambia la URL por la correcta del backend
+      .then((response) => {
+        setListaDatos(response.data.libreria); // Asigna los datos obtenidos al estado listaDatos
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
+
+  const handleDelete = (id_libro) => {
+    // Copiar la lista de datos actual y eliminar el libro correspondiente
+    const nuevosDatos = listaDatos.filter((dato) => dato.id_libro !== id_libro);
+    setListaDatos(nuevosDatos);
+    setBorradoExitoso(true);
+
+    axios
+      .delete(`http://127.0.0.1:3000/api/libro/${id_libro}/`)
+      .then((response) => {
+        console.log("Dato eliminado de la base de datos:", response.data);
+      })
+      .catch((error) => {
+        console.error("Error al eliminar el dato:", error);
+      });
   };
 
-  const handleDelete = (index) => {
-    setListaDatos(listaDatos.filter((_, i) => i !== index));
-  };
-
-  const handleEdit = (index) => {
-    const datosEditados = listaDatos[index];
+  // Método para editar un libro por su id
+  const handleEdit = (id) => {
+    const datosEditados = listaDatos.find((dato) => dato.id === id);
     setDatosLibros(datosEditados);
-    setEditandoIndex(index);
+    setEditandoIndex(id);
   };
+
+  const handleBusquedaChange = (event) => {
+    setTerminoBusqueda(event.target.value);
+  };
+
+  const datosFiltrados = listaDatos.filter((dato) => {
+    const nombreCompleto = `${dato.codigo} ${dato.nombreLibro} ${dato.autor} ${dato.descripcion} ${dato.cantidad} ${dato.carrera}`;
+    return nombreCompleto.toLowerCase().includes(terminoBusqueda.toLowerCase());
+  });
+
+  // useEffect(() => {
+  //   if (guardadoExitoso || borradoExitoso) {
+  //     const timer = setTimeout(() => {
+  //       setGuardadoExitoso(false);
+  //       setBorradoExitoso(false);
+  //     }, 3000);
+
+  //     return () => clearTimeout(timer);
+  //   }
+  // }, [guardadoExitoso, borradoExitoso]);
 
   return (
-    <div className="container">
-      <div className="col-5">
-        <h2>Registro de libros de la Biblioteca</h2>
-        <form onSubmit={handleSubmit}>
-        <div className="form-group">
-            <label>Codigo:</label>
+    <Container className="text-center mt-5">
+      <Row>
+        <Col md={12} className="mx-auto bg-white p-4 rounded">
+          <div className="table-container">
+            <div className="col-12">
+              <form onSubmit={handleSubmit}>
+                <Row>
+                  <Col md={6}>
+                    <div className="mb-1">
+                      <label className="form-label">Código:</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        name="codigo"
+                        value={datosLibros.codigo}
+                        required
+                        onChange={handleChange}
+                      />
+                    </div>
+                    <div className="mb-3">
+                      <label className="form-label">Nombre del Libro:</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        name="nombreLibro"
+                        value={datosLibros.nombreLibro}
+                        required
+                        onChange={handleChange}
+                      />
+                    </div>
+                    <div className="mb-3">
+                      <label className="form-label">Autor:</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        name="autor"
+                        value={datosLibros.autor}
+                        required
+                        onChange={handleChange}
+                      />
+                    </div>
+                  </Col>
+                  <Col md={6}>
+                    <div className="mb-3">
+                      <label className="form-label">Cantidad:</label>
+                      <input
+                        type="number"
+                        className="form-control"
+                        name="cantidad"
+                        value={datosLibros.cantidad}
+                        required
+                        onChange={handleChange}
+                      />
+                    </div>
+                    <div className="mb-3">
+                      <label className="form-label">Descripción:</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        name="descripcion"
+                        value={datosLibros.descripcion}
+                        required
+                        onChange={handleChange}
+                      />
+                    </div>
+                    <div className="mb-3">
+                      <label className="form-label">Carrera:</label>
+                      <select
+                        className="form-select"
+                        name="carrera"
+                        value={datosLibros.carrera}
+                        required
+                        onChange={handleChange}
+                      >
+                        <option value="">Selección de carreras.</option>
+                        <option value="Ingeniería Agroindustrial">
+                          Ingeniería Agroindustrial
+                        </option>
+                        <option value="Ingeniería de Software">
+                          Ingeniería de Software
+                        </option>
+                        <option value="Ingeniería en Animación y Efectos Visuales">
+                          Ingeniería en Animación y Efectos Visuales
+                        </option>
+                        <option value="Ingeniería en Energía">
+                          Ingeniería en Energía
+                        </option>
+                        <option value="Ingeniería en Logística y Transporte">
+                          Ingeniería en Logística y Transporte
+                        </option>
+                        <option value="Ingeniería en Nanotecnología">
+                          Ingeniería en Nanotecnología
+                        </option>
+                        <option value="Ingeniería en Sistemas Automotrices">
+                          Ingeniería en Sistemas Automotrices
+                        </option>
+                        <option value="Ingeniería en Tecnología Ambiental">
+                          Ingeniería en Tecnología Ambiental
+                        </option>
+                        <option value="Ingeniería Financiera">
+                          Ingeniería Financiera
+                        </option>
+                        <option value="Ingeniería Mecatrónica">
+                          Ingeniería Mecatrónica
+                        </option>
+                        <option value="Maestría en Ingeniería">
+                          Maestría en Ingeniería
+                        </option>
+                        <option value="Centro de Estudios de Lenguas Extranjeras">
+                          Centro de Estudios de Lenguas Extranjeras
+                        </option>
+                      </select>
+                    </div>
+                  </Col>
+                </Row>
+                <Row>
+                  <div className="mb-3">
+                    <label className="form-label">Imagen:</label>
+                    <br />
+                    <input
+                      type="file"
+                      className="form-control-file"
+                      accept="image/*"
+                      required
+                      onChange={handleImageChange}
+                    />
+                    {datosLibros.imagen && (
+                      <div className="mt-3">
+                        <img
+                          src={URL.createObjectURL(datosLibros.imagen)}
+                          alt="Imagen seleccionada"
+                          className="mt-2"
+                          style={{ width: "100px" }}
+                        />
+                      </div>
+                    )}
+                  </div>
+                </Row>
+                <button type="submit" className="btn btn-primary">
+                  {editandoIndex !== -1 ? "Actualizar" : "Guardar"}
+                </button>
+              </form>
+              {errorCampos && (
+                <div className="alert alert-danger mt-4">
+                  Por favor, completa todos los campos.
+                </div>
+              )}
+              {errorNumerico && (
+                <div className="alert alert-danger mt-4">
+                  Por favor, ingresa un valor numérico válido en el campo de
+                  cantidad.
+                </div>
+              )}
+              {guardadoExitoso && (
+                <div className="alert alert-success mt-4">
+                  Los datos se guardaron correctamente.
+                </div>
+              )}
+              {borradoExitoso && (
+                <div className="alert alert-success mt-4">
+                  El dato se eliminó correctamente.
+                </div>
+              )}
+            </div>
+          </div>
+          <div className="mt-4 col-12">
             <input
               type="text"
-              className="form-control"
-              name="codigo"
-              required
-              value={datosLibros.codigo}
-              onChange={handleChange}
+              className="form-control mt-4"
+              placeholder="Buscar por código, nombre del libro, autor, descripción, cantidad o carrera..."
+              value={terminoBusqueda}
+              onChange={handleBusquedaChange}
             />
           </div>
-          <div className="form-group">
-            <label>Nombre del Libro:</label>
-            <input
-              type="text"
-              className="form-control"
-              name="nombreLibro"
-              required
-              value={datosLibros.nombreLibro}
-              onChange={handleChange}
-            />
+          <div className="table-wrapper">
+            <table className="table">
+              <thead>
+                <tr>
+                  <th>Código</th>
+                  <th>Nombre del Libro</th>
+                  <th>Autor</th>
+                  <th>Descripción</th>
+                  <th>Cantidad</th>
+                  <th>Carrera</th>
+                  <th>Imagen</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                {datosFiltrados.map((dato) => (
+                  <tr key={dato.id}>
+                    <td>{dato.codigo}</td>
+                    <td>{dato.nombreLibro}</td>
+                    <td>{dato.autor}</td>
+                    <td>{dato.descripcion}</td>
+                    <td>{dato.cantidad}</td>
+                    <td>{dato.carrera}</td>
+                    <td>
+                      {/* Establecer el tamaño de la imagen */}
+                      {dato.imagen && (
+                        <img
+                          src={URL.createObjectURL(dato.imagen)}
+                          alt="Imagen del libro"
+                          style={{ width: "100px", height: "auto" }} // Cambiar el tamaño aquí
+                        />
+                      )}
+                    </td>
+                    <td>
+                      <div className="d-flex align-items-center">
+                        <button
+                          className="btn btn-danger me-2"
+                          onClick={() => handleDelete(dato.id)}
+                        >
+                          Borrar
+                        </button>
+                        <button
+                          className="btn btn-primary"
+                          onClick={() => handleEdit(dato.id)} 
+                        >
+                          Editar
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
-          <div className="form-group">
-            <label>Autor:</label>
-            <input
-              type="text"
-              className="form-control"
-              name="autor"
-              value={datosLibros.autor}
-              onChange={handleChange}
-            />
-          </div>
-          <div className="form-group">
-            <label>Descripcion:</label>
-            <input
-              type="text"
-              className="form-control"
-              name="descripcion"
-              value={datosLibros.descripcion}
-              onChange={handleChange}
-            />
-          </div>
-          <div className="form-group">
-            <label>cantidad:</label>
-            <input
-              type="number"
-              className="form-control"
-              name="cantidad"
-              value={datosLibros.cantidad}
-              onChange={handleChange}
-            />
-          </div>
-          <div className="form-group">
-            <label>Carrera:</label>
-            <input
-              type="text"
-              className="form-control"
-              name="carrera"
-              value={datosLibros.carrera}
-              onChange={handleChange}
-            />
-          </div>
-          <div className="form-group">
-            <label>Categoria:</label>
-            <input
-              type="text"
-              className="form-control"
-              name="categoria"
-              value={datosLibros.categoria}
-              onChange={handleChange}
-            />
-          </div>
-          <div className="form-group">
-            <label>Imagen:</label>
-            <input
-              type="file"
-              className="form-control-file"
-              accept="image/*"
-              onChange={handleImageChange}
-            />
-            {datosLibros.imagen && (
-              <div className="mt-3">
-                <img
-                  src={URL.createObjectURL(datosLibros.imagen)}
-                  alt="Imagen seleccionada"
-                  className="mt-2"
-                  style={{ maxWidth: '200px' }}
-                />
-              </div>
-            )}
-          </div>
-          <button type="submit" className="btn btn-primary">
-            {editandoIndex !== -1 ? 'Guardar Edición' : 'Guardar'}
-          </button>
-        </form>
-      </div>
-      <div>
-        <h2>Datos Guardados</h2>
-        <table className="table">
-          <thead>
-            <tr>
-              <th>Codigo</th>
-              <th>Nombre del Libro</th>
-              <th>Autor</th>
-              <th>Cantidad de Libro</th>
-              <th>Descipcion</th>
-              <th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            {listaDatos.map((datos, index) => (
-              <tr key={index}>
-                <td>{datos.codigo}</td>
-                <td>{datos.nombreLibro}</td>
-                <td>{datos.autor}</td>
-                <td>{datos.cantidad}</td>
-                <td>{datos.codigo}</td>
-                <td>{datos.descripcion}</td>
-                <td>{datos.imagen ? datos.imagen.name : ''}</td>
-                <td>
-                  <button
-                    className="btn btn-danger mr-2"
-                    onClick={() => handleDelete(index)}
-                  >
-                    Borrar
-                  </button>
-                  <button
-                    className="btn btn-primary"
-                    onClick={() => handleEdit(index)}
-                  >
-                    Editar
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </div>
+        </Col>
+      </Row>
+    </Container>
   );
 };
 
-export default Formulario;
+export default AgregarLibros;

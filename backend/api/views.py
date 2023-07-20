@@ -4,77 +4,139 @@ from django.views import View
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 import json
-from PIL import Image
-
+from .serializers import LibroSerializer
+from django.http import JsonResponse
 
 
 # tabla de la base de libro
-
-from .models import libro
-class libroview(View):
+from .models import Libro
+class LibroView(View):
     @method_decorator(csrf_exempt)
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
-    # para mostrar los datos
+
     def get(self, request, id=0):
         if id > 0:
-            libreria = list(libro.objects.filter(id=id).values())
-            if len(libreria) > 0:
-                libros = libreria[0]
-                datos = {"message": "Success", "libros": libros}
-            else:
-                datos = {"message": "registro del libro not found..."}
-            return JsonResponse(datos)
+            try:
+                libro = Libro.objects.get(id=id)
+                datos = {"message": "Success", "libros": {
+                    "id": libro.id,
+                    "codigo": libro.codigo,
+                    "cantidad": libro.cantidad,
+                    "nombreLibro": libro.nombreLibro,
+                    "autor": libro.autor,
+                    "carrera": libro.carrera,
+                    "descripcion": libro.descripcion,
+                }}
+            except Libro.DoesNotExist:
+                datos = {"message": "Registro del libro no encontrado."}
         else:
-            libreria = list(libro.objects.values())
-            if len(libreria) > 0:
-                datos = {"message": "Success", "libreria": libreria}
+            libros = Libro.objects.all()
+            if libros:
+                datos = {"message": "Success", "libreria": list(libros.values())}
             else:
-                datos = {"message": "libros not found..."}
-            return JsonResponse(datos)
-
-    # para agregare datos libro es la tabla en models
-    def post(self, request):
-        # print(request.body)
-        jd = json.loads(request.body)
-        print(jd)
-        libro.objects.create(
-            codigo=jd["codigo"],
-            cantidad=jd["cantidad"],
-            nombreLibro=jd["nombreLibro"],
-            autor=jd["autor"],
-            descripcion=jd["descripcion"],
-            
-        )
-        datos = {"mensaje": "Seccess"}
+                datos = {"message": "Libros no encontrados."}
         return JsonResponse(datos)
 
-#     # para editar por id
-#     def put(self, request, id):
-#         jd = json.loads(request.body)
-#         libreria = list(libro.objects.filter(id=id).values())
-#         if len(libreria) > 0:
-#             librerias = libro.objects.get(id=id)
-#             librerias.codigo = jd["codigo"]
-#             librerias.cantidad = jd["cantidad"]
-#             librerias.nombreLibro = jd["nombreLibro"]
-#             librerias.autor = jd["autor"]
-#             librerias.descripcion = jd["descripcion"]
-#             librerias.save()
-#             datos = {"mensaje": "Seccess"}
-#         else:
-#             datos = {"message": "registro not found..."}
-#         return JsonResponse(datos)
+    def post(self, request):
+        try:
+            jd = json.loads(request.body)
+            Libro.objects.create(
+                codigo=jd["codigo"],
+                cantidad=jd["cantidad"],
+                nombreLibro=jd["nombreLibro"],
+                autor=jd["autor"],
+                carrera=jd["carrera"],
+                descripcion=jd["descripcion"],
+            )
+            datos = {"mensaje": "Success: Libro agregado correctamente."}
+        except Exception as e:
+            datos = {"message": "Error: No se pudo agregar el libro.", "error": str(e)}
+        return JsonResponse(datos)
 
-#     #    para borrar
-#     def delete(self, request, id):
-#         libreria = list(libro.objects.filter(id=id).values())
-#         if len(libreria) > 0:
-#             libro.objects.filter(id=id).delete()
-#             datos = {"message": "Success"}
+    def put(self, request, id):
+        try:
+            jd = json.loads(request.body)
+            libro = Libro.objects.get(id=id)
+            libro.codigo = jd["codigo"]
+            libro.cantidad = jd["cantidad"]
+            libro.nombreLibro = jd["nombreLibro"]
+            libro.autor = jd["autor"]
+            libro.carrera = jd["carrera"]
+            libro.descripcion = jd["descripcion"]
+            libro.save()
+            datos = {"mensaje": "Success: Libro actualizado correctamente."}
+        except Libro.DoesNotExist:
+            datos = {"message": "Error: Registro de libro no encontrado."}
+        except Exception as e:
+            datos = {"message": "Error: No se pudo actualizar el libro.", "error": str(e)}
+        return JsonResponse(datos)
+    
+    def delete(self, request, id):
+        try:
+            libro = Libro.objects.get(id=id)
+            libro.delete()
+            datos = {"mensaje": "Success: Registro de libro eliminado correctamente."}
+        except Libro.DoesNotExist:
+            datos = {"message": "Error: Registro de libro no encontrado."}
+        except Exception as e:
+            datos = {"message": "Error: No se pudo eliminar el libro.", "error": str(e)}
+        return JsonResponse(datos)
+
+
+
+###################################################################################################
+
+# from django.http import JsonResponse
+# from django.views.decorators.csrf import csrf_exempt
+# from .models import Libro
+# from .serializers import LibroSerializer
+
+# @csrf_exempt
+# def create_or_update_libro(request, id=None):
+#     if request.method == 'GET':
+#         if id is not None:
+#             try:
+#                 libro = Libro.objects.get(id=id)
+#                 serializer = LibroSerializer(libro)
+#                 return JsonResponse(serializer.data, status=200)
+#             except Libro.DoesNotExist:
+#                 return JsonResponse({'error': 'Libro no encontrado.'}, status=404)
 #         else:
-#             datos = {"message": "registro de libro not found..."}
-#         return JsonResponse(datos)
+#             libros = Libro.objects.all()
+#             serializer = LibroSerializer(libros, many=True)
+#             return JsonResponse({'libreria': serializer.data}, status=200)
+#     elif request.method == 'POST':
+#         serializer = LibroSerializer(data=request.data)  # Usamos request.data en lugar de request.POST
+#         if serializer.is_valid():
+#             serializer.save()
+#             return JsonResponse(serializer.data, status=201)
+#         else:
+#             return JsonResponse(serializer.errors, status=400)
+#     elif request.method == 'PUT':
+#         if id is not None:
+#             try:
+#                 libro = Libro.objects.get(id=id)
+#                 serializer = LibroSerializer(libro, data=request.data)  # Usamos request.data en lugar de request.POST
+#                 if serializer.is_valid():
+#                     serializer.save()
+#                     return JsonResponse(serializer.data, status=200)
+#                 else:
+#                     return JsonResponse(serializer.errors, status=400)
+#             except Libro.DoesNotExist:
+#                 return JsonResponse({'error': 'Libro no encontrado.'}, status=404)
+
+# @csrf_exempt
+# def delete_libro(request, id):
+#     if request.method == 'DELETE':
+#         try:
+#             libro = Libro.objects.get(id=id)
+#             libro.delete()
+#             return JsonResponse({'message': 'Libro eliminado correctamente.'}, status=200)
+#         except Libro.DoesNotExist:
+#             return JsonResponse({'error': 'Libro no encontrado.'}, status=404)
+
+
 
 ################################################################################################################################
 
@@ -137,6 +199,25 @@ class libroview(View):
 
 ###############################################################################################################
 
+# from django.http import JsonResponse
+# from django.views import View
+# from django.views.decorators.csrf import csrf_exempt
+# from .models import libro
+
+# @csrf_exempt
+# class LibroDetailView(View):
+#     def delete(self, request, id):
+#         try:
+#             Libro = libro.objects.get(id=id)
+#             Libro.delete()
+#             datos = {"message": "Success: Registro de libro eliminado correctamente."}
+#         except libro.DoesNotExist:
+#             datos = {"message": "Error: Registro de libro no encontrado."}
+#         return JsonResponse(datos)
+
+
+
+################################
 
 # tabla de registrousuario
 from .models import registrousuario

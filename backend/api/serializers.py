@@ -1,8 +1,7 @@
-from rest_framework.serializers import ModelSerializer
+from rest_framework import serializers
+from .models import Libro
 
-from .models import Blog
-
-class BlogSerializer(ModelSerializer):
+class LibroSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Blog
-        fields = '__all__'
+        model = Libro
+        fields = ['id', 'codigo', 'nombreLibro', 'autor', 'cantidad', 'descripcion', 'carrera', 'imagen']
