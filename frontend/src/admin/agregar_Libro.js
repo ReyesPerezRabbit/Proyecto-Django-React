@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+// import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Container, Row, Col } from "react-bootstrap";
 
@@ -16,7 +17,7 @@ const Formulario = () => {
   const [listaDatos, setListaDatos] = useState([]);
   const [editandoIndex, setEditandoIndex] = useState(-1);
   const [error] = useState("");
-  const [setGuardadoExitoso] = useState(false);
+  const [, setGuardadoExitoso] = useState(false);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -64,6 +65,17 @@ const Formulario = () => {
     });
   };
 
+  useEffect(() => {
+    axios
+      .get("http://127.0.0.1:8000/api/libro/") // Cambia la URL por la correcta del backend
+      .then((response) => {
+        setListaDatos(response.data.libreria); // Asigna los datos obtenidos al estado listaDatos
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
+
   const handleDelete = (index) => {
     setListaDatos(listaDatos.filter((_, i) => i !== index));
   };
@@ -73,17 +85,6 @@ const Formulario = () => {
     setDatosLibros(datosEditados);
     setEditandoIndex(index);
   };
-
-  /*useEffect(() => {
-    axios
-      .get("http://127.0.0.1:8000/api/libro/")
-      .then((response) => {
-        setListaDatos(response.data); // Actualizar el estado con los datos obtenidos
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, []);*/
 
   return (
     <Container className="text-center mt-5">
@@ -224,11 +225,9 @@ const Formulario = () => {
                     </div>
                   )}
                 </div>
-                <div className="mb-3">
-                  <button type="submit" className="btn btn-primary mt-3">
-                    {editandoIndex !== -1 ? "Guardar Edición" : "Guardar"}
-                  </button>
-                </div>
+                <button type="submit" className="btn btn-primary mt-3">
+                  {editandoIndex !== -1 ? "Guardar Edición" : "Guardar"}
+                </button>
               </form>
             </div>
           </div>
