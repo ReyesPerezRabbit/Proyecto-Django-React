@@ -8,25 +8,26 @@ class Blog(models.Model):
 
 # base de datos para añadir usuarios
 
+
 class incioseccion(models.Model):
     idinicio = models.AutoField(primary_key=True)
-    usuario = models.CharField( max_length=50)
-    password = models.CharField( max_length=50)
+    usuario = models.CharField(max_length=50)
+    password = models.CharField(max_length=50)
 
 
 class registrousuario(models.Model):
     idregistrouser = models.AutoField(primary_key=True)
-    matricula = models.CharField(max_length = 15)
-    nombrealumno = models.CharField(max_length=100,blank=False)
-    apellidoP = models.CharField(max_length=50,blank=False)
-    apellidoM = models.CharField(max_length=50,blank=False)
+    matricula = models.CharField(max_length=15)
+    nombrealumno = models.CharField(max_length=100, blank=False)
+    apellidoP = models.CharField(max_length=50, blank=False)
+    apellidoM = models.CharField(max_length=50, blank=False)
     correo = models.EmailField(blank=False)
     telefono = models.CharField(max_length=20, blank=False, null=False)
-    edad = models.IntegerField( blank=True)
-    carrera = models.CharField(max_length=100,blank=False)
-    genero = models.CharField(max_length=100,blank=False)
-    user = models.CharField(max_length=50,blank=False)
-    password = models.CharField(max_length=50,blank=False)
+    edad = models.IntegerField(blank=True)
+    carrera = models.CharField(max_length=100, blank=False)
+    genero = models.CharField(max_length=100, blank=False)
+    user = models.CharField(max_length=50, blank=False)
+    password = models.CharField(max_length=50, blank=False)
 
     def __str__(self):
         return self.matricula
@@ -34,27 +35,28 @@ class registrousuario(models.Model):
     class Meta:
         db_table = "Registro_user"
         verbose_name = "Registro de usuarios"
-    
+
 
 # Datos del libro
 
 
 class libro(models.Model):
     id_libro = models.AutoField(primary_key=True)
-    codigo = models.CharField(max_length = 150,blank=False)
+    codigo = models.CharField(max_length=150, blank=False)
     cantidad = models.IntegerField(blank=False)
-    nombreLibro = models.CharField(max_length=150,blank=False)
-    autor = models.CharField(max_length=100,blank=False)
+    nombreLibro = models.CharField(max_length=150, blank=False)
+    autor = models.CharField(max_length=100, blank=False)
     descripcion = models.TextField(blank=False)
-    imagen = models.ImageField(upload_to='libros/', null=True, blank=True)
+    carrera = models.CharField(max_length=100, blank=False)
+    imagen = models.ImageField(upload_to="libros/", null=True, blank=True)
 
-    
     def __str__(self):
         return self.codigo
 
     class Meta:
         db_table = "Libros"
         verbose_name = "Registro de Libros"
+
 
 ## Inventario
 

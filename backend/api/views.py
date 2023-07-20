@@ -44,8 +44,8 @@ class libroview(View):
             cantidad=jd["cantidad"],
             nombreLibro=jd["nombreLibro"],
             autor=jd["autor"],
+            carrera=jd["carrera"],
             descripcion=jd["descripcion"],
-            
         )
         datos = {"mensaje": "Seccess"}
         return JsonResponse(datos)
@@ -60,6 +60,7 @@ class libroview(View):
             librerias.cantidad = jd["cantidad"]
             librerias.nombreLibro = jd["nombreLibro"]
             librerias.autor = jd["autor"]
+            libreria.carrera = jd["carrera"]
             librerias.descripcion = jd["descripcion"]
             librerias.save()
             datos = {"mensaje": "Seccess"}
@@ -190,7 +191,7 @@ class registrouser(View):
 
 ################################################################################################################################
 
-#para Libros
+# para Libros
 
 # @csrf_exempt
 # def guardar_libro(request):
@@ -201,7 +202,7 @@ class registrouser(View):
 #         cantidad = request.POST.get('cantidad')
 #         descripcion = request.POST.get('descripcion')
 #         imagen = request.FILES.get('imagen')
-        
+
 #         Libro = libro(
 #             codigo=codigo,
 #             nombreLibro=nombreLibro,
@@ -211,9 +212,9 @@ class registrouser(View):
 #             imagen=imagen
 #         )
 #         Libro.save()
-        
+
 #         return JsonResponse({'mensaje': 'Libro guardado correctamente.'})
-    
+
 #     return JsonResponse({'error': 'Método no permitido.'})
 
 # @csrf_exempt
@@ -225,7 +226,7 @@ class registrouser(View):
 #             return JsonResponse({'mensaje': 'Libro borrado correctamente.'})
 #         except libro.DoesNotExist:
 #             return JsonResponse({'error': 'Libro no encontrado.'})
-    
+
 #     return JsonResponse({'error': 'Método no permitido.'})
 
 # @csrf_exempt
@@ -240,14 +241,14 @@ class registrouser(View):
 #             Libro.descripcion = request.POST.get('descripcion')
 #             Libro.imagen = request.FILES.get('imagen')
 #             Libro.save()
-            
+
 #             return JsonResponse({'mensaje': 'Libro editado correctamente.'})
 #         except Libro.DoesNotExist:
 #             return JsonResponse({'error': 'Libro no encontrado.'})
-    
+
 #     return JsonResponse({'error': 'Método no permitido.'})
 
 
 ################################################################################################
 
-#Para Usuario
+# Para Usuario
