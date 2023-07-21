@@ -21,18 +21,6 @@ const AgregarLibros = () => {
   const [guardadoExitoso, setGuardadoExitoso] = useState(false);
   const [borradoExitoso, setBorradoExitoso] = useState(false);
 
-  // useEffect(() => {
-  //   // Fetch data from the API and store it in the 'listaDatos' state
-  //   axios
-  //     .get("http://127.0.0.1:8000/api/libro/")
-  //     .then((response) => {
-  //       setListaDatos(response.data);
-  //     })
-  //     .catch((error) => {
-  //       console.error(error);
-  //     });
-  // }, []);
-
   const handleChange = (event) => {
     const { name, value } = event.target;
     setDatosLibros({ ...datosLibros, [name]: value });
@@ -118,17 +106,6 @@ const AgregarLibros = () => {
     const nombreCompleto = `${dato.codigo} ${dato.nombreLibro} ${dato.autor} ${dato.descripcion} ${dato.cantidad} ${dato.carrera}`;
     return nombreCompleto.toLowerCase().includes(terminoBusqueda.toLowerCase());
   });
-
-  // useEffect(() => {
-  //   if (guardadoExitoso || borradoExitoso) {
-  //     const timer = setTimeout(() => {
-  //       setGuardadoExitoso(false);
-  //       setBorradoExitoso(false);
-  //     }, 3000);
-
-  //     return () => clearTimeout(timer);
-  //   }
-  // }, [guardadoExitoso, borradoExitoso]);
 
   return (
     <Container className="text-center mt-5">

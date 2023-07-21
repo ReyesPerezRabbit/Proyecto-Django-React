@@ -185,13 +185,61 @@ const AgregarUsuarios = () => {
     return nombreCompleto.toLowerCase().includes(terminoBusqueda.toLowerCase());
   });
 
+  const handleUpdate = (event) => {
+    event.preventDefault();
+
+    // Validar que los campos no estén vacíos (puedes agregar otras validaciones según tus necesidades)
+
+    const datosActualizados = {
+      matricula,
+      nombrealumno,
+      apellidoP,
+      apellidoM,
+      correo,
+      telefono,
+      edad,
+      carrera,
+      genero,
+      user,
+      password,
+    };
+
+    // Make an HTTP PUT request to update the data
+    axios
+      .put(`http://127.0.0.1:8000/api/user/${indiceEditar}/`, datosActualizados)
+      .then((response) => {
+        console.log(response.data);
+        setGuardadoExitoso(true);
+      })
+      .catch((error) => {
+        console.error(error);
+        setGuardadoExitoso(false);
+      });
+
+    // Clear form and reset states after successful update
+    setMatricula("");
+    setNombreAlumno("");
+    setApellidoP("");
+    setApellidoM("");
+    setCorreo("");
+    setTelefono("");
+    setEdad("");
+    setCarrera("");
+    setGenero("");
+    setUser("");
+    setPassword("");
+    setErrorCampos(false);
+    setErrorNumerico(false);
+    setIndiceEditar(-1);
+  };
+
   return (
     <Container className="text-center mt-5">
       <Row>
         <Col md={12} className="mx-auto bg-white p-4 rounded">
           <div className="col-12">
             <h2>Registro de usuarios de la biblioteca</h2>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={indiceEditar !== -1 ? handleUpdate : handleSubmit}>
               <Row>
                 <Col md={6}>
                   <div className="mb-1">
@@ -398,22 +446,22 @@ const AgregarUsuarios = () => {
           </div>
           <div className="mt-4">
             <h2>Datos Guardados</h2>
-            <div className="table-container">
-              <table className="table tableproperties">
+            <div className="table-responsive">
+              <table className="table">
                 <thead>
                   <tr>
-                    <th>Matricula</th>
-                    <th>Nombre</th>
-                    <th>Apellido Paterno</th>
-                    <th>Apellido Materno</th>
-                    <th>Correo</th>
-                    <th>Telefono</th>
-                    <th>Edad</th>
-                    <th>Género</th>
-                    <th>Carrera</th>
-                    <th>Usuario</th>
-                    <th>Contraseña</th>
-                    <th>Acciones</th>
+                    <th className="sticky-col">Matricula</th>
+                    <th className="sticky-col">Nombre</th>
+                    <th className="sticky-col">Apellido Paterno</th>
+                    <th className="sticky-col">Apellido Materno</th>
+                    <th className="sticky-col">Correo</th>
+                    <th className="sticky-col">Telefono</th>
+                    <th className="sticky-col">Edad</th>
+                    <th className="sticky-col">Género</th>
+                    <th className="sticky-col">Carrera</th>
+                    <th className="sticky-col">Usuario</th>
+                    <th className="sticky-col">Contraseña</th>
+                    <th className="sticky-col">Acciones</th>
                   </tr>
                 </thead>
                 <tbody>

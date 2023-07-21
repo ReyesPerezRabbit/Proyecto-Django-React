@@ -124,6 +124,31 @@ class registrouser(View):
         datos = {"message": "Success"}
         return JsonResponse(datos)
 
+    # actualizar usuario
+
+    # MK1
+    # def put(self, request, matricula):
+    #     jd = json.loads(request.body)
+    #     useregister = list(registrousuario.objects.filter(matricula=matricula).values())
+    #     if len(useregister) > 0:
+    #         registeruser = registrousuario.objects.get(matricula=matricula)
+    #         registeruser.matricula = jd["matricula"]
+    #         registeruser.nombrealumno = jd["nombrealumno"]
+    #         registeruser.apellidoP = jd["apellidoP"]
+    #         registeruser.apellidoM = jd["apellidoM"]
+    #         registeruser.correo = jd["correo"]
+    #         registeruser.telefono = jd["telefono"]
+    #         registeruser.edad = jd["edad"]
+    #         registeruser.carrera = jd["carrera"]
+    #         registeruser.user = jd["user"]
+    #         registeruser.genero = jd["genero"]
+    #         registeruser.password = jd["password"]
+    #         registeruser.save()
+    #         datouser = {"message": "Success"}
+    #     else:
+    #         datouser = {"message": "Libro not found..."}
+    #     return JsonResponse(datouser)
+
     def put(self, request, matricula):
         jd = json.loads(request.body)
         useregister = list(registrousuario.objects.filter(matricula=matricula).values())
@@ -143,9 +168,10 @@ class registrouser(View):
             registeruser.save()
             datouser = {"message": "Success"}
         else:
-            datouser = {"message": "Libro not found..."}
+            datouser = {"message": "Usuario no encontrado..."}
         return JsonResponse(datouser)
 
+    # borrar usuario
     def delete(self, request, matricula):
         useregister = list(registrousuario.objects.filter(matricula=matricula).values())
         if len(useregister) > 0:
