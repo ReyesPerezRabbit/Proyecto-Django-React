@@ -8,7 +8,7 @@ const InicioAdmin = () => {
   return (
     <Container className="text-center mt-5">
       <Row>
-        <Col md={12} className="mx-auto bg-white p-4 rounded">
+        <Col md={8} className="mx-auto bg-white p-4 rounded">
           <Typography variant="h3" gutterBottom>
             Panel de Administrador
           </Typography>
@@ -28,7 +28,6 @@ const InicioAdmin = () => {
                 className="img-fluid"
                 width={200}
                 height={140}
-                alt="171x180"
                 src={logo}
               />
               <Figure.Caption>Java Crew</Figure.Caption>

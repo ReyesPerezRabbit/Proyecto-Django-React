@@ -14,7 +14,8 @@ class LibroView(View):
     @method_decorator(csrf_exempt)
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
-
+    
+    @csrf_exempt
     def get(self, request, id=0):
         if id > 0:
             try:
@@ -37,7 +38,8 @@ class LibroView(View):
             else:
                 datos = {"message": "Libros no encontrados."}
         return JsonResponse(datos)
-
+    
+    @csrf_exempt
     def post(self, request):
         try:
             jd = json.loads(request.body)
@@ -53,7 +55,8 @@ class LibroView(View):
         except Exception as e:
             datos = {"message": "Error: No se pudo agregar el libro.", "error": str(e)}
         return JsonResponse(datos)
-
+    
+    @csrf_exempt
     def put(self, request, id):
         try:
             jd = json.loads(request.body)
@@ -72,6 +75,7 @@ class LibroView(View):
             datos = {"message": "Error: No se pudo actualizar el libro.", "error": str(e)}
         return JsonResponse(datos)
     
+    @csrf_exempt
     def delete(self, request, id):
         try:
             libro = Libro.objects.get(id=id)

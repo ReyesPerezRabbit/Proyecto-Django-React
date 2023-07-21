@@ -21,18 +21,6 @@ const AgregarLibros = () => {
   const [guardadoExitoso, setGuardadoExitoso] = useState(false);
   const [borradoExitoso, setBorradoExitoso] = useState(false);
 
-  // useEffect(() => {
-  //   // Fetch data from the API and store it in the 'listaDatos' state
-  //   axios
-  //     .get("http://127.0.0.1:8000/api/libro/")
-  //     .then((response) => {
-  //       setListaDatos(response.data);
-  //     })
-  //     .catch((error) => {
-  //       console.error(error);
-  //     });
-  // }, []);
-
   const handleChange = (event) => {
     const { name, value } = event.target;
     setDatosLibros({ ...datosLibros, [name]: value });
@@ -57,7 +45,7 @@ const AgregarLibros = () => {
       setListaDatos([...listaDatos, datosLibros]);
 
       axios
-        .post("http://127.0.0.1:3000/api/libro/", datosLibros)
+        .post("http://127.0.0.1:8000/api/libro/", datosLibros)
         .then((response) => {
           console.log(response.data);
           setGuardadoExitoso(true);
@@ -80,7 +68,7 @@ const AgregarLibros = () => {
   };
   useEffect(() => {
     axios
-      .get("http://127.0.0.1:3000/api/libro/") // Cambia la URL por la correcta del backend
+      .get("http://127.0.0.1:8000/api/libro/") // Cambia la URL por la correcta del backend
       .then((response) => {
         setListaDatos(response.data.libreria); // Asigna los datos obtenidos al estado listaDatos
       })
@@ -89,14 +77,13 @@ const AgregarLibros = () => {
       });
   }, []);
 
-  const handleDelete = (id_libro) => {
-    // Copiar la lista de datos actual y eliminar el libro correspondiente
-    const nuevosDatos = listaDatos.filter((dato) => dato.id_libro !== id_libro);
-    setListaDatos(nuevosDatos);
+  const handleDelete = (index) => {
+    setListaDatos(listaDatos.filter((_, i) => i !== index));
     setBorradoExitoso(true);
 
+    const libroABorrar = listaDatos[index];
     axios
-      .delete(`http://127.0.0.1:3000/api/libro/${id_libro}/`)
+      .delete(`http://127.0.0.1:8000/api/libro/${libroABorrar.id}/`)
       .then((response) => {
         console.log("Dato eliminado de la base de datos:", response.data);
       })
@@ -105,11 +92,10 @@ const AgregarLibros = () => {
       });
   };
 
-  // Método para editar un libro por su id
-  const handleEdit = (id) => {
-    const datosEditados = listaDatos.find((dato) => dato.id === id);
+  const handleEdit = (index) => {
+    const datosEditados = listaDatos[index];
     setDatosLibros(datosEditados);
-    setEditandoIndex(id);
+    setEditandoIndex(index);
   };
 
   const handleBusquedaChange = (event) => {
@@ -120,17 +106,6 @@ const AgregarLibros = () => {
     const nombreCompleto = `${dato.codigo} ${dato.nombreLibro} ${dato.autor} ${dato.descripcion} ${dato.cantidad} ${dato.carrera}`;
     return nombreCompleto.toLowerCase().includes(terminoBusqueda.toLowerCase());
   });
-
-  // useEffect(() => {
-  //   if (guardadoExitoso || borradoExitoso) {
-  //     const timer = setTimeout(() => {
-  //       setGuardadoExitoso(false);
-  //       setBorradoExitoso(false);
-  //     }, 3000);
-
-  //     return () => clearTimeout(timer);
-  //   }
-  // }, [guardadoExitoso, borradoExitoso]);
 
   return (
     <Container className="text-center mt-5">
@@ -322,8 +297,8 @@ const AgregarLibros = () => {
                 </tr>
               </thead>
               <tbody>
-                {datosFiltrados.map((dato) => (
-                  <tr key={dato.id}>
+                {datosFiltrados.map((dato, index) => (
+                  <tr key={index}>
                     <td>{dato.codigo}</td>
                     <td>{dato.nombreLibro}</td>
                     <td>{dato.autor}</td>
@@ -344,13 +319,13 @@ const AgregarLibros = () => {
                       <div className="d-flex align-items-center">
                         <button
                           className="btn btn-danger me-2"
-                          onClick={() => handleDelete(dato.id)}
+                          onClick={() => handleDelete(index)}
                         >
                           Borrar
                         </button>
                         <button
                           className="btn btn-primary"
-                          onClick={() => handleEdit(dato.id)} 
+                          onClick={() => handleEdit(index)}
                         >
                           Editar
                         </button>

@@ -8,7 +8,7 @@ const InicioUsuario = () => {
   return (
     <Container className="text-center mt-5">
       <Row>
-        <Col md={12} className="mx-auto bg-white p-4 rounded">
+        <Col md={8} className="mx-auto bg-white p-4 rounded">
           <Typography variant="h3" gutterBottom>
             Panel de Usuarios
           </Typography>
